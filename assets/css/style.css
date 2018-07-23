@@ -1,0 +1,92 @@
+html, body {
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+nav {
+    background-color: #D5DDC8 !important;
+}
+
+
+#logo {
+    text-align: center;
+    padding-top: 2%;
+}
+
+#content {
+    padding: 2% 5%;
+    background-color: #668330;
+}
+
+.shop-header {
+    text-decoration: underline;
+    font-size: 2rem;
+    color: #D5DDC8;
+    transition: all 0.8s ease-in-out;
+}
+
+.product {
+    box-shadow: 2px 2px 10px #D5DDC8;
+    border: 2px solid #C9D408;
+    padding: 5%;
+    height: 100%;
+}
+ 
+.card-img-top {
+    width: 50%;
+}
+
+.card-title {
+    padding-top: 15px;
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+
+.card-text {
+    height: 50%;
+    text-align: left;
+    font-size: 14px;
+}
+
+.price {
+    font-family: 'Inconsolata', monospace;
+    font-size: 1.5em;
+}
+
+.product-image {
+    height: 50%;
+}
+
+footer {
+    padding-top: 10px;
+    font-size: 12px;
+    background-color: #D5DDC8;
+    color: #668330;
+}
+
+.btn-success {
+    background-color: #B2C39B;
+    border-color: #B2C39B;
+}
+
+.btn-success:hover {
+    background-color: #668330;
+    border-color: #668330;
+}
+
+.about {
+    color: #FFF;
+}
+
+
+
+/* #C9D408 gold
+#668330 dark green
+white #FBFBFB
+dark sea #B2C39B
+#D5DDC8 light grey
+
+*/
+
+
+

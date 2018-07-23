@@ -34,7 +34,7 @@ ORDER BY
 LIMIT 
 	10;
 
--- Supplements sold during month
+-- Supplements sold during month of 2017-06
 SELECT
 	inv.inv_num,
 	inv.inv_date,
@@ -48,11 +48,11 @@ FROM
         LEFT JOIN supplements sup ON invl.supplement_id = sup.supplement_id
         LEFT JOIN supplement_descriptions supd ON sup.description_id = supd.description_id
 WHERE
-	inv.inv_date >= '2017-06-01'
+	inv.inv_date >= '2017-06-01' AND inv.inv_date <= '2017-06-30'
 ORDER BY 
 	inv.inv_date
 
--- Clients for year
+-- Clients for year 2017
 SELECT 
 	inv.inv_num, 
     inv.inv_date, 
