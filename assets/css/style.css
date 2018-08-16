@@ -65,13 +65,13 @@ footer {
 }
 
 .btn-success {
-    background-color: #B2C39B;
-    border-color: #B2C39B;
+    background-color: #668330;
+    border-color: #668330;
 }
 
 .btn-success:hover {
-    background-color: #668330;
-    border-color: #668330;
+    background-color: #B2C39B;
+    border-color: #B2C39B;
 }
 
 .about {
