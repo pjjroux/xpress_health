@@ -10,7 +10,7 @@ nav {
 
 #logo {
     text-align: center;
-    padding-top: 2%;
+    padding-top: 5%;
 }
 
 #content {
@@ -74,6 +74,16 @@ footer {
     border-color: #B2C39B;
 }
 
+.btn-outline-success {
+    border-color: #668330;
+    color: #668330;
+}
+
+.btn-outline-success:hover {
+    background-color: #668330;
+    border-color: #668330;
+}
+
 .about {
     color: #FFF;
 }
@@ -116,6 +126,4 @@ dark sea #B2C39B
 #D5DDC8 light grey
 
 */
-
-
 
