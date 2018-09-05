@@ -49,17 +49,20 @@ $(document).ready(function() {
 $("#inputID").on("input", function() {
     var inputID = $("#inputID").val();
 
-    if (inputID.length == 13) {
+    // Strip mask formatting from value and only call if length is 13
+    if (inputID.replace(/[_-]/g, '').length == 13) {
         $.getJSON("controller/client_controller.php", {action: "getClientData", client_id: inputID})
             .done(function(json) {
-                $("#inputName").val(json.client_name);
-                $("#inputSurname").val(json.client_surname);
-                $("#inputAddress").val(json.client_address);
-                $("#inputPostal").val(json.client_postalcode);
-                $("#inputTelHome").val(json.client_tel_home);
-                $("#inputTelWork").val(json.client_tel_work);
-                $("#inputCell").val(json.client_tel_cell);
-                $("#inputRef").val(json.ref_id);
+                if (typeof json.client_name != "undefined") {
+                    $("#inputName").val(json.client_name);
+                    $("#inputSurname").val(json.client_surname);
+                    $("#inputAddress").val(json.client_address);
+                    $("#inputPostal").val(json.client_postalcode);
+                    $("#inputTelHome").val(json.client_tel_home);
+                    $("#inputTelWork").val(json.client_tel_work);
+                    $("#inputCell").val(json.client_tel_cell);
+                    $("#inputRef").val(json.ref_id);
+                }
             })
             .fail(function(jqxhr, textStatus, error) {
                 var err = textStatus + ", " + error;
@@ -81,4 +84,30 @@ function validateForm() {
         $('#inputPassword').focus();
         return false;
     }
+
+    // Test if user with email not already registered
+    var inputID = $("#inputID").val();
+    var inputEmail = $("#inputEmail").val();
+    
+    $.getJSON("controller/client_controller.php", {action: "isAlreadyRegistered", client_id: inputID, client_email: inputEmail})
+        .done(function(json) {
+            if (json.client_id) {
+                $('.msg-text').text("Client already registered");
+                $('.alert').addClass("show");
+                $('#inputID').focus();
+                return false;
+            } else if (json.client_email) {
+                $('.msg-text').text("Email address already in use");
+                $('.alert').addClass("show");
+                $('#inputEmail').focus();
+                return false;
+            } else {
+                $('#registration_form').submit(); 
+            }
+        })
+        .fail(function(jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            $('.msg-text').text(err);
+            $('.alert').addClass("show");
+        });
 }

@@ -23,11 +23,14 @@ switch ($_GET['action']) {
     case 'getReferences':
         getReferences();
         break;
-    default:
-        echo 'Invalid action - ' . __LINE__ . ' - ' . __FILE__;
-        break;
     case 'registerClient':
         registerClient($_POST);
+        break;
+    case 'isAlreadyRegistered':
+        isAlreadyRegistered($_GET['client_id'], $_GET['client_email']);
+        break;
+    default:
+        echo 'Invalid action - ' . __LINE__ . ' - ' . __FILE__;
         break;
 }
 
@@ -83,8 +86,51 @@ function getReferences() {
  * @return void
  */
 function registerClient($form_data) {
-    
+    $client = new Client($form_data['inputID']);
+
+    $client->insert_new_client($form_data);
+
+    header("Location: ../register.php?registered=1");
 }
 
 
+/**
+ * Test if client not already registered by testing client_id and client_email seperately
+ * 
+ * @param string $client_id Client ID number
+ * @param string $client_email Client email address
+ * @return json $data Registered status
+ */
+function isAlreadyRegistered($client_id, $client_email) {
+    $client = new Client($client_id);
+
+    $registered_status = $client->get_registration_status();
+
+    $data['client_id'] = $registered_status;
+    $data['client_email'] = '';
+
+    if (!$registered_status) {
+        // Client id not registered test if email address not already in use
+        $database = new Database();
+    
+        $database->query('SELECT * FROM clients WHERE client_email = :client_email');
+        $database->bind(':client_email', $client_email);
+        $row = $database->single();
+
+        if (!empty($row)) {
+            $data['client_email'] = true;
+        } else {
+            $data['client_email'] = false;
+        }
+    } 
+
+    echo json_encode($data);    
+}
+
+
+
+
+
+
 ?>
+

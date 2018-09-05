@@ -40,12 +40,13 @@
       </div>
     </nav>
 
+    <?php if (isset($_GET['registered'])) : ?>
+      <p>Thank you for registering, you will be redirected to login screen shortly...</p>
+    <?php endif; ?>
+
     <!-- Validation error block -->
-    <div class="alert alert-danger alert-dismissible fade hide" style="margin: 5% 10% 0 10%;" role="alert">
+    <div class="alert alert-danger fade hide" style="margin: 5% 10% 0 10%;" role="alert">
       <span class="msg-text">Placeholder</span>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
     </div>
 
     <form class="form-register" id="registration_form" method="post" action="controller/client_controller.php?action=registerClient" onsubmit="return validateForm()" >
@@ -58,7 +59,7 @@
         </div>
         <div class="col-12 col-md-6 col-lg-6">
           <label for="inputID" class="sr-only">ID number</label>
-          <input type="text" id="inputID" name="inputID" class="form-control" placeholder="ID number" required minlength="13" maxlength="13">
+          <input type="text" id="inputID" name="inputID" class="form-control" placeholder="ID number" required>
         </div>
       </div>
 
@@ -118,7 +119,7 @@
 
       <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
-          <select class="form-control" id="inputRef" name="inputRef">
+          <select class="form-control" id="inputRef" name="inputRef" required>
             <option value="" disabled selected>Reference</option>
           </select>
         </div>
