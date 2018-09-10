@@ -90,7 +90,7 @@ function registerClient($form_data) {
 
     $client->insert_new_client($form_data);
 
-    header("Location: ../register.php?registered=1");
+    header("Location: ../register.html?registered=1");
 }
 
 
@@ -113,7 +113,7 @@ function isAlreadyRegistered($client_id, $client_email) {
         // Client id not registered test if email address not already in use
         $database = new Database();
     
-        $database->query('SELECT * FROM clients WHERE client_email = :client_email');
+        $database->query('SELECT * FROM clients INNER JOIN auth on clients.client_id = auth.client_id WHERE client_email = :client_email'); 
         $database->bind(':client_email', $client_email);
         $row = $database->single();
 

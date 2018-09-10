@@ -9,6 +9,22 @@
 |
 */
 $(document).ready(function() {
+    // If page loads with the registered parameter show noty and redirect to login page within 5 seconds
+    if (getUrlParameter('registered') == 1) {
+        new Noty({
+            type: 'success',
+            layout: 'center',
+            theme: 'bootstrap-v4',
+            text: 'Thank you for registering, you will be redirected to the login page shortly'
+        }).show();
+
+        window.setTimeout(function() {
+            window.location.href = 'login.html';
+        }, 5000);
+    }
+
+
+
     // Get reference values for reference select box
     $.getJSON("controller/client_controller.php", {action: "getReferences"})
         .done(function(json) {
@@ -18,8 +34,12 @@ $(document).ready(function() {
         })
         .fail(function(jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;
-            $('.msg-text').text(err);
-            $('.alert').addClass("show");
+            new Noty({
+                type: 'error',
+                layout: 'center',
+                theme: 'bootstrap-v4',
+                text: err
+            }).show();
         });
 
         // Input masks for form validation
@@ -66,8 +86,12 @@ $("#inputID").on("input", function() {
             })
             .fail(function(jqxhr, textStatus, error) {
                 var err = textStatus + ", " + error;
-                $('.msg-text').text(err);
-                $('.alert').addClass("show");
+                new Noty({
+                    type: 'error',
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    text: err
+                }).show();
             });
     } 
 });
@@ -76,38 +100,87 @@ $("#inputID").on("input", function() {
 /**
  * Validates form data on submit
  */
+var client_id_exists = '';
+var client_email_exists = '';
 function validateForm() {
     // Password and confirm password must match
     if ($('#inputPassword').val() !== $('#inputRePassword').val()) {
-        $('.msg-text').text("Passwords must match");
-        $('.alert').addClass("show");
+        new Noty({
+            type: 'error',
+            layout: 'center',
+            theme: 'bootstrap-v4',
+            text: 'Passwords must match'
+        }).show();
         $('#inputPassword').focus();
         return false;
     }
-
+    
     // Test if user with email not already registered
     var inputID = $("#inputID").val();
     var inputEmail = $("#inputEmail").val();
-    
-    $.getJSON("controller/client_controller.php", {action: "isAlreadyRegistered", client_id: inputID, client_email: inputEmail})
-        .done(function(json) {
+
+    client_id_exists = false;
+    client_email_exists = false;
+    $.ajax({
+        url: 'controller/client_controller.php',
+        method: 'GET',
+        dataType: 'json',
+        async: false,
+        data: { 
+            action: 'isAlreadyRegistered',
+            client_id: inputID, 
+            client_email: inputEmail
+        },
+        success: function (json) {
             if (json.client_id) {
-                $('.msg-text').text("Client already registered");
-                $('.alert').addClass("show");
-                $('#inputID').focus();
-                return false;
-            } else if (json.client_email) {
-                $('.msg-text').text("Email address already in use");
-                $('.alert').addClass("show");
-                $('#inputEmail').focus();
-                return false;
-            } else {
-                $('#registration_form').submit(); 
+                client_id_exists = true;
             }
-        })
-        .fail(function(jqxhr, textStatus, error) {
+           
+            if (json.client_email) {
+                client_email_exists = true;
+            }
+        },
+        error: function (jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;
-            $('.msg-text').text(err);
-            $('.alert').addClass("show");
-        });
+                new Noty({
+                    type: 'error',
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    text: err
+                }).show();
+        }
+    });
+
+
+    if (client_id_exists) {
+        new Noty({
+            type: 'error',
+            layout: 'center',
+            theme: 'bootstrap-v4',
+            text: 'Client already registered'
+        }).show();
+        $('#inputID').focus();
+        return false;
+    }
+
+    if (client_email_exists) {
+        new Noty({
+            type: 'error',
+            layout: 'center',
+            theme: 'bootstrap-v4',
+            text: 'Email address already in use'
+        }).show();
+        $('#inputEmail').focus();
+        return false;
+    }
+
+    return true;
 }
+
+// Get value from url
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
