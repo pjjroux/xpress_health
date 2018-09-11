@@ -9,6 +9,7 @@
 | Date:           2018-09-10
 |
 */
+session_start();
 
 // Include Client class  
 require_once('../classes/Client.php');
@@ -18,7 +19,7 @@ require_once('../classes/Client.php');
  */
 switch ($_GET['action']) {
     case 'login':
-        login($_GET['client_id']);
+        login();
         break;
     case 'validateUserLogin':
         validateUserLogin($_GET['client_email'], $_GET['client_password']);
@@ -31,12 +32,16 @@ switch ($_GET['action']) {
 
 /**
  * Login user
- * 
- * @param string $client_id Client ID number
+
  * @return void
  */
-function login($client_id) {
+function login() {
+    $client = new Client($_POST['client_id']);
+
+    $_SESSION['client_name'] = $client->get_client_name();
+    $_SESSION['client_email'] = $client->get_client_email();
     
+    header("Location: ../login.html?logged_in=1");
 }
 
 
@@ -57,12 +62,14 @@ function validateUserLogin($client_email, $client_password) {
     if (!empty($row)) {
         // Validate password
         if (password_verify($client_password, $row['pass'])) {
-            //return true and client_id
+            $data['error'] = '';
+            $data['client_id'] = $row['client_id'];
         } else {
-            // password invalid
+            $data['error'] = 'Incorrect password';
         }
     } else {
         // Client email not registered
+        $data['error'] = 'No account associated with email address';
     }
 
 

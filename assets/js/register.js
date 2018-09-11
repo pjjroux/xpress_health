@@ -58,9 +58,7 @@ $(document).ready(function() {
             showMaskOnFocus: false,
             showMaskOnHover: false
         });
-
-
-        
+    
 });
 
 
