@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2018 at 08:46 PM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- Generation Time: Sep 12, 2018 at 08:20 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -46,6 +46,29 @@ TRUNCATE TABLE `account_types`;
 
 INSERT INTO `account_types` (`acc_type_id`, `acc_type_description`) VALUES
 (1, 'Cheque');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth`
+--
+
+CREATE TABLE `auth` (
+  `client_id` varchar(13) NOT NULL,
+  `pass` char(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Truncate table before insert `auth`
+--
+
+TRUNCATE TABLE `auth`;
+--
+-- Dumping data for table `auth`
+--
+
+INSERT INTO `auth` (`client_id`, `pass`) VALUES
+('9011135082087', '$2y$10$h6/WF2bG.SfK/.2BCase3O51D8y8f0yMbNyCsDNbOxFAPoZyPTWU.');
 
 -- --------------------------------------------------------
 
@@ -498,6 +521,7 @@ INSERT INTO `clients` (`client_id`, `client_name`, `client_surname`, `client_add
 ('8908220122088', 'Andre ', 'Schoeman', 'PO Bos 535\r\nHONEYDEW\r\n2040', '', '(066)-(489)-(8662)', '(023)-(794)-(9855)', '(057)-(850)-(4856)', 'Andre @work.co.za', 2),
 ('9003280235085', 'Alex ', 'Mkhonto', '15 Beaufort Place 39 Beaufort Avenue Goodwood Park', '7960', '(097)-(965)-(1602)', '(061)-(129)-(0277)', '(029)-(270)-(8897)', '', 2),
 ('9010200680087', 'Mothupi ', 'Xulubana', 'P O Box 3912 Pretoria', '0001', '(018)-(867)-(8067)', '(065)-(848)-(7223)', '(039)-(256)-(2775)', 'Mothupi @telkomsa.net', 2),
+('9011135082087', 'Jaco', 'Roux', '23B Transvaal Street, Lichtenburg', '2740', '(018)-(633)-(6163)', '(018)-(633)-(1394)', '(079)-(969)-(2440)', 'pjjroux@gmail.com', 1),
 ('9012110306084', 'Thapelo ', 'Mokoena', 'C18239 Umsunduzi Road Kwamashu', '9359', '(055)-(900)-(9493)', '(053)-(715)-(3414)', '(043)-(775)-(4966)', 'Thapelo @gmail.com', 2),
 ('9103060340082', 'Mpho ', 'Hleza', '9953 Motloung Avenue Dobsonville Ext 3', '1863', '(046)-(303)-(4847)', '(026)-(340)-(8970)', '(083)-(339)-(7282)', '', NULL),
 ('9109140754088', 'Mashamokwena ', 'Van Vuuren', '995 30Th Avenue Villieria', '0186', '(072)-(432)-(4094)', '(099)-(338)-(6528)', '(097)-(273)-(6866)', 'Mashamokwena @mweb.co.za', NULL),
@@ -4994,6 +5018,12 @@ INSERT INTO `suppliers` (`supplier_id`, `supplier_name`, `bank_id`, `acc_type_id
 ALTER TABLE `account_types`
   ADD PRIMARY KEY (`acc_type_id`),
   ADD KEY `acc_type_id` (`acc_type_id`);
+
+--
+-- Indexes for table `auth`
+--
+ALTER TABLE `auth`
+  ADD PRIMARY KEY (`client_id`);
 
 --
 -- Indexes for table `banks`

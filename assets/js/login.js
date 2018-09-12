@@ -67,6 +67,16 @@ function validateForm() {
     return true;
 }
 
+
+function logout() {
+    $.ajax({
+        url: 'controller/login_controller.php?action=logout',
+        success: function() {
+          window.location.reload();
+        }
+      });
+}
+
 // Get value from url
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');

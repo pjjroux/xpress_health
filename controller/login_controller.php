@@ -21,6 +21,9 @@ switch ($_GET['action']) {
     case 'login':
         login();
         break;
+    case 'logout':
+        logout();
+        break;
     case 'validateUserLogin':
         validateUserLogin($_GET['client_email'], $_GET['client_password']);
         break;
@@ -32,18 +35,27 @@ switch ($_GET['action']) {
 
 /**
  * Login user
-
+ *
  * @return void
  */
 function login() {
     $client = new Client($_POST['client_id']);
 
-    $_SESSION['client_name'] = $client->get_client_name();
+    $_SESSION['client_name'] = $client->get_client_name() . ' ' . $client->get_client_surname();
     $_SESSION['client_email'] = $client->get_client_email();
     
     header("Location: ../login.html?logged_in=1");
 }
 
+/**
+ * Logout user and destory session
+ * 
+ * @return void
+ */
+function logout() {
+    session_start();
+    session_destroy();
+}
 
 /**
  * Validate user credentials

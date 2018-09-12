@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,10 +29,7 @@
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="index.html"><i class="fa fa-home"></i> Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Account</a>
+            <a class="nav-link" href="index.php"><i class="fa fa-home"></i> Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.html"><i class="fa fa-info-circle"></i> Contact Us</a>
@@ -39,15 +40,24 @@
           <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Checkout</a>
-          </li>  
-          <li class="nav-item">
-            <a class="nav-link" href="login.html"><i class="fa fa-sign-in"></i> Login</a>
-          </li>   
-          <li class="nav-item">
-            <a class="nav-link" href="register.html"><i class="fa fa-user-plus"></i> Register</a>
-          </li>     
+          <?php if (!isset($_SESSION['client_name'])) { ?>  
+            <li class="nav-item">
+              <a class="nav-link" href="login.html"><i class="fa fa-sign-in"></i> Login</a>
+            </li>   
+            <li class="nav-item">
+              <a class="nav-link" href="register.html"><i class="fa fa-user-plus"></i> Register</a>
+            </li>
+          <?php } else { ?> 
+            <li class="nav-item">
+              <a class="nav-link" href="account.html"><i class="fa fa-user"></i> <?php echo $_SESSION['client_name'] ?></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Checkout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="logout();return false;"><i class="fa fa-sign-out"></i> Logout</a>
+            </li> 
+          <?php } ?>   
         </ul>
       </div>
     </nav>
@@ -174,8 +184,9 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="assets/js/login.js"></script>
   </body>
 </html>
