@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2018 at 08:20 PM
+-- Generation Time: Sep 17, 2018 at 08:41 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -36,11 +36,6 @@ CREATE TABLE `account_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `account_types`
---
-
-TRUNCATE TABLE `account_types`;
---
 -- Dumping data for table `account_types`
 --
 
@@ -59,11 +54,6 @@ CREATE TABLE `auth` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `auth`
---
-
-TRUNCATE TABLE `auth`;
---
 -- Dumping data for table `auth`
 --
 
@@ -81,11 +71,6 @@ CREATE TABLE `banks` (
   `bank_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Truncate table before insert `banks`
---
-
-TRUNCATE TABLE `banks`;
 --
 -- Dumping data for table `banks`
 --
@@ -114,11 +99,6 @@ CREATE TABLE `clients` (
   `ref_id` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Truncate table before insert `clients`
---
-
-TRUNCATE TABLE `clients`;
 --
 -- Dumping data for table `clients`
 --
@@ -584,11 +564,6 @@ CREATE TABLE `client_references` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `client_references`
---
-
-TRUNCATE TABLE `client_references`;
---
 -- Dumping data for table `client_references`
 --
 
@@ -614,11 +589,6 @@ CREATE TABLE `invoices` (
   `grand_total` decimal(13,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Truncate table before insert `invoices`
---
-
-TRUNCATE TABLE `invoices`;
 --
 -- Dumping data for table `invoices`
 --
@@ -2158,11 +2128,6 @@ CREATE TABLE `invoice_lines` (
   `total` decimal(13,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Truncate table before insert `invoice_lines`
---
-
-TRUNCATE TABLE `invoice_lines`;
 --
 -- Dumping data for table `invoice_lines`
 --
@@ -4646,11 +4611,6 @@ CREATE TABLE `supplements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `supplements`
---
-
-TRUNCATE TABLE `supplements`;
---
 -- Dumping data for table `supplements`
 --
 
@@ -4909,66 +4869,63 @@ INSERT INTO `supplements` (`supplement_id`, `description_id`, `cost_excl`, `cost
 
 CREATE TABLE `supplement_descriptions` (
   `description_id` int(11) UNSIGNED NOT NULL,
-  `supplement_description` varchar(255) NOT NULL
+  `supplement_description` varchar(255) NOT NULL,
+  `long_description` text NOT NULL,
+  `img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Truncate table before insert `supplement_descriptions`
---
-
-TRUNCATE TABLE `supplement_descriptions`;
 --
 -- Dumping data for table `supplement_descriptions`
 --
 
-INSERT INTO `supplement_descriptions` (`description_id`, `supplement_description`) VALUES
-(1, '90'),
-(2, '60'),
-(3, '180g powder'),
-(4, '113g'),
-(5, '118ml'),
-(6, '30'),
-(7, '750ml'),
-(8, '30 one month suupply'),
-(9, '240'),
-(10, '120'),
-(11, '400g'),
-(12, '60\'s'),
-(13, '180'),
-(14, '2.5 litre'),
-(15, '200ml'),
-(16, '500ml glass'),
-(17, '120ml jar'),
-(18, '110ml jar'),
-(19, '22ml'),
-(20, '200ml glass'),
-(21, '250ml'),
-(22, '200g'),
-(23, 'powder'),
-(24, '64g (10 servings)'),
-(25, '1liter'),
-(26, '300mg'),
-(27, '90\'s'),
-(28, '1 packet'),
-(29, '1'),
-(30, '240g'),
-(31, 'one month supply'),
-(32, '42'),
-(33, 'Powder - 65 heaped spoons'),
-(34, '500mg 90\'s'),
-(35, '50ml'),
-(36, '250g'),
-(37, '100 X 1.5g sachets'),
-(38, 'big bottle'),
-(39, '450g'),
-(40, '320ml'),
-(41, 'Book and chart'),
-(42, 'Book'),
-(43, '30 Sachets'),
-(44, '30ml'),
-(45, '15ml'),
-(46, '100ml'),
-(47, '150g');
+INSERT INTO `supplement_descriptions` (`description_id`, `supplement_description`, `long_description`, `img_path`) VALUES
+(1, '90', 'HIGHEST POTENCY AVAILABLE TURMERIC PILLS ENHANCED WITH BIOPERINE: BioSchwartz turmeric formula has 1500mg of Turmeric Curcumin with 95% Standardized Curcuminoids per serving (Highest Potency) and 10mg of BioPerine (black pepper, curcumin with black pepper) for enhanced absorption and bio-availability.', 'assets/img/products/90.jpg'),
+(2, '60', 'BOOST IMMUNE SYSTEM & DIGESTIVE HEALTH Our Superior Probiotics Supplement replenishes the beneficial bacteria for optimal digestive and immune health, supports more vitamin production and promotes daily relief from allergies, gas, bloating and constipation. It may even help you lose weight by improving your metabolism and accelerating fat loss.', 'assets/img/products/60.jpg'),
+(3, '180g powder', 'YOU NEED MORE COLLAGEN: Collagen is one of the most important nutrients needed to to ensure the health and vitality of your skin, hair, tendon, cartilage, bones, and joints. Around the age of 30, our bodies naturally begin to produce less collagen, and the first signs of aging start to occur.', 'assets/img/products/180g powder.jpg'),
+(4, '113g', 'BOOSTED IRON ABSORPTION: Vitamin Code RAW iron pills contain 22mg of gentle whole food iron and whole food vitamins C, B-12, and folate to support iron absorption and utilization', 'assets/img/products/113g.jpg'),
+(5, '118ml', 'NATURAL COFACTORS: Vitamin Code zinc capsules include a RAW Veggie Mineral Blend of 17 organically grown vegetables & 75 ancient soil based alkalizing trace minerals containing natural cofactors', 'assets/img/products/118ml.jpg'),
+(6, '30', 'B COMPLEX VITAMINS: Our vitamin b complex provides mental and physical energy, supports blood health, heart health, immune system health and healthy stress response', 'assets/img/products/30.jpg'),
+(7, '750ml', 'Valuable source of EFA\'s 3/6/9\'s and also contains two very powerful phytochemicals Nigel lone and Thymoquinone along with other nutrients that work synergistically to support the body\'s various functions.', 'assets/img/products/750ml.jpg'),
+(8, '30 one month supply', 'GMO-FREE: Vegan, Gluten Free, Non-GMO, Processed in the Peruvian Andes, for Freshness that Preserves Vital Nutrients NUTRIENT DENSE SUPERFOOD: Maca Contains High Levels of Protein, Vitamins and Minerals, and Essential Amino Acids', 'assets/img/products/30 one month supply.jpg'),
+(9, '240', 'Haritaki is one of the three fruits of the Ayurvedic formula, triphala. Haritaki is often taken on its own to support a healthy supply of oxygen to the blood, rejuvenating and nourishing all bodily tissues.', 'assets/img/products/240.jpg'),
+(10, '120', 'Contains (1) bottle of 250 Vitamin C tablets of 500mg each. Vitamin C plays an important role in supporting the immune system.(1) As an antioxidant, it helps neutralize cell-damaging free radicals in your body.(1) Take 1 tablet daily to support immune health.(1)', 'assets/img/products/120.jpg'),
+(11, '400g', 'GET BETTER SLEEP – Melatonin is naturally produced by our bodies to manage sleep cycles, but its balance can be easily disrupted. Natrol Advanced Sleep Melatonin helps you fall asleep faster, stay asleep longer, and wake up feeling refreshed, plus, it’s 100% vegetarian.', 'assets/img/products/400g.jpg'),
+(12, '60\'s', 'GRASS FED LIVER (600MG) provides nature\'s most nutrient dense superfood. Liver is the only meaningful source of natural vitamin A (rich in heme iron and B12). Supports optimal liver health and energy demands.', 'assets/img/products/60\'s.jpg'),
+(13, '180', 'HEALTHY HEART & BLOOD PRESSURE - Our pure and high absorption Coenzyme Q10 capsules provide excellent nutritional support for overall cardiovascular health including maintaining normal blood pressure, boosting healthy “good” cholesterol, monitoring blood sugar levels and improving immune function.', 'assets/img/products/180.jpg'),
+(14, '2.5 litre', '240 SOFTGELS - 8 MONTHS SUPPLY – You receive 8 months supply (at 100mg per day) of our premium CoQ10 softgels. You won\'t find a similar quality product at the same price - AMAZING VALUE!', 'assets/img/products/2.5 litre.jpg'),
+(15, '200ml', '100% MORE THAN OTHER BRANDS, 120 CAPSULES - 2 MONTH SUPPLY - You get the benefit of DOUBLE the capsules thanks to our ability to buy ingredients in bulk. Receive 2 months supply of our premium Thyroid Complex. You won\'t find a similar quality product at the same price - MARKET LEADING VALUE!', 'assets/img/products/200ml.jpg'),
+(16, '500ml glass', 'DOCTOR FORMULATED MADE IN USA BEST OMEGA 3 FISH OIL SUPPLEMENT: Our Premium Omega-3 Fish Oil is formulated by doctors and manufactured in the USA in an FDA-approved facility following strict GMP guidelines. This omega fish oil is rigorously tested for heavy metals and also third-party tested to ensure that each batch is of the highest quality and purity.', 'assets/img/products/500ml glass.jpg'),
+(17, '120ml jar', 'Turmeric Curcumin Supplement Capsules Premium Formulation by Purely Holistic Containing Organic Turmeric Powder', 'assets/img/products/120ml jar.jpg'),
+(18, '110ml jar', '120 VEGGIE CAPSULES - 2 MONTHS SUPPLY - You receive 2 months supply of our premium Candida Cleanse. Most people stop taking Candida Cleanses TOO EARLY, – Our 2 month supply ensures you have an internal balance with healthy intestinal flora.', 'assets/img/products/110ml jar.jpg'),
+(19, '22ml', 'NOTICE: This product contains deglycyrrhizinated licorice, or licorice in which the glycyrrhizin is removed during processing to eliminate the side-effects that sometimes occur with licorice use. However a few individuals may still see increased blood pressure. If you experience any of the above reactions, stop taking this supplement immediately.', 'assets/img/products/22ml.jpg'),
+(20, '200ml glass', '#1 QUALITY PURE WHITE MULBERRY LEAF EXTRACT 1000mg/serving (10:1). (Morus alba) As a dietary supplement, take 1-2 capsules, with food and water, 3 times per day, or as directed by your health care professional. 100% PURE & ORGANIC Veggie Capsules/Pills', 'assets/img/products/200ml glass.jpg'),
+(21, '250ml', 'MADE WITH ORGANIC CEYLON CINNAMON, 100% NATURAL - NutriFlair Ceylon Cinnamon Supplement, Made with Organic and Natural Ingredients, is a powerful antioxidant, free of GMO Ingredients. Supports healthy blood sugar levels, promotes heart health, helps with weight management, helps with joint pain, and serves as a power anti-inflammatory supplement', 'assets/img/products/250ml.jpg'),
+(22, '200g', 'GutMeister is the ULTIMATE PREBIOTIC: GutMeister supports your floral balance. Feeds only the good bacteria. And targets the bad. Avoids disadvantages that standard prebiotics have, like FOS etc', 'assets/img/products/200g.jpg'),
+(23, 'powder', 'ADVANCED BERBERINE SUPPLEMENT: Our Berberine Supplement provides 600mg of Berberine HCI per capsule. Just two capsules of Sunergetic’s Berberine formula, provides 1,200 mg of high quality Berberine. Our Berberine HCI capsules are easy to swallow, vegetarian and convenient.', 'assets/img/products/powder.jpg'),
+(24, '64g (10 servings)', 'Berberine has shown to help maintain healthy blood sugar and cholesterol levels that are already within normal range. Bebeerine capsules have also shown to help support weight loss, digestion and immune health.', 'assets/img/products/64g (10 servings).jpg'),
+(25, '1liter', 'TRENGTH JIAOGULAN EXTRACT: NusaPure’s maximum strength Jiaogulan extract contains 820mg of pure Jiaogulan extract per serving. With 180 capsules in every bottle, you receive a full 90 day supply. Jiaogulan, also known as Gynostemma pentaphyllum, is a climbing vine indigenous to Japan, Vietnam, Southern Korea, and China. Jiaogulan is thought to have powerful antioxidant & adaptogenic properties. *', 'assets/img/products/1liter.jpg'),
+(26, '300mg', 'Quercetin is a flavonoid (plant pigment) naturally found in fruits and vegetables. It is found in many foods, such as red wine, onions, green tea, apples, berries etc. It known for its Anti-oxidant and Anti-Inflammatory Properties. Amazing Nutrition Quercetin 500 Mg is offered in Veggie Capsule to suit most diet preferences', 'assets/img/products/300mg.jpg'),
+(27, '90\'s', 'SUPERCHARGE YOUR METABOLISM with nature’s most POWERFUL AMPK ACTIVATOR - Gynostemma pentaphyllum, called Jiao Gu Lan in Chinese, is scientifically proven the best AMPK Activator supplement, even more powerful than berberine or quercetin pills. AMPK activation is key to HEALTHY WEIGHT LOSS. Gynostemma is also a POTENT ANTIOXIDANT SUPPLMENT. Herbalists consider it the KING OF NATURAL ADAPTOGENS. You’ll have more stamina and gravitate toward healthy cholesterol and blood sugar levels BOOST YOUR IMMUNE SYSTEM – Gynostemma is often called SOUTHERN GINSENG, because it provides many of the same health benefits of ginseng. But, scientists were shocked to discover it actually has 127 different saponins & gypenosides, that’s 7X the power of regular ginseng. Our jiaogulan veggy capsules also stimulate increased SOD production, your body’s own powerful antioxidant. Higher SOD production is crucial for your body to generate new mitochondria* NATURE’S MOST REVERED LONGEVITY HERB – The locals who grow jiaogulan actually call it the herb of immortality. They’ve known for centuries the anti-aging effects of jiaogulan leaf, aka gynostemma. Modern research backs up these claims showing that gynostemma is the best natural vasodilator, promoting blood flow and improved oxygen delivery. Recent research also recoemmends it as a powerful weight loss supplements powder.* THE BENEFITS ARE IN THE WHOLE LEAF! - Thousands of years of Traditional Chinese Medicine and modern science agree, whole herbs provide more effective health benefits. Our bodies need the synergistic effects of full spectrum herbs. Pharmaceuticals and extracts are manufactured with chemistry, are less effective and can be downright dangerous. Our gynostemma capsules are pure gynostemma leaf powder, natures most effectiev antioxidant supplement. OUR NAME MEANS GYNOSTEMMA – We founded Immortalitea in 2004 to introduce Gynostemma to the world. We grow our caffeine-free whole leaf gynostemma 100% chemical and pesticide-free on small farms in the highlands of Thailand. We powder and capsulate the loose leaf in an FDA registered facility that is GMP certified. We standby all of our products with our peace of mind guarantee. If you are unsatisfied, for any reason, within 60 days of purchase, we’ll refund your purchase in full.', 'assets/img/products/90\'s.jpg'),
+(28, '1 packet', 'MAX STRENGTH JIAOGULAN EXTRACT: aSquared Nutrition’s maximum strength Jiaogulan extract contains 820mg of pure Jiaogulan extract per serving. With 180 capsules in every bottle, you receive a full 90 day supply. Jiaogulan, also known as Gynostemma pentaphyllum, is a climbing vine indigenous to Japan, Vietnam, Southern Korea, and China. Jiaogulan is thought to have powerful antioxidant & adaptogenic properties, and is often taken with Quercetin, Berberine, or even Panax Ginseng 1000mg. *', 'assets/img/products/1 packet.jpg'),
+(29, '1', 'MAX STRENGTH QUERCETIN: aSquared Nutrition’s maximum strength Quercetin formula contains 500mg of Quercetin per capsule and 200 capsules per bottle for a full 200-day supply. Quercetin is a plant pigment flavonoid that is naturally found in berries, broccoli, and leafy greens. Quercetin is a powerful antioxidant and free radical scavenger that helps protect the body from cell membrane damage & DNA alterations. *', 'assets/img/products/1.jpg'),
+(30, '240g', 'BEST VALUE ON AMAZON - MAX STRENGTH 1000 MG PER SERVING - 180 CAPSULES - You receive 180 capsules of 100% pure, extra strength resveratrol for a FULL 90 DAY supply (others offer half for a more expensive price), all backed by our \"best in the industry\" 100% MONEY BACK GUARANTEE for 30 days. If you are dissatisfied with our product you have 30 days to return it for a full refund. *', 'assets/img/products/240g.jpg'),
+(31, 'one month supply', 'COLOR MAY VARY FROM TAN TO GREEN: We recently transitioned from Golden Cracked Wall Chlorella to Organic Green Cracked Wall Chlorella, so the color of the powder in the capsules may be tan or green. (Product with Green Chlorella will be noted with a \"NOW with Organic Green Cracked-Wall Chlorella\" sticker on the product box carton.)', 'assets/img/products/one month supply.jpg'),
+(32, '42', 'POLYPHENOLS SUPPLEMENT: Our RAW Kombucha supplement contains black tea, rich in polyphenols, and PABA for antioxidant protection and energy', 'assets/img/products/42.jpg'),
+(33, 'Powder - 65 heaped spoons', 'WEIGHT LOSS SUPPLEMENT: This specialized formula promotes metabolism health, heart health, mental and physical energy, digestive support, and improved stress response', 'assets/img/products/Powder - 65 heaped spoons.jpg'),
+(34, '500mg 90\'s', 'NUTRITIONAL SUPPLEMENT: Certified USDA Organic & Non- GMO Project Verified, No palm oil or other filler oils, Hexane-free, Non-Hydrogenated, 0g Trans Fat, Paleo & Ketogenic diet-friendly, Vegan, Gluten Free, Dairy Free, Soy Free', 'assets/img/products/500mg 90\'s.jpg'),
+(35, '50ml', 'Grass fed from pasture-raised and hormone-free New Zealand cows, no antibiotics. Tested dairy free, lactose free, casein free', 'assets/img/products/50ml.jpg'),
+(36, '250g', 'NATURAL BRAIN BOOSTER: Certified USDA Organic & Non-GMO Project Verified, Vegetarian, Gluten Free, Dairy Free, Soy Free', 'assets/img/products/250g.jpg'),
+(37, '100 X 1.5g sachets', 'NUTRITIONAL SUPPLEMENT: Clean, simple, clinically studied whole food ingredients, 600mg of Organic Neurophenol Organic Grape & Wild Blueberry, 100mg of Organic NeuroFactor Organic Coffee Fruit', 'assets/img/products/100 X 1.5g sachets.jpg'),
+(38, 'big bottle', 'DIGESTION SUPPORT: This once daily probiotic supplement contains Lactobaccilus acidophilus and Bifidobacteria for digestive health and constipation relief', 'assets/img/products/big bottle.jpg'),
+(39, '450g', 'MULTIVITAMIN WITH IRON: mykind\'s vegan multivitamin for women includes vegan D3, 2mg of iron, organic vitamin B-12, and vitamin b', 'assets/img/products/450g.jpg'),
+(40, '320ml', 'SILICA SUPPLEMENT: mykind vegan collagen hair supplement helps build the body\'s own natural production of collagen with collagen co-nutrients such as silica for beautiful hair, skin and nails', 'assets/img/products/320ml.jpg'),
+(41, 'Book and chart', 'CALCIUM MAGNESIUM: The mykind calcium magnesium formula includes Vegan D3 from lichen and Vitamin K2 MK7 for bone health and reduced osteoporosis risk', 'assets/img/products/Book and chart.jpg'),
+(42, 'Book', 'MULTIVITAMIN WITH IRON: With 18mg iron and 800mg Folate, this prenatal with folate helps support healthy neural tube development', 'assets/img/products/Book.jpg'),
+(43, '30 Sachets', 'SUPPORTS HEALTHY JOINTS & REDUCE INFLAMMATION: Several recent studies show that turmeric/curcumin has anti-inflammatory properties and modifies immune system responses*. In addition, curcumin lowers the levels of two enzymes in the body that cause inflammation.', 'assets/img/products/30 Sachets.jpg'),
+(44, '30ml', 'NATURAL, ORGANIC, HIGHEST ABSORPTION - Our CoQ10 100mg is pure, free of allergens, non-gmo, gluten free, GMP certified and lab tested to ensure purity, potency and effectivness. Our High Absorption COQ10 is formulated in Organic Olive oil, which is full of beneficial fatty acids such as Omega 3, Omega 6 and monounsaturated fats that increase absorption and can improve heart health and overall health.', 'assets/img/products/30ml.jpg'),
+(45, '15ml', 'OUR VITAMIN B COMPLEX: Natural organic ingredients & nothing synthetic (as Folic Acid). Not all B\'s are alike & unlike many B vitamin products ours contains the active forms of the vitamins for greater bioavailability. Our high potency B vitamins provide multisystem support for blood health, heart health, adrenal and nervous system. Also a Co-enzyme b complex with PROBIOTICS and ENZYMES for additional digestive support. The highest quality & the only one you will ever need', 'assets/img/products/15ml.jpg'),
+(46, '100ml', '2-in-1 SUPPORT: 5000 IU (125mcg) of Vitamin D3 & 100 mcg of Vitamin K2 MK-7 for Strong Bones and a Healthy Cardiovascular System. Studies also suggest supplementing Vitamin K2+D3 may help support a weight management.', 'assets/img/products/100ml.jpg'),
+(47, '150g', 'NEW Advance Formula: Made with Superba2 Krill Oil, a new advance formula clinically proven to increase omega-3 fatty acid levels in the body*. Each softgel also contains 1mg of the powerhouse Antioxidant Astaxanthin!', 'assets/img/products/150g.jpg');
 
 -- --------------------------------------------------------
 
@@ -4991,11 +4948,6 @@ CREATE TABLE `suppliers` (
   `supplier_comments` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Truncate table before insert `suppliers`
---
-
-TRUNCATE TABLE `suppliers`;
 --
 -- Dumping data for table `suppliers`
 --
