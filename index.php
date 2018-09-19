@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+require_once('controller/product_controller.php');
+
+// Get the top 4 best selling products
+$best_sellers = getBestSellingProducts();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,10 +40,6 @@ session_start();
             <a class="nav-link" href="contact.html"><i class="fa fa-info-circle"></i> Contact Us</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
-          <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
         <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 
           <?php if (!isset($_SESSION['client_name'])) { ?>  
             <li class="nav-item">
@@ -60,6 +61,10 @@ session_start();
           <?php } ?>   
         </ul>
       </div>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </nav>
     
     <section>
@@ -70,104 +75,41 @@ session_start();
 
     <section id="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
+        <div id="product-area">
+          <div class="row">
+            <div class="col-12">
               <h2 class="shop-header">Best Sellers</h2>
-          </div>
-        </div>
-
-        <div class="row">
-          <!-- Featured Product tiles -->
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <div class="product card" align="center"> 
-              <div class="product-image">
-                  <img class="card-img-top" src="assets/img/products/60.jpg" alt="Product image">
-              </div>
-      
-              <h5 class="card-title">Supplement-236</h5>
-              <p class="card-text">BOOST IMMUNE SYSTEM & DIGESTIVE HEALTH Our Superior Probiotics Supplement replenishes the beneficial bacteria for optimal digestive and immune health, supports more vitamin production and promotes daily relief from allergies, gas, bloating and constipation. It may even help you lose weight by improving your metabolism and accelerating fat loss.</p>
-
-              <div class="text-success">
-                <p>In stock</p>
-              </div>
-
-              <div class="price">
-                <p>R233.70</p>
-              </div>
-
-              <div class="text-right">
-                <a href="#" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-              </div>     
             </div>
           </div>
+          
+          
+          <div class="row">
+            <?php foreach ($best_sellers as $value) : ?>
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                <div class="product card" align="center"> 
+                  <div class="product-image">
+                    <img class="card-img-top" src="<?php echo $value['img'] ?>" alt="Product image">
+                  </div>
 
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <div class="product card" align="center"> 
-              <div class="product-image">
-                  <img class="card-img-top" src="assets/img/products/90.jpg" alt="Product image">
+                  <h5 class="card-title"><?php echo $value['supplement_id'] ?></h5>
+                  <h6><?php echo $value['description'] ?></h6>
+                  <p class="card-text"><?php echo $value['long_description'] ?></p>
+
+                  <div class="<?php echo $value['stock_style'] ?>">
+                    <p><?php echo $value['stock_status'] ?></p>
+                  </div>
+
+                  <div class="price">
+                    <p><?php echo $value['cost'] ?></p>
+                  </div>
+
+                  <div class="text-right">
+                    <a href="#" onclick="buy('<?php echo $value['supplement_id'] ?>');return false;" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                  </div>   
+
+                </div>
               </div>
-      
-              <h5 class="card-title">Supplement-127</h5>
-              <p class="card-text">HIGHEST POTENCY AVAILABLE TURMERIC PILLS ENHANCED WITH BIOPERINE: BioSchwartz turmeric formula has 1500mg of Turmeric Curcumin with 95% Standardized Curcuminoids per serving (Highest Potency) and 10mg of BioPerine (black pepper, curcumin with black pepper) for enhanced absorption and bio-availability.</p>
-
-              <div class="text-warning">
-                <p>Limited stock</p>
-              </div>
-
-              <div class="price">
-                <p>R234.94</p>
-              </div>
-
-              <div class="text-right">
-                <a href="#" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-              </div>     
-            </div>
-          </div>
-
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <div class="product card" align="center"> 
-              <div class="product-image">
-                  <img class="card-img-top" src="assets/img/products/200g.jpg" alt="Product image">
-              </div>
-      
-              <h5 class="card-title">Supplement-59</h5>
-              <p class="card-text">GutMeister is the ULTIMATE PREBIOTIC: GutMeister supports your floral balance. Feeds only the good bacteria. And targets the bad. Avoids disadvantages that standard prebiotics have, like FOS etc</p>
-
-              <div class="text-success">
-                <p>In stock</p>
-              </div>
-
-              <div class="price">
-                <p>R258.36</p>
-              </div>
-
-              <div class="text-right">
-                <a href="#" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-              </div>     
-            </div>
-          </div>
-
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <div class="product card" align="center"> 
-              <div class="product-image">
-                  <img class="card-img-top" src="assets/img/products/500ml glass.jpg" alt="Product image">
-              </div>
-      
-              <h5 class="card-title">Supplement-52</h5>
-              <p class="card-text">DOCTOR FORMULATED MADE IN USA BEST OMEGA 3 FISH OIL SUPPLEMENT: Our Premium Omega-3 Fish Oil is formulated by doctors and manufactured in the USA in an FDA-approved facility following strict GMP guidelines. This omega fish oil is rigorously tested for heavy metals and also third-party tested to ensure that each batch is of the highest quality and purity.</p>
-
-              <div class="text-danger">
-                <p>Out of stock</p>
-              </div>
-
-              <div class="price">
-                <p>R219.64</p>
-              </div>
-
-              <div class="text-right">
-                <a href="#" class="btn btn-success" title="Buy" disabled><i class="fa fa-shopping-cart"></i> Add to cart</a>
-              </div>     
-            </div>
+            <?php endforeach; ?>
           </div>
         </div>
       </div>
@@ -188,5 +130,13 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="assets/js/login.js"></script>
+
+    <script>
+      function buy($supplement_id) {
+        alert($supplement_id);
+      }
+    
+    
+    </script>
   </body>
 </html>
