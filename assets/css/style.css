@@ -94,6 +94,10 @@ footer {
     border-color: #B2C39B;
 }
 
+.badge-success {
+    background-color: #668330;
+}
+
 .btn-primary:hover {
     background-color: #D5DDC8;
     border-color: #D5DDC8;

@@ -43,6 +43,7 @@ function login() {
 
     $_SESSION['client_name'] = $client->get_client_name() . ' ' . $client->get_client_surname();
     $_SESSION['client_email'] = $client->get_client_email();
+    $_SESSION['cart'] = [];
     
     header("Location: ../login.html?logged_in=1");
 }

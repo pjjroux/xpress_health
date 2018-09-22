@@ -74,3 +74,13 @@ body {
 .shopping-cart {
     margin-top: 5%;
 }
+
+small {
+    font-size: 14px;
+    font-style: oblique;
+}
+
+.sub_total {
+    text-align: right;
+    font-style: italic;
+}

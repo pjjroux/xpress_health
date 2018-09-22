@@ -3,6 +3,13 @@ session_start();
 
 require_once('controller/product_controller.php');
 
+if (isset($_SESSION['cart'])) {
+  $checkout_count = 0;
+  foreach ($_SESSION['cart'] as $cart_item) {
+    $checkout_count +=  $cart_item['qty'];
+  }
+}
+
 // Get the top 4 best selling products
 $best_sellers = getBestSellingProducts();
 
@@ -21,6 +28,8 @@ $best_sellers = getBestSellingProducts();
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <link href="assets/libraries/noty/lib/noty.css" rel="stylesheet">
+    <link rel="stylesheet"  href="assets/libraries/noty/lib/themes/bootstrap-v4.css" />
     <link rel="stylesheet" href="assets/css/style.css">
 
     <title>Xpress Health</title>
@@ -53,7 +62,11 @@ $best_sellers = getBestSellingProducts();
               <a class="nav-link" href="account.html"><i class="fa fa-user"></i> <?php echo $_SESSION['client_name'] ?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Checkout</a>
+              <?php if (isset($checkout_count) && $checkout_count > 0) { ?>
+                <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i> Checkout <span class="badge badge-pill badge-success" style="margin-left:5px;"><?php echo $checkout_count ?></span></a>
+              <?php } else { ?>
+                <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i> Checkout</a>
+              <?php } ?>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="logout();return false;"><i class="fa fa-sign-out"></i> Logout</a>
@@ -104,7 +117,11 @@ $best_sellers = getBestSellingProducts();
                   </div>
 
                   <div class="text-right">
-                    <a href="#" onclick="buy('<?php echo $value['supplement_id'] ?>');return false;" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                    <?php if ($value['stock_status'] != 'Out of stock') { ?>
+                      <a href="#" onclick="buy('<?php echo $value['supplement_id'] ?>');return false;" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                    <?php } else { ?>
+                      <a href="#" disabled class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                    <?php } ?>
                   </div>   
 
                 </div>
@@ -129,14 +146,9 @@ $best_sellers = getBestSellingProducts();
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="assets/libraries/noty/lib/noty.js" type="text/javascript"></script>
     <script src="assets/js/login.js"></script>
+    <script src="assets/js/cart.js"></script>
 
-    <script>
-      function buy($supplement_id) {
-        alert($supplement_id);
-      }
-    
-    
-    </script>
   </body>
 </html>
