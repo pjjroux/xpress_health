@@ -115,6 +115,59 @@ class Client {
     }
 
     /**
+     * Updates client information
+     * 
+     * @param array $client_data Array containing field data for update
+     * @return void
+     */
+    public function update_client($client_data) {
+        $this->database->beginTransaction(); 
+
+        $this->database->query(
+            'UPDATE clients SET
+                client_id = :client_id,
+                client_name = :client_name, 
+                client_surname = :client_surname, 
+                client_address = :client_address, 
+                client_postalcode = :client_postalcode,
+                client_tel_home = :client_tel_home, 
+                client_tel_work = :client_tel_work, 
+                client_tel_cell = :client_tel_cell, 
+                client_email = :client_email, 
+                ref_id = :ref_id
+            WHERE client_id = :original_client_id;'
+        );
+
+        $this->database->bind(':client_id', $client_data['inputID']);
+        $this->database->bind(':client_name', $client_data['inputName']); 
+        $this->database->bind(':client_surname', $client_data['inputSurname']); 
+        $this->database->bind(':client_address', $client_data['inputAddress']); 
+        $this->database->bind(':client_postalcode', $client_data['inputPostal']); 
+        $this->database->bind(':client_tel_home', $client_data['inputTelHome']); 
+        $this->database->bind(':client_tel_work', $client_data['inputTelWork']); 
+        $this->database->bind(':client_tel_cell', $client_data['inputCell']);
+        $this->database->bind(':client_email', $client_data['inputEmail']);
+        $this->database->bind(':ref_id', $client_data['inputRef']); 
+        $this->database->bind(':original_client_id', $_SESSION['client_id']); 
+        
+        $this->database->execute();  
+
+        if ($client_data['inputID'] != $_SESSION['client_id']) {
+            $this->database->query('UPDATE auth SET client_id = :client_id WHERE client_id = :original_client_id;');
+            $this->database->bind(':client_id', $client_data['inputID']);
+            $this->database->bind(':original_client_id', $_SESSION['client_id']); 
+    
+            $this->database->execute(); 
+        }
+
+        $this->database->endTransaction();  
+
+        $_SESSION['client_id'] = $client_data['inputID'];
+        $_SESSION['client_name'] = $client_data['inputName'] . ' ' . $client_data['inputSurname'];
+        $_SESSION['client_email'] = $client_data['inputEmail'];
+    }
+
+    /**
      * Get registration status
      * 
      * @return boolean Registered status

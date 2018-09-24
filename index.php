@@ -46,6 +46,9 @@ $best_sellers = getBestSellingProducts();
             <a class="nav-link" href="index.php"><i class="fa fa-home"></i> Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="products.php"><i class="fa fa-list"></i> Products</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="contact.html"><i class="fa fa-info-circle"></i> Contact Us</a>
           </li>
         </ul>
@@ -59,7 +62,7 @@ $best_sellers = getBestSellingProducts();
             </li>
           <?php } else { ?> 
             <li class="nav-item">
-              <a class="nav-link" href="account.html"><i class="fa fa-user"></i> <?php echo $_SESSION['client_name'] ?></a>
+              <a class="nav-link" href="account.php"><i class="fa fa-user"></i> <?php echo $_SESSION['client_name'] ?></a>
             </li>
             <li class="nav-item">
               <?php if (isset($checkout_count) && $checkout_count > 0) { ?>

@@ -9,8 +9,6 @@
 |
 */
 
-var shopping_cart_qty = [];
-
 /**
  * Add item to shopping cart
  * @param string supplement_id 
@@ -72,7 +70,39 @@ function add_qty(supplement_id) {
     var new_qty = Number($('#'+supplement_id+'_qty').val()) + 1;
     $('#'+supplement_id+'_qty').val(new_qty);
 
-    shopping_cart_qty[supplement_id] = $('#'+supplement_id+'_qty').val();
+    $.ajax({
+        url: 'controller/cart_controller.php',
+        method: 'GET',
+        dataType: 'json',
+        async: false,
+        data: { 
+            action: 'add_qty',
+            supplement_id: supplement_id, 
+        },
+        success: function (json) {
+            if (json.error != '') {
+                new Noty({
+                    type: 'error',
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    modal: true,
+                    text: json.error
+                }).show();
+            } else {
+                window.location.reload();
+            }
+        },
+        error: function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+                new Noty({
+                    type: 'error',
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    text: err,
+                    modal: true,
+                }).show();
+        }
+    });       
 }
 
 /**
@@ -83,11 +113,43 @@ function remove_qty(supplement_id) {
     var qty =  Number($('#'+supplement_id+'_qty').val());
 
     // No negative quantities allowed
-    if (qty > 0) {
+    if (qty > 1) {
         var new_qty = Number($('#'+supplement_id+'_qty').val()) - 1;
         $('#'+supplement_id+'_qty').val(new_qty);
 
-        shopping_cart_qty[supplement_id] = $('#'+supplement_id+'_qty').val();
+        $.ajax({
+            url: 'controller/cart_controller.php',
+            method: 'GET',
+            dataType: 'json',
+            async: false,
+            data: { 
+                action: 'remove_qty',
+                supplement_id: supplement_id, 
+            },
+            success: function (json) {
+                if (json.error != '') {
+                    new Noty({
+                        type: 'error',
+                        layout: 'center',
+                        theme: 'bootstrap-v4',
+                        modal: true,
+                        text: json.error
+                    }).show();
+                } else {
+                    window.location.reload();
+                }
+            },
+            error: function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                    new Noty({
+                        type: 'error',
+                        layout: 'center',
+                        theme: 'bootstrap-v4',
+                        text: err,
+                        modal: true,
+                    }).show();
+            }
+        });       
     }
     
 }
@@ -105,7 +167,6 @@ function remove_from_cart(supplement_id) {
         text: 'Do you want to remove the item/s from your cart?',
         buttons: [
           Noty.button('YES', 'btn btn-success', function () {
-            n.close();
             $.ajax({
                 url: 'controller/cart_controller.php',
                 method: 'GET',
@@ -116,7 +177,8 @@ function remove_from_cart(supplement_id) {
                     supplement_id: supplement_id, 
                 },
                 success: function (json) {
-                   if (json.error != '') {
+                    n.close();
+                    if (json.error != '') {
                         new Noty({
                             type: 'error',
                             layout: 'center',
@@ -124,7 +186,7 @@ function remove_from_cart(supplement_id) {
                             text: json.error,
                             modal: true,
                         }).show();
-                   } else {
+                    } else {
                         new Noty({
                             type: 'success',
                             layout: 'center',
@@ -162,55 +224,8 @@ function remove_from_cart(supplement_id) {
 }
 
 /**
- * Update shopping cart by updating quantities
- * 
+ * Checkout shopping cart and place order
  */
-function update_cart() {
-    if (shopping_cart_qty.length > 0) {
-        $.ajax({
-            url: 'controller/cart_controller.php',
-            method: 'GET',
-            dataType: 'json',
-            async: false,
-            data: { 
-                action: 'updateCart',
-                shopping_cart_qty: shopping_cart_qty, 
-            },
-            success: function (json) {
-                if (json.error != '') {
-                    new Noty({
-                        type: 'error',
-                        layout: 'center',
-                        theme: 'bootstrap-v4',
-                        modal: true,
-                        text: json.error
-                    }).show();
-                } else {
-                    new Noty({
-                        type: 'success',
-                        layout: 'center',
-                        theme: 'bootstrap-v4',
-                        timeout: 1500,
-                        modal: true,
-                        text: 'Shopping cart updated',
-                        callbacks: {
-                            onClose: function() {
-                                window.location.reload();
-                            },  
-                        }
-                    }).show();
-                }
-            },
-            error: function (jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                    new Noty({
-                        type: 'error',
-                        layout: 'center',
-                        theme: 'bootstrap-v4',
-                        text: err,
-                        modal: true,
-                    }).show();
-            }
-        });       
-    }
+function checkout() {
+    alert();
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2018 at 08:41 PM
+-- Generation Time: Sep 23, 2018 at 12:33 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -30,11 +30,17 @@ USE `xpress_health`;
 -- Table structure for table `account_types`
 --
 
+DROP TABLE IF EXISTS `account_types`;
 CREATE TABLE `account_types` (
   `acc_type_id` int(11) UNSIGNED NOT NULL,
   `acc_type_description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `account_types`
+--
+
+TRUNCATE TABLE `account_types`;
 --
 -- Dumping data for table `account_types`
 --
@@ -48,11 +54,17 @@ INSERT INTO `account_types` (`acc_type_id`, `acc_type_description`) VALUES
 -- Table structure for table `auth`
 --
 
+DROP TABLE IF EXISTS `auth`;
 CREATE TABLE `auth` (
   `client_id` varchar(13) NOT NULL,
   `pass` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `auth`
+--
+
+TRUNCATE TABLE `auth`;
 --
 -- Dumping data for table `auth`
 --
@@ -66,11 +78,17 @@ INSERT INTO `auth` (`client_id`, `pass`) VALUES
 -- Table structure for table `banks`
 --
 
+DROP TABLE IF EXISTS `banks`;
 CREATE TABLE `banks` (
   `bank_id` int(11) UNSIGNED NOT NULL,
   `bank_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `banks`
+--
+
+TRUNCATE TABLE `banks`;
 --
 -- Dumping data for table `banks`
 --
@@ -86,6 +104,7 @@ INSERT INTO `banks` (`bank_id`, `bank_name`) VALUES
 -- Table structure for table `clients`
 --
 
+DROP TABLE IF EXISTS `clients`;
 CREATE TABLE `clients` (
   `client_id` varchar(13) NOT NULL,
   `client_name` varchar(255) NOT NULL,
@@ -99,6 +118,11 @@ CREATE TABLE `clients` (
   `ref_id` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `clients`
+--
+
+TRUNCATE TABLE `clients`;
 --
 -- Dumping data for table `clients`
 --
@@ -558,11 +582,17 @@ INSERT INTO `clients` (`client_id`, `client_name`, `client_surname`, `client_add
 -- Table structure for table `client_references`
 --
 
+DROP TABLE IF EXISTS `client_references`;
 CREATE TABLE `client_references` (
   `ref_id` int(11) UNSIGNED NOT NULL,
   `ref_description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `client_references`
+--
+
+TRUNCATE TABLE `client_references`;
 --
 -- Dumping data for table `client_references`
 --
@@ -580,6 +610,7 @@ INSERT INTO `client_references` (`ref_id`, `ref_description`) VALUES
 -- Table structure for table `invoices`
 --
 
+DROP TABLE IF EXISTS `invoices`;
 CREATE TABLE `invoices` (
   `inv_num` varchar(20) NOT NULL,
   `inv_date` date NOT NULL,
@@ -589,6 +620,11 @@ CREATE TABLE `invoices` (
   `grand_total` decimal(13,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `invoices`
+--
+
+TRUNCATE TABLE `invoices`;
 --
 -- Dumping data for table `invoices`
 --
@@ -2119,6 +2155,7 @@ INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `tot
 -- Table structure for table `invoice_lines`
 --
 
+DROP TABLE IF EXISTS `invoice_lines`;
 CREATE TABLE `invoice_lines` (
   `line_id` int(11) UNSIGNED NOT NULL,
   `inv_num` varchar(20) DEFAULT NULL,
@@ -2128,6 +2165,11 @@ CREATE TABLE `invoice_lines` (
   `total` decimal(13,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `invoice_lines`
+--
+
+TRUNCATE TABLE `invoice_lines`;
 --
 -- Dumping data for table `invoice_lines`
 --
@@ -4597,6 +4639,7 @@ INSERT INTO `invoice_lines` (`line_id`, `inv_num`, `supplement_id`, `price_charg
 -- Table structure for table `supplements`
 --
 
+DROP TABLE IF EXISTS `supplements`;
 CREATE TABLE `supplements` (
   `supplement_id` varchar(50) NOT NULL,
   `description_id` int(11) UNSIGNED DEFAULT NULL,
@@ -4610,6 +4653,11 @@ CREATE TABLE `supplements` (
   `nappi_code` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `supplements`
+--
+
+TRUNCATE TABLE `supplements`;
 --
 -- Dumping data for table `supplements`
 --
@@ -4630,7 +4678,7 @@ INSERT INTO `supplements` (`supplement_id`, `description_id`, `cost_excl`, `cost
 ('Supplement-11', NULL, '147.85', '168.55', '60.00', '228.55', 3, 7, 49, ''),
 ('Supplement-110', 30, '213.00', '242.82', '40.00', '282.82', 2, 7, 45, ''),
 ('Supplement-111', NULL, '123.00', '140.22', '0.00', '140.22', NULL, 3, 41, ''),
-('Supplement-112', NULL, '2.00', '2.00', '16.00', '2.00', NULL, 1, 34, ''),
+('Supplement-112', 19, '2.00', '2.00', '16.00', '2.00', NULL, 1, 34, ''),
 ('Supplement-113', NULL, '117.00', '133.38', '0.00', '133.38', NULL, 2, 13, ''),
 ('Supplement-114', 31, '221.00', '251.94', '20.00', '271.94', 1, 8, 50, ''),
 ('Supplement-115', 2, '371.00', '422.94', '10.00', '432.94', 1, 10, 44, ''),
@@ -4867,6 +4915,7 @@ INSERT INTO `supplements` (`supplement_id`, `description_id`, `cost_excl`, `cost
 -- Table structure for table `supplement_descriptions`
 --
 
+DROP TABLE IF EXISTS `supplement_descriptions`;
 CREATE TABLE `supplement_descriptions` (
   `description_id` int(11) UNSIGNED NOT NULL,
   `supplement_description` varchar(255) NOT NULL,
@@ -4874,6 +4923,11 @@ CREATE TABLE `supplement_descriptions` (
   `img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `supplement_descriptions`
+--
+
+TRUNCATE TABLE `supplement_descriptions`;
 --
 -- Dumping data for table `supplement_descriptions`
 --
@@ -4933,6 +4987,7 @@ INSERT INTO `supplement_descriptions` (`description_id`, `supplement_description
 -- Table structure for table `suppliers`
 --
 
+DROP TABLE IF EXISTS `suppliers`;
 CREATE TABLE `suppliers` (
   `supplier_id` int(11) UNSIGNED NOT NULL,
   `supplier_name` varchar(255) NOT NULL,
@@ -4948,6 +5003,11 @@ CREATE TABLE `suppliers` (
   `supplier_comments` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `suppliers`
+--
+
+TRUNCATE TABLE `suppliers`;
 --
 -- Dumping data for table `suppliers`
 --

@@ -9,16 +9,18 @@
 | Date:           2018-08-29
 |
 */
+session_start();
 
 // Include Client class  
-require_once('../classes/Client.php');
+require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/classes/Client.php');
 
 /**
  * Decide on action using $_GET parameter
  */
 switch ($_GET['action']) {
     case 'getClientData':
-        getClientData($_GET['client_id']);
+        $client_id = (isset($_GET['client_id'])) ? $_GET['client_id'] : null ;
+        getClientData($client_id);
         break;
     case 'getReferences':
         getReferences();
@@ -26,8 +28,14 @@ switch ($_GET['action']) {
     case 'registerClient':
         registerClient($_POST);
         break;
+    case 'updateClient':
+        updateClient($_POST);
+        break;
     case 'isAlreadyRegistered':
         isAlreadyRegistered($_GET['client_id'], $_GET['client_email']);
+        break;
+    case 'isAlreadyRegisteredUpdate':
+        isAlreadyRegisteredUpdate($_GET['client_id'], $_GET['client_email']);
         break;
     default:
         echo 'Invalid action - ' . __LINE__ . ' - ' . __FILE__;
@@ -41,8 +49,12 @@ switch ($_GET['action']) {
  * @param string $client_id Client ID number
  * @return json $data
  */
-function getClientData($client_id) {
-    $client = new Client($client_id);
+function getClientData($client_id = null) {
+    if (is_null($client_id)) {
+        $client = new Client($_SESSION['client_id']);
+    } else {
+        $client = new Client($client_id);
+    }
 
     $data = [];
 
@@ -93,6 +105,20 @@ function registerClient($form_data) {
     header("Location: ../register.html?registered=1");
 }
 
+/**
+ * Update client information
+ * Save data to mysql and reload
+ * 
+ * @param array $form_data Submitted data from account form
+ * @return void
+ */
+function updateClient($form_data) {
+    $client = new Client($form_data['inputID']);
+
+    $client->update_client($form_data);
+    header("Location: ../account.php?updated=1");
+}
+
 
 /**
  * Test if client not already registered by testing client_id and client_email seperately
@@ -127,7 +153,47 @@ function isAlreadyRegistered($client_id, $client_email) {
     echo json_encode($data);    
 }
 
+/**
+ * Test if client not already registered by testing client_id and client_email seperately for update on account data
+ * 
+ * @param string $client_id Client ID number
+ * @param string $client_email Client email address
+ * @return json $data Registered status
+ */
+function isAlreadyRegisteredUpdate($client_id, $client_email) {
+    $data['client_email'] = false;
+    $data['client_id'] = false;
 
+    $database = new Database();
+
+    // Client see if client_id exists if changed
+    if ($client_id != $_SESSION['client_id']) {
+        $database->query('SELECT * FROM clients WHERE client_id = :client_id');
+        $database->bind(':client_email', $client_id);
+        $row = $database->single();
+        
+        if (!empty($row)) {
+            $data['client_id'] = true;
+        } else {
+            $data['client_id'] = false;
+        }
+    }
+
+    // Client see if client_email exists if changed
+    if ($client_email != $_SESSION['client_email']) {
+        $database->query('SELECT * FROM clients WHERE client_email = :client_email'); 
+        $database->bind(':client_email', $client_email);
+        $row = $database->single();
+
+        if (!empty($row)) {
+            $data['client_email'] = true;
+        } else {
+            $data['client_email'] = false;
+        }
+    }
+
+    echo json_encode($data);    
+}
 
 
 

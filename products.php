@@ -1,12 +1,16 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/cart_controller.php');
+require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/product_controller.php');
+
+// Get all products
+$products = getProducts();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Xpress Health - Shopping Cart">
+    <meta name="description" content="Xpress Health - Products">
     <meta name="author" content="Jaco Roux (5376-553-2)">
     <link rel="icon" href="assets/img/favicon.ico">
 
@@ -20,7 +24,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/cart_controll
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/cart.css">
 
-    <title>Xpress Health - Shopping Cart</title>
+    <title>Xpress Health - Products</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-light">
@@ -44,71 +48,50 @@ require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/cart_controll
     <div class="container-fluid">
       <div class="card shopping-cart">
         <div class="card-header bg-light text-dark">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          Shopping Cart
-          <a href="index.php" class="btn btn-outline-success btn-sm pull-right">Continue Shopping</a>
+          <i class="fa fa-list" aria-hidden="true"></i>
+          Product listing
           <div class="clearfix"></div>
         </div>
 
         <div class="card-body">
           <?php 
-            if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
-              $total_price = 0;
-              foreach ($_SESSION['cart'] as $cart_item) :  
+            if (isset($products) && count($products) > 0) {
+              foreach ($products as $product) :  
           ?>
                 <!-- PRODUCT -->
                 <div class="row">
                   <div class="col-12 col-sm-12 col-md-2 text-center">
-                    <img class="img-responsive" src="<?php echo $cart_item['img'] ?>" alt="prewiew" width="100" height="100">
+                    <img class="img-responsive" src="<?php echo $product['img'] ?>" alt="prewiew" width="100" height="100">
                   </div>
                   <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                    <h4 class="product-name"><strong><?php echo $cart_item['supplement_id'] ?></strong></h4>
+                    <h4 class="product-name"><strong><?php echo $product['supplement_id'] ?></strong></h4>
                     <h4>
-                        <small><?php echo $cart_item['description'] ?></small>
+                        <small><?php echo $product['long_description'] ?></small>
                     </h4>
                   </div>
                   <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
                     <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                      <h6><strong><?php echo 'R '.number_format($cart_item['cost_per_item'], 2, '.', ' ') ?> <span class="text-muted">x</span></strong></h6>
+                      <h6><strong><?php echo $product['cost'] ?> <span class="text-muted">x</span></strong></h6>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4">
                       <div class="quantity">
-                        <input type="button" value="+" class="plus" onclick="add_qty('<?php echo $cart_item['supplement_id'] ?>')">
-                        <input type="number" step="1" max="99" min="1" id="<?php echo $cart_item['supplement_id'].'_qty' ?>" value="<?php echo $cart_item['qty'] ?>" title="Qty" class="qty"
+                        <input type="button" value="+" class="plus" onclick="add_qty('<?php echo $product['supplement_id'] ?>')">
+                        <input type="number" step="1" max="99" min="1" id="<?php echo $product['supplement_id'].'_qty' ?>" value="1" title="Qty" class="qty"
                               size="4" readonly>
-                        <input type="button" value="-" class="minus" onclick="remove_qty('<?php echo $cart_item['supplement_id'] ?>')">
+                        <input type="button" value="-" class="minus" onclick="remove_qty('<?php echo $product['supplement_id'] ?>')">
                       </div>
-                    </div>
-                    <div class="col-2 col-sm-2 col-md-2 text-right">
-                      <button type="button" class="btn btn-outline-danger btn-xs" onclick="remove_from_cart('<?php echo $cart_item['supplement_id'] ?>')">
-                        <i class="fa fa-trash" aria-hidden="true" ></i>
-                      </button>
                     </div>
                   </div>
                 </div>
                 
-                <div align="right" class="sub_total">
-                  <?php echo 'R '.number_format($cart_item['cost'], 2, '.', ' ') ?>
-                </div>
-
                 <hr>
                 <!-- END PRODUCT -->
           <?php
-              $total_price += $cart_item['cost'];
               endforeach;
           ?>
         </div>
-
-        <div class="card-footer">
-          <div class="pull-right" style="margin: 10px">
-            <a href="#" class="btn btn-success pull-right" onclick="checkout()"><i class="fa fa-check"></i> Checkout</a>
-            <div class="pull-right" style="margin: 5px">
-                Total price: <b><?php echo 'R '.number_format($total_price, 2, '.', ' ') ?></b>
-            </div>
-          </div>
-        </div>
         <?php } else { ?>
-            <h4 class="empty_cart">Your shopping cart is empty.</h4>
+            <h4 class="empty_cart">No products found</h4>
         <?php } ?>
       </div>
     </div>

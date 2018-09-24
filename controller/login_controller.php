@@ -41,6 +41,7 @@ switch ($_GET['action']) {
 function login() {
     $client = new Client($_POST['client_id']);
 
+    $_SESSION['client_id'] = $_POST['client_id'];
     $_SESSION['client_name'] = $client->get_client_name() . ' ' . $client->get_client_surname();
     $_SESSION['client_email'] = $client->get_client_email();
     $_SESSION['cart'] = [];

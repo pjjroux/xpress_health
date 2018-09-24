@@ -84,3 +84,9 @@ small {
     text-align: right;
     font-style: italic;
 }
+
+.empty_cart {
+    text-align: center;
+    font-style: italic;
+    opacity: 0.5;
+}

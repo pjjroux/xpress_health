@@ -23,6 +23,12 @@ switch ($action) {
     case 'addToCart':
         addToCart($_GET['supplement_id']);
         break;
+    case 'add_qty':
+        add_qty($_GET['supplement_id']);
+        break;
+    case 'remove_qty':
+        remove_qty($_GET['supplement_id']);
+        break;
     case 'removeFromCart':
         removeFromCart($_GET['supplement_id']);
         break;
@@ -32,9 +38,9 @@ switch ($action) {
 }
 
 /**
- * Retrieve client data and return json
+ * Add product to shopping cart
  * 
- * @param string $client_id Client ID number
+ * @param string $supplement_id Supplement ID
  * @return json $data
  */
 function addToCart($supplement_id) {
@@ -69,18 +75,22 @@ function addToCart($supplement_id) {
     echo json_encode($data);
 }
 
+
+
 /**
- * Retrieve client data and return json
+ * Add 1 to supplement quantity and return json
  * 
- * @param string $client_id Client ID number
+ * @param string $supplement_id Supplement ID
  * @return json $data
  */
-function removeFromCart($supplement_id) {
+function add_qty($supplement_id) {
     $data['error'] = '';
 
     try {
         $key = array_search($supplement_id, array_column($_SESSION['cart'], 'supplement_id'));
-        unset($_SESSION['cart'][$key]);
+
+        $_SESSION['cart'][$key]['qty'] = $_SESSION['cart'][$key]['qty'] + 1;
+        $_SESSION['cart'][$key]['cost'] = $_SESSION['cart'][$key]['cost_per_item'] * $_SESSION['cart'][$key]['qty'];
     } catch (Throwable $t) {
         $data['error'] = $t->getMessage();
     } catch (Exception $e) {
@@ -91,19 +101,42 @@ function removeFromCart($supplement_id) {
 }
 
 /**
- * Retrieve client data and return json
+ * Remove 1 from supplement quantity and return json
  * 
- * @param array $shopping_cart_qty Array containing updated quantities
+ * @param string $supplement_id Supplement ID
  * @return json $data
  */
-function updateCart($shopping_cart_qty) {
+function remove_qty($supplement_id) {
     $data['error'] = '';
 
     try {
-        foreach ($shopping_cart_qty as $key => $value) {
-            $search_key = array_search($key, array_column($_SESSION['cart'], 'supplement_id'));
-            $_SESSION['cart'][$key]['qty'] = $value;
-        }
+        $key = array_search($supplement_id, array_column($_SESSION['cart'], 'supplement_id'));
+
+        $_SESSION['cart'][$key]['qty'] = $_SESSION['cart'][$key]['qty'] - 1;
+        $_SESSION['cart'][$key]['cost'] = $_SESSION['cart'][$key]['cost_per_item'] * $_SESSION['cart'][$key]['qty'];
+    } catch (Throwable $t) {
+        $data['error'] = $t->getMessage();
+    } catch (Exception $e) {
+        $data['error'] = $e->getMessage();     
+    }
+
+    echo json_encode($data);
+}
+
+
+/**
+ * Remove item from cart
+ * 
+ * @param string $supplement_id Supplement ID
+ * @return json $data
+ */
+function removeFromCart($supplement_id) {
+    $data['error'] = '';
+
+    try {
+        $key = array_search($supplement_id, array_column($_SESSION['cart'], 'supplement_id'));
+        unset($_SESSION['cart'][$key]);
+        $_SESSION['cart'] = array_values($_SESSION['cart']);
     } catch (Throwable $t) {
         $data['error'] = $t->getMessage();
     } catch (Exception $e) {
