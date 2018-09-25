@@ -21,7 +21,8 @@ $action = (isset($_GET['action'])) ? $_GET['action'] : '' ;
  */
 switch ($action) {
     case 'addToCart':
-        addToCart($_GET['supplement_id']);
+        $supplement_qty = (isset($_GET['supplement_qty'])) ? $_GET['supplement_qty'] : 1 ;
+        addToCart($_GET['supplement_id'], $supplement_qty);
         break;
     case 'add_qty':
         add_qty($_GET['supplement_id']);
@@ -41,9 +42,10 @@ switch ($action) {
  * Add product to shopping cart
  * 
  * @param string $supplement_id Supplement ID
+ * @param int $supplement_qty Quantity
  * @return json $data
  */
-function addToCart($supplement_id) {
+function addToCart($supplement_id, $supplement_qty = 1) {
     $data['error'] = '';
 
     if (isset($_SESSION['cart'])) {
@@ -55,7 +57,7 @@ function addToCart($supplement_id) {
             "cost_per_item" => $product->get_cost_client(),
             "description" => $product->get_long_description(),
             "img" => $product->get_product_img(),
-            "qty" => 1,
+            "qty" => $supplement_qty,
         ];
 
         $key = array_search($item['supplement_id'], array_column($_SESSION['cart'], 'supplement_id'));

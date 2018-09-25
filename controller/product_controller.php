@@ -36,10 +36,12 @@ function getBestSellingProducts() {
 /**
  * Get all the products
  */
-function getProducts() {
+function getProducts($start_from, $limit_val) {
     $database = new Database();
     
-    $database->query('SELECT supplement_id FROM supplements ORDER BY RAND()');
+    $database->query('SELECT supplement_id FROM supplements ORDER BY supplement_id ASC LIMIT :start_from, :limit_val');
+    $database->bind(':start_from', $start_from);
+    $database->bind(':limit_val', $limit_val);
     $data = $database->resultset();
 
     if (!empty($data)) {
@@ -50,6 +52,20 @@ function getProducts() {
     }
 
     return $array;
+}
+
+/**
+ * Get number of products total
+ */
+function getProductsTotal() {
+    $database = new Database();
+    
+    $database->query('SELECT COUNT(supplement_id) AS total_supplements FROM supplements');
+    $row = $database->single();
+
+    if (!empty($row)) {
+       return $row['total_supplements'];
+    }
 }
 
 

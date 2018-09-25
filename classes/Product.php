@@ -49,6 +49,23 @@ class Product {
             $this->stock_levels = $row['stock_levels'];
             $this->nappi_code = $row['nappi_code'];
             $this->product_img = $row['img_path'];
+        } else {
+            // Supplement with no supplier or descriptions
+            $this->database->query('SELECT * FROM supplements WHERE supplement_id = :supplement_id');
+            $this->database->bind(':supplement_id', $supplement_id);
+            $row = $this->database->single();
+
+            if (!empty($row)) {
+                $this->supplement_id = $row['supplement_id'];
+                $this->cost_excl = $row['cost_excl'];
+                $this->cost_incl = $row['cost_incl'];
+                $this->perc_inc = $row['perc_inc'];
+                $this->cost_client = $row['cost_client'];
+                $this->min_levels = $row['min_levels'];
+                $this->stock_levels = $row['stock_levels'];
+                $this->nappi_code = $row['nappi_code'];
+                $this->product_img = 'assets/img/products/no_img.png';
+            }
         }
     }
 
