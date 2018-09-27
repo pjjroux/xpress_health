@@ -89,7 +89,7 @@ $total_pages = ceil($products_total / $limit);
       <div class="card shopping-cart">
         <div class="card-header bg-light text-dark">
         <nav class="pagination-bar">
-          <ul class="pagination justify-content-end">
+          <ul class="pagination justify-content-end pagination-sm">
 
             <?php if ($page > 1) { ?>
               <li class="page-item">

@@ -227,5 +227,64 @@ function remove_from_cart(supplement_id) {
  * Checkout shopping cart and place order
  */
 function checkout() {
-    alert();
+    var n = new Noty({
+        layout: 'center',
+        theme: 'bootstrap-v4',
+        modal: true,
+        text: 'Are you sure you want to place this order?',
+        buttons: [
+          Noty.button('YES', 'btn btn-success', function () {
+            $.ajax({
+                url: 'controller/cart_controller.php',
+                method: 'GET',
+                dataType: 'json',
+                async: false,
+                data: { 
+                    action: 'checkout',
+                },
+                success: function (json) {
+                    n.close();
+                    if (json.error != '') {
+                        new Noty({
+                            type: 'error',
+                            layout: 'center',
+                            theme: 'bootstrap-v4',
+                            text: json.error,
+                            modal: true,
+                        }).show();
+                    } else {
+                        new Noty({
+                            type: 'success',
+                            layout: 'center',
+                            theme: 'bootstrap-v4',
+                            timeout: 1500,
+                            text: 'Order placed, you will receive a confirmation email shortly',
+                            modal: true,
+                            callbacks: {
+                                onClose: function() {
+                                    window.location.href = 'index.php';
+                                },  
+                            }
+                        }).show();
+                   }
+                },
+                error: function (jqxhr, textStatus, error) {
+                    var err = textStatus + ", " + error;
+                        new Noty({
+                            type: 'error',
+                            layout: 'center',
+                            theme: 'bootstrap-v4',
+                            modal: true,
+                            text: err
+                        }).show();
+                }
+            }); 
+          }, {id: 'button1', 'data-status': 'ok'}),
+      
+          Noty.button('NO', 'btn btn-danger', function () {
+              n.close();
+          })
+        ]
+      });
+      n.show();
 }
