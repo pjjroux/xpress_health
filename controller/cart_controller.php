@@ -230,8 +230,12 @@ function checkout() {
 
         $_SESSION['cart'] = [];
 
-        $invoice = new Invoice();
-        $invoice->create_pdf();
+        $invoice = new Invoice($new_inv_num);
+        $invoice->create_and_email();
+
+        if ($invoice->get_error() != '') {
+            throw new Exception($invoice->get_error(), 1);
+        }
     } catch (Throwable $t) {
         $data['error'] = $t->getMessage();
     } catch (Exception $e) {

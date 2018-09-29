@@ -234,6 +234,7 @@ function checkout() {
         text: 'Are you sure you want to place this order?',
         buttons: [
           Noty.button('YES', 'btn btn-success', function () {
+            $('#pleaseWaitDialog').modal();
             $.ajax({
                 url: 'controller/cart_controller.php',
                 method: 'GET',
