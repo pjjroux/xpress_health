@@ -40,18 +40,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/cart_controll
       </div>
     </nav>
 
-    <div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
-      <div class="modal-header">
-          <h1>Please Wait</h1>
-      </div>
-      <div class="modal-body">
-          <div id="ajax_loader">
-              <img src="~/Images/ajax-loader.gif" style="display: block; margin-left: auto; margin-right: auto;">
-          </div>
-      </div>
-    </div>
-
-
     <div class="container-fluid">
       <div class="card shopping-cart">
         <div class="card-header bg-light text-dark">

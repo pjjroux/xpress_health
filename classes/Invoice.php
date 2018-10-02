@@ -164,7 +164,7 @@ class Invoice {
         //invoice lines
         foreach ($this->invoice_lines as $line) {
             $pdf->Cell(90 ,5,$line['supplement_id'],1,0);
-            $pdf->Cell(30 ,5,$line['price_charged'],1,0);
+            $pdf->Cell(30 ,5,$line['price_charged'],1,0,'R');
             $pdf->Cell(25 ,5,$line['quantity'],1,0,'C');
             $pdf->Cell(34 ,5,$line['total'],1,1,'R');//end of line
         }
@@ -182,9 +182,9 @@ class Invoice {
         $pdf->Ln();
 
         $pdf->Cell(100 ,5,'Xpress Health Wellness Center',0,1);
-        $pdf->Cell(100 ,5,'ABSA',0,1);
+        $pdf->Cell(100 ,5,'Bank: ABSA',0,1);
         $pdf->Cell(100 ,5,'Account number: 45124561254',0,1);						
-        $pdf->Cell(100 ,5,'Cheque',0,1);
+        $pdf->Cell(100 ,5,'Account type: Cheque',0,1);
         $pdf->Ln();
         $pdf->Ln();
         $pdf->SetFont('Arial','B',12);
