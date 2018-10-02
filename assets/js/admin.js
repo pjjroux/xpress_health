@@ -54,7 +54,7 @@ function confirmOrder(inv_num) {
                         layout: 'center',
                         theme: 'bootstrap-v4',
                         timeout: 1500,
-                        text: 'Payment confirmed, please check email for shipping label',
+                        text: 'Payment confirmed, please check email for picking slip. Client will receive an update via email',
                         modal: true,
                         callbacks: {
                             onClose: function() {

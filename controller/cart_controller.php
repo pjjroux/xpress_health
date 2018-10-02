@@ -232,6 +232,8 @@ function checkout() {
 
         $invoice = new Invoice($new_inv_num);
         $invoice->create_and_email();
+        $invoice->send_mail_admin();
+
 
         if ($invoice->get_error() != '') {
             throw new Exception($invoice->get_error(), 1);

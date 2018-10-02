@@ -17,6 +17,15 @@ require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/classes/Product.php');
 // Include Invoice class
 require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/classes/Invoice.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/assets/libraries/fpdf/fpdf.php');
+
+require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/assets/libraries/PHPMailer/src/Exception.php');
+require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/assets/libraries/PHPMailer/src/PHPMailer.php');
+require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/assets/libraries/PHPMailer/src/SMTP.php');
+
 $action = (isset($_GET['action'])) ? $_GET['action'] : '' ;
 
 /**
@@ -92,6 +101,11 @@ function confirmOrder($inv_num) {
     $database->execute();
 
     $database->endTransaction();
+
+    // Send updated final invoice to client
+    $invoice->create_and_email();
+    $invoice->create_shipping_label();
+
   } catch (Throwable $t) {
     $data['error'] = $t->getMessage();
   } catch (Exception $e) {
@@ -128,6 +142,5 @@ function cancelOrder($inv_num) {
 
   echo json_encode($data);
 }
-
 
 ?>
