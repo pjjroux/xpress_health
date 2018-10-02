@@ -45,8 +45,14 @@ function login() {
     $_SESSION['client_name'] = $client->get_client_name() . ' ' . $client->get_client_surname();
     $_SESSION['client_email'] = $client->get_client_email();
     $_SESSION['cart'] = [];
+
+    if ($client->get_admin() != 1) {
+        header("Location: ../login.html?logged_in=1");
+    } else {
+        header("Location: ../admin.php");
+    }
     
-    header("Location: ../login.html?logged_in=1");
+    
 }
 
 /**

@@ -15,7 +15,7 @@ require_once('Database.php');
 
 class Client {
     protected $client_id, $client_name, $client_surname, $client_address, $client_postalcode;
-    protected $client_tel_home, $client_tel_work, $client_tel_cell, $client_email, $ref_id;
+    protected $client_tel_home, $client_tel_work, $client_tel_cell, $client_email, $ref_id, $admin;
 
     protected $database;
 
@@ -47,6 +47,7 @@ class Client {
             $this->client_tel_cell = $row['client_tel_cell'];
             $this->client_email = $row['client_email'];
             $this->ref_id = $row['ref_id'];
+            $this->admin = $row['admin'];
         }
     }
 
@@ -222,6 +223,10 @@ class Client {
 
     public function get_ref_id() {
         return $this->ref_id;
+    }
+
+    public function get_admin() {
+        return $this->admin;
     }
 }
 

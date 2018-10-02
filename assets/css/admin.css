@@ -1,0 +1,23 @@
+.table-header {
+  font-size: 1.5em;
+  font-style: oblique;
+  font-weight: bold;
+  padding: 2%;
+  text-align: center;
+}
+
+.no_orders {
+  text-align: center;
+  font-style: italic;
+  opacity: 0.5;
+  padding: 5%;
+}
+
+#main {
+  padding: 2% 2%;
+  background-color: #668330;
+}
+
+#table-area {
+  background-color: white !important;
+}

@@ -85,6 +85,7 @@ class Invoice {
                 $this->client_email = $row['client_email'];
             }
 
+            
             $this->order_status = 'Pending';
        }
     }
@@ -237,6 +238,13 @@ class Invoice {
      */
     public function get_error() {
         return $this->error;
+    }
+
+    /**
+     * Return Invoice lines
+     */
+    public function get_invoice_lines() {
+        return $this->invoice_lines;
     }
 
 }

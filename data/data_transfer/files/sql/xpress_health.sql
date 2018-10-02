@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2018 at 12:33 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Oct 02, 2018 at 01:55 PM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -70,6 +70,7 @@ TRUNCATE TABLE `auth`;
 --
 
 INSERT INTO `auth` (`client_id`, `pass`) VALUES
+('0000000000000', '$2y$10$tF6qAVhO5vX1/DrzWt/YiuXYs1NviZ888wWGu0nPtDisMynRrh.oi'),
 ('9011135082087', '$2y$10$h6/WF2bG.SfK/.2BCase3O51D8y8f0yMbNyCsDNbOxFAPoZyPTWU.');
 
 -- --------------------------------------------------------
@@ -115,7 +116,8 @@ CREATE TABLE `clients` (
   `client_tel_work` varchar(20) NOT NULL,
   `client_tel_cell` varchar(20) NOT NULL,
   `client_email` varchar(50) NOT NULL,
-  `ref_id` int(11) UNSIGNED DEFAULT NULL
+  `ref_id` int(11) UNSIGNED DEFAULT NULL,
+  `admin` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -127,454 +129,455 @@ TRUNCATE TABLE `clients`;
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`client_id`, `client_name`, `client_surname`, `client_address`, `client_postalcode`, `client_tel_home`, `client_tel_work`, `client_tel_cell`, `client_email`, `ref_id`) VALUES
-('1003250239088', 'Brian ', 'Kekana', '116 Selbourne Avenue Parow', '7500', '(047)-(773)-(5345)', '(080)-(450)-(8061)', '(087)-(708)-(7445)', 'Brian @rbiworld.co.za', 2),
-('1003280163086', 'Philani ', 'Khan', '802 Dalbergia 159 Justice Mohammed Avenue Sunnyside', '0002', '(015)-(763)-(0318)', '(093)-(327)-(2627)', '(034)-(252)-(7734)', '', NULL),
-('1004050642083', 'Linda', 'Makapela', '', '', '(095)-(226)-(0905)', '(010)-(354)-(9589)', '(051)-(680)-(6529)', '', 2),
-('1005260157083', 'Nepo ', 'Mukwevho', '3983 Fairbridge Corner Daniel&Davidson Str Fairlands', '2195', '(077)-(606)-(2017)', '(056)-(107)-(5076)', '(082)-(971)-(3584)', 'Nepo @mweb.co.za', 1),
-('1007230144085', 'Mduduzi ', 'Mugeri', 'Flat112 Capito Hill 395 Justice Muhammed Avenue Muckleneuk', '0002', '(090)-(634)-(2145)', '(068)-(892)-(4609)', '(026)-(167)-(2681)', 'Mduduzi @icon.co.za', NULL),
-('1010190221088', 'Sinqobile', 'Moloisane', '06 BAILEYBRIDGE UNIT 9 STONEBRIDGE PHOENIX', '', '(047)-(847)-(9730)', '(037)-(824)-(2370)', '(085)-(298)-(0219)', 'Sinqobile@telkomsa.net', 2),
-('1011060902084', 'Balungile ', 'Klassen', '3222 Taylor Park Zamdela', '1999', '(045)-(596)-(0647)', '(017)-(644)-(9722)', '(035)-(727)-(6040)', 'Balungile @erazyweb.co.za', 1),
-('1011160807087', 'Donavan ', 'Mthunywa', '92 Boundary Road Rouxville', '2192', '(083)-(359)-(3854)', '(036)-(803)-(3184)', '(079)-(654)-(2586)', 'Donavan @mjvn.co.za', 2),
-('1012070281082', 'Phakamani ', 'Gamede', '22 Iris Avenue Reigerpark', '1959', '(082)-(238)-(3065)', '(062)-(187)-(6668)', '(080)-(192)-(4779)', '', 2),
-('1104280343081', 'Mark ', 'Sifunda', '139392 Absolom Crescent Mankurwane', '8395', '(039)-(837)-(7998)', '(091)-(319)-(5376)', '(064)-(129)-(4237)', '', 1),
-('1105280586088', 'Petrus ', 'Sithole', '398 Glenton Ave Clayville East', '1666', '(066)-(539)-(4574)', '(040)-(594)-(2354)', '(031)-(597)-(8845)', 'Petrus @sappi.com', 2),
-('1107230618084', 'Timothy ', 'Mugagadeli', 'P O Box 169939 Lyttelton', '190', '(039)-(432)-(0974)', '(011)-(688)-(0786)', '(071)-(299)-(4911)', 'Timothy @gmail.com', 1),
-('1203280171086', 'Lionel ', 'Myeki', 'P O Box 95999 Waterkloof', '195', '(042)-(863)-(2113)', '(012)-(914)-(8270)', '(029)-(358)-(0686)', '', 2),
-('1204030632082', 'Sonica', 'Ebrahim', 'Kingsgate Primary School P O Box 169 Mafeteng 900 Lesotho', '0000', '(026)-(471)-(1491)', '(047)-(465)-(4475)', '(073)-(113)-(6410)', 'Sonica@africanrand.co.za', 2),
-('1205040963082', 'Adam', 'Mugadi', '695 Francis Baard Avenue 506 Vicadia Flat Arcadia', '0083', '(031)-(991)-(7619)', '(076)-(395)-(9931)', '(042)-(864)-(4021)', '', NULL),
-('1302080439088', 'Mzukisi', 'Letsie', '36 Olivers Court Cnr Hyperion & Pritchard Str North Riding Ext 1', '2169', '(038)-(597)-(2077)', '(057)-(306)-(9319)', '(086)-(858)-(7936)', '', NULL),
-('1307090536085', 'Matome ', 'Khomola', 'P O Box 3993 Vongani', '0930', '(033)-(373)-(9047)', '(016)-(694)-(1286)', '(047)-(840)-(6135)', 'Matome @wandragconsulting.co.za', 2),
-('1308190287088', 'Josaya ', 'Chabvonga', 'P O Box 60918 Karenpark', '0118', '(079)-(644)-(8637)', '(082)-(574)-(5772)', '(083)-(303)-(0923)', 'Josaya @liberty.co.za', 1),
-('1311040718081', 'Gomotsegang ', 'Lee', '393 Binneman Avenue Oakdale Western Cape Oakdale Est', '7530', '(049)-(532)-(6344)', '(080)-(607)-(9009)', '(039)-(178)-(9996)', '', NULL),
-('1311240354085', 'Donald', 'Sethole', '3990 Stellenberg Rd N0 99 Peters Place Equestria', '189', '(087)-(798)-(0943)', '(049)-(732)-(7824)', '(093)-(670)-(0881)', 'Donald@vodacom.co.a', 2),
-('1401030341085', 'Adriaan', 'Letsie', 'Postnet Suite 398 Private Bag X09 Menlo Park', '782', '(055)-(593)-(5113)', '(090)-(790)-(1455)', '(028)-(508)-(1461)', '', NULL),
-('1412130177086', 'Sumitra', 'Rehman', 'P O Box 9168 Verwoerdpark', '1953', '(042)-(260)-(3086)', '(097)-(804)-(8377)', '(039)-(833)-(5940)', 'Sumitra@parktowngirls.co.za', 2),
-('1501200671081', 'Leon', 'Maphoto', '3983 Taronga Road Lansdowne', '7780', '(039)-(589)-(8313)', '(075)-(299)-(8952)', '(026)-(120)-(7054)', '', NULL),
-('1503200793088', 'Promise ', 'Van Wyk', '', '', '(079)-(806)-(0010)', '(027)-(734)-(9270)', '(040)-(932)-(6418)', '', NULL),
-('1504280313088', 'Thato ', 'Robertson', '2090 Tswelopele Ext08 Tembisa', '1632', '(067)-(429)-(8627)', '(050)-(867)-(1729)', '(073)-(988)-(0747)', '', 2),
-('151021036088', 'Shaun ', 'Lesch', '21 Martinson Rd, Twee Pieke Unit 83 Mostertsdrift', '7600', '(028)-(699)-(2379)', '(071)-(870)-(0610)', '(033)-(657)-(6105)', '', 1),
-('1512140600088', 'Tlou', 'Chibase', 'P O Box 1639 Ngqubusini', '5170', '(046)-(763)-(2689)', '(089)-(690)-(5609)', '(029)-(745)-(5153)', 'Tlou@aforbes.co.za', 2),
-('1512170591085', 'Muteba ', 'Khobane', 'P O Box 639 Gans Bay', '7220', '(085)-(232)-(4944)', '(033)-(351)-(5265)', '(061)-(264)-(1633)', 'Muteba @lantic.net', 2),
-('1603220911086', 'Ricardo ', 'Makhonza', '39592 Tswelopele Avenue Rietvlei Ext 1', '1739', '(054)-(938)-(6348)', '(083)-(555)-(9756)', '(087)-(326)-(7227)', 'Ricardo @gmail.com', 2),
-('1604070370087', 'Abiot ', 'Dlamini', '398 Mopanie Avenue Florapark', '0699', '(045)-(468)-(3722)', '(068)-(449)-(6873)', '(076)-(873)-(0413)', 'Abiot @mweb.co.za', 2),
-('1608130591087', 'Mahlatse ', 'Campbell', '33 Aldergate Mount Edgecombe', '9302', '(064)-(270)-(7408)', '(095)-(462)-(3055)', '(032)-(766)-(9796)', '', NULL),
-('1704180177085', 'Leeto ', 'Legane', 'P O Box 956 Grahamstown', '6190', '(079)-(991)-(3083)', '(090)-(316)-(1396)', '(095)-(722)-(9998)', 'Leeto @hotmail.co.za', 2),
-('1705180376087', 'Kaveshan', 'Mokonyane', 'P O Box 332 Jane Furse Hospital', '7885', '(082)-(717)-(3101)', '(090)-(545)-(8738)', '(016)-(820)-(2338)', 'Kaveshan@mweb.co.za', 2),
-('1709240402082', 'Louis ', 'Van Der Westhuizen', 'P O Box 92200 Boordfontein', '0201', '(034)-(406)-(2034)', '(022)-(493)-(6494)', '(028)-(775)-(3157)', 'Louis @hotmail.com', 2),
-('1709280678088', 'Stephan ', 'Nyalungu', '91 Juta Avenue Braamfontein', '2001', '(084)-(628)-(5658)', '(062)-(332)-(6416)', '(018)-(592)-(7076)', 'Stephan @gmail.com', 2),
-('1803090222085', 'Tshepo ', 'Makhuvele', 'P O Box 9891 Polokwane', '0700', '(042)-(858)-(6305)', '(068)-(611)-(4953)', '(081)-(622)-(7192)', 'Tshepo @gmail.com', 2),
-('1804030915086', 'Saegan', 'Hicks', 'P O Box 699 Velddrif', '7365', '(045)-(818)-(7526)', '(087)-(674)-(6107)', '(092)-(670)-(4100)', 'Saegan@pps.co.za', 2),
-('1805020907085', 'Leeto ', 'Duiker', '1916 Tanong Ext5 Tembisa', '1632', '(078)-(737)-(1431)', '(096)-(254)-(4003)', '(016)-(174)-(7061)', '', 2),
-('1807070505082', 'Livhuwani ', 'Ndlovu', 'PO Bos 7269\r\nKRUGERSDORP NORTH\r\n1741', '', '(040)-(626)-(9728)', '(015)-(171)-(0512)', '(052)-(358)-(3972)', 'Livhuwani @gmail.com', NULL),
-('1810160413088', 'Nelisiwe', 'Mpofu', 'P O Box 19293 Laudium', '0037', '(010)-(118)-(9211)', '(059)-(273)-(5474)', '(068)-(442)-(8679)', 'Nelisiwe@standardbank.co.za', 2),
-('1902060828085', 'Xolile', 'Gungudoo', 'P O Box 32896 Braamfontein', '2017', '(069)-(374)-(2180)', '(069)-(683)-(4871)', '(031)-(526)-(1444)', 'Xolile@anchor.co.za', 2),
-('1906040694086', 'Ngwagu ', 'Khoza', '21 Thatchfield Hights Thatchfield Close Brakfontein Road Centurion', '0157', '(096)-(936)-(6354)', '(070)-(718)-(2066)', '(089)-(146)-(9790)', '', 2),
-('1908150375082', 'Cliff', 'Bomela', 'Wonderpark Estate Unit 1369 90 First Avenue Karenpark', '0182', '(074)-(449)-(1722)', '(029)-(565)-(6703)', '(046)-(976)-(2408)', 'Cliff@live.co.za', 2),
-('2005130271081', 'Navisha', 'Nyamupangedengu', '2939/59 Umfuyaneni Umfuyaneni Section', '1632', '(047)-(922)-(7532)', '(055)-(233)-(1573)', '(091)-(964)-(6830)', '', 2),
-('2007100717086', 'Warren ', 'Piroe', '2128 Nu11 Mdantsane', '5219', '(057)-(406)-(2092)', '(012)-(519)-(8360)', '(081)-(853)-(0164)', '', 2),
-('2008190919082', 'Shaun ', 'Maarman', 'Private Bag X1 Simon\'S Town', '7995', '(013)-(667)-(4505)', '(034)-(674)-(9222)', '(029)-(678)-(7921)', '', 2),
-('2009210740082', 'Mari', 'Maredi', 'E6 Wilgerpark Stellenberg Road Oak Glen', '7530', '(045)-(103)-(4645)', '(099)-(891)-(3383)', '(097)-(777)-(6343)', 'Mari@vodamail.co.za', 2),
-('2011240231088', 'Nhloso ', 'Schoeman', '553992 Nomzamo Avenue Phahameng Bloemfontein', '9301', '(014)-(388)-(2222)', '(097)-(361)-(7012)', '(094)-(473)-(4225)', 'Nhloso @work.co.za', 5),
-('2012190284086', 'Kagiso', 'Ntuli', '219 Du Toit Avenue 209 Orpheum Mansions Pretoria', '0002', '(083)-(110)-(7144)', '(091)-(274)-(9119)', '(044)-(354)-(5287)', 'Kagiso@lantic.net', 2),
-('2012200849081', 'Onele', 'Veeragaloo', 'F 395 Ntombela Road Kwamashu', '9359', '(013)-(304)-(1410)', '(047)-(157)-(4958)', '(034)-(157)-(0274)', 'Onele@afrihost.co.za', 1),
-('2102130913085', 'Heinrich', 'Dlamini', 'P O Box 2993 Montana Park', '0159', '(044)-(698)-(4141)', '(083)-(433)-(8338)', '(060)-(857)-(4045)', 'Heinrich@wol.co.za', 2),
-('2104030218083', 'Grace', 'Mudau', 'P O Box 5060 Batlharo', '8976', '(045)-(324)-(0994)', '(034)-(251)-(6709)', '(013)-(463)-(7629)', 'Grace@gmail.com', 2),
-('2109050549084', 'Matete', 'Magodielo', '29 Regina Road Northdale', '3201', '(018)-(226)-(0355)', '(088)-(176)-(6830)', '(095)-(111)-(3227)', '', 2),
-('2109180750085', 'Chaguwa ', 'Matlala', '98 Grosvenor Burberry Office Park Amadeus Place Bryanston', '2191', '(046)-(555)-(0179)', '(042)-(281)-(4579)', '(086)-(775)-(9455)', '', NULL),
-('2111130577081', 'Seturumane ', 'Dharamraj', 'P O Box 626 St Helenabaai', '7390', '(068)-(229)-(8911)', '(077)-(369)-(0677)', '(059)-(887)-(6249)', 'Seturumane @yahoo.com', 2),
-('2201120350085', 'Wilhelm', 'Seanego', 'Unit 35 San Monroe 26 Logan Avenue Highveld Ext 8', '0157', '(023)-(968)-(4596)', '(066)-(985)-(5282)', '(039)-(170)-(4278)', 'Wilhelm@yahoo.com', 2),
-('2202040449087', 'Sheldon ', 'Matlakeng', '5 Ntsu Avenue Saulsville', '0125', '(095)-(929)-(6409)', '(052)-(951)-(8041)', '(016)-(918)-(8075)', 'Sheldon @absamail.co.za', 2),
-('2205140565082', 'Echelle ', 'Koeberg', 'P O Box 239250 Sunnyside', '0132', '(089)-(550)-(1302)', '(034)-(444)-(6256)', '(047)-(717)-(2614)', 'Echelle @gmail.com', 2),
-('2207010632083', 'Nyakallo', 'Kupke', '9393/138 Sophiatown Difateng', '1632', '(069)-(890)-(2589)', '(014)-(793)-(1379)', '(076)-(660)-(5008)', 'Nyakallo@telkomsa.net', 2),
-('2210130900088', 'Dion', 'Mabanga', '99398 Illovo Township Amanzimtoti', '9126', '(056)-(682)-(7433)', '(094)-(748)-(1506)', '(091)-(561)-(6328)', 'Dion@artizans.co.za', 2),
-('2303030988083', 'Fortunate', 'Ndzulu', 'P O Box 21822 Helderkruin', '1733', '(098)-(411)-(7536)', '(044)-(650)-(7520)', '(087)-(185)-(6226)', 'Fortunate@mweb.co.za', 1),
-('2309220589087', 'Sylvester ', 'Xhakaza', 'P O Box 90195 Cleveland', '2022', '(074)-(666)-(7434)', '(064)-(290)-(1537)', '(024)-(131)-(2549)', 'Sylvester @yahoo.com', 3),
-('2411070180081', 'Wilhelm', 'Mokansi', '25 Owl Avenue 6Th Floor Johannesburg', '2001', '(069)-(998)-(1771)', '(049)-(265)-(0519)', '(079)-(198)-(6828)', '', 2),
-('2511130529083', 'Tshilidzi', 'Metcalf', '1359 Mahlangu Stand Winterveldt', '0198', '(091)-(822)-(4741)', '(030)-(891)-(2945)', '(040)-(576)-(1210)', 'Tshilidzi@anglocoal.co.za', 1),
-('2605130248088', 'Letsoni ', 'Baepane', '18 Mngadi Str Atteridgeville', '0008', '(078)-(529)-(2729)', '(084)-(569)-(0643)', '(081)-(584)-(8655)', '', NULL),
-('2605150205088', 'Busisiwe', 'Du Plessis', '1 Kliprivier Avenue Secunda Secunda', '2302', '(066)-(762)-(2975)', '(086)-(193)-(7436)', '(058)-(901)-(5043)', '', 1),
-('2608180553088', 'Vuyokazi ', 'Nanub', '19 Pamaphosa Avenue Payneville', '1565', '(041)-(484)-(8269)', '(045)-(918)-(9059)', '(082)-(367)-(9809)', '', 1),
-('2611180135088', 'Moeketsi ', 'Noko', '1891 Kriel', '2271', '(094)-(515)-(4612)', '(080)-(884)-(9304)', '(091)-(535)-(6362)', '', 3),
-('2612230397082', 'Mbheki ', 'Ekanayake', '39165 Ext 398 Diepsloot', '2189', '(082)-(456)-(6558)', '(078)-(858)-(5438)', '(094)-(917)-(3773)', 'Mbheki @transnet.co.za', 4),
-('2702250305088', 'Shaun ', 'Kafile', 'P O Box 9961 Protea Glen Ext 12', '1819', '(028)-(487)-(6443)', '(099)-(760)-(0121)', '(031)-(971)-(9512)', 'Shaun @yahoo.com', NULL),
-('2703080994088', 'Berry ', 'Mutamba', '21 Fourie Cresant Kibler Park', '2091', '(088)-(260)-(8598)', '(017)-(648)-(4808)', '(079)-(817)-(9844)', '', 2),
-('2704170868088', 'Shelley-Anne ', 'Madia', '51 Pearce Avenue Clayville Ext 9', '1666', '(074)-(148)-(7156)', '(087)-(414)-(0779)', '(012)-(919)-(2724)', '', 2),
-('2706070629087', 'Victor ', 'Mgidi', '28 Paling Drive\r\nMeerensee\r\nRichardsbaai\r\n3901', '', '(054)-(385)-(7798)', '(018)-(224)-(2553)', '(097)-(121)-(5412)', '', NULL),
-('2707050803087', 'Marc ', 'Baloyi', 'P O Box 199339 Middelburg', '7850', '(047)-(916)-(0130)', '(076)-(570)-(4161)', '(088)-(221)-(7304)', '', 2),
-('2707140905083', 'Nokukhanya', 'Ndou', '3986 Die Hoewes Towers 20 Gropius Road Die Hoewes', '0157', '(084)-(570)-(3890)', '(052)-(485)-(2084)', '(084)-(700)-(9028)', 'Nokukhanya@acenet.co.za', 2),
-('2709110853083', 'Ndivhuwo ', 'Oliver', '16239 Block Hh Soshanguve', '0152', '(043)-(452)-(8545)', '(072)-(720)-(8195)', '(078)-(178)-(8394)', 'Ndivhuwo @actionford.co.za', 1),
-('2709210905082', 'Kagiso', 'Robinson', 'Santam Head Office 1 Sportica Cresent Tyger Valley', '7530', '(068)-(469)-(9297)', '(066)-(375)-(7645)', '(071)-(749)-(6368)', 'Kagiso@costoutterz.co.za', 2),
-('2711130236088', 'Sango', 'Brown', '8 Klopper Avenue Libradene', '1959', '(054)-(537)-(0684)', '(071)-(819)-(0681)', '(020)-(836)-(2141)', 'Sango@gmail.com', 2),
-('2712250489081', 'Ruduwhan ', 'Mokwebo', '5 Hortense Laan\r\nFlorida-Glen', '', '(042)-(254)-(6694)', '(063)-(139)-(3871)', '(034)-(319)-(9514)', 'Ruduwhan @telkomsa.net', 2),
-('2802230303081', 'Lance ', 'Mulaudzi', 'P O Box 16355 Nelspruit', '1200', '(049)-(466)-(3934)', '(050)-(479)-(7057)', '(090)-(721)-(8754)', 'Lance @sa-tec.co.za / mboshoff141@gmail.com', NULL),
-('2802270531083', 'Nonjabulo', 'Mafogo', '11 GALLINULE STREET ROOIHUISKRAAL', '', '(068)-(535)-(6596)', '(088)-(942)-(5179)', '(062)-(571)-(6982)', '', 2),
-('2804070757085', 'Edwin', 'Chilinda', '33961 Meadowlands Zone 398', '1852', '(040)-(139)-(2394)', '(082)-(568)-(0086)', '(057)-(658)-(7492)', '', 1),
-('2804220399085', 'Tsholofelo ', 'Benjamin', 'P O Box 22539 Letlhabile', '269', '(069)-(642)-(6052)', '(024)-(785)-(8235)', '(098)-(916)-(2699)', 'Tsholofelo @medallist.comau', 2),
-('2805070756085', 'Benjamin', 'Mofokeng', 'P O Box 23989 Rustenburg', '0300', '(019)-(631)-(6781)', '(078)-(333)-(5176)', '(040)-(324)-(8409)', 'Benjamin@hotmail.com', 2),
-('2807090965085', 'Michiel ', 'Mathabatha', '351 Mavimbela Section Katlehong', '1931', '(054)-(511)-(4156)', '(045)-(998)-(6940)', '(070)-(390)-(5312)', 'Michiel @GMAIL.COM', NULL),
-('2808250506083', 'Nishandhran ', 'Shezi', '9 Fern Close 9996 Thornhill Estate Bendor Polokwane Thornhill Plaza', '0699', '(060)-(802)-(5793)', '(033)-(521)-(6539)', '(047)-(228)-(2683)', 'Nishandhran @standardbank.co.za', 2),
-('2809260609084', 'Mmasaka ', 'Myeza', '13 Garrick Road University Estate Woodstock', '7925', '(057)-(441)-(7996)', '(079)-(590)-(7728)', '(051)-(628)-(9781)', 'Mmasaka @mweb.co.za', NULL),
-('2809270394087', 'Simphiwe ', 'Jacobs', '26 Swartkops Avenue Extension 2 Eldorado Park', '1811', '(056)-(696)-(9341)', '(046)-(824)-(4917)', '(063)-(901)-(4440)', 'Simphiwe @nashuaisp.co.za', 1),
-('2811170937087', 'Jan ', 'Robinson', '395 Erica Avenue Boksburg', '1959', '(036)-(230)-(3090)', '(065)-(740)-(1390)', '(089)-(275)-(3191)', '', 2),
-('2811240555087', 'Rene', 'Makhonza', '', '', '(018)-(691)-(6329)', '(093)-(745)-(6785)', '(098)-(359)-(9033)', 'Rene@gmail.com', 2),
-('2902030264083', 'Trevor ', 'Ganga-Scott', '3 Denise Road, Unit 16 Sandton', '2196', '(026)-(738)-(3010)', '(066)-(653)-(3994)', '(028)-(372)-(8183)', '', 2),
-('2905080185087', 'Shivesh', 'Mathebula', 'P O Box 1320 Pietermaritzburg', '3200', '(071)-(945)-(7843)', '(091)-(810)-(1781)', '(019)-(517)-(7409)', 'Shivesh@gmail.com', NULL),
-('2906040747081', 'Johanna ', 'Muselli', '18398 Riet Avenue Barkly West', '8375', '(011)-(853)-(5976)', '(030)-(259)-(2683)', '(043)-(619)-(0387)', '', NULL),
-('290611026087', 'Goratamang ', 'Owens', '5 Mosiliki Katlehong', '1931', '(034)-(452)-(4032)', '(045)-(984)-(6194)', '(046)-(536)-(3745)', 'Goratamang @telkomsa.net', 2),
-('2907080814082', 'Tumelo ', 'Molepo', 'P O Box 16502 Lyttelton', '190', '(042)-(531)-(1149)', '(089)-(758)-(1415)', '(085)-(723)-(6298)', 'Tumelo @mannas.co.za', 2),
-('2909270467081', 'Desmond', 'Louvouezo Banzouzi', '8 Jarvis Road Berea', '5291', '(063)-(659)-(5343)', '(072)-(927)-(3033)', '(010)-(405)-(4523)', '', 2),
-('3001280724084', 'Nkani ', 'Mohlala', 'P O Box 2326 Ermelo', '2350', '(011)-(142)-(0649)', '(014)-(519)-(7920)', '(079)-(241)-(0467)', 'Nkani @telkomsa.net', 2),
-('3004230801084', 'Shaun ', 'Geitner', 'Unit 52 35 Jules Avenue Jeppestown', '2099', '(016)-(274)-(7068)', '(078)-(840)-(6582)', '(050)-(869)-(3499)', 'Shaun @gmail.com', 2),
-('3203230938086', 'Fulufhelo ', 'Zombene', 'Jean Avenue Lyttelton', '0157', '(075)-(221)-(8555)', '(017)-(979)-(1283)', '(070)-(956)-(6994)', 'Fulufhelo @mtn.co.za', 2),
-('3205070928081', 'Mmadineo ', 'Tandwa', 'Andesstr.1361\r\nBergbron', '', '(058)-(380)-(5593)', '(034)-(754)-(4986)', '(062)-(113)-(2202)', '', 2),
-('3205230915086', 'Ntombekaya', 'Mugadi', '3 Edmund Street\r\nConstantia Kloof\r\n1712', '', '(068)-(737)-(3325)', '(054)-(764)-(9500)', '(054)-(518)-(4549)', '', 2),
-('3208130215083', 'Koena ', 'Viviers', '9 Besembos Amandasig', '0182', '(019)-(867)-(9883)', '(037)-(958)-(3816)', '(054)-(447)-(0733)', 'Koena @yahoo.com', 2),
-('3211200919082', 'Loyald ', 'Nthani', 'No: 39862 Lakeside Proper Evaton', '1989', '(033)-(903)-(7765)', '(033)-(750)-(8047)', '(039)-(342)-(4198)', 'Loyald @tiscali.co.za', 2),
-('3211280908087', 'Nonhlanhla ', 'Naidoo', '16 Eaglestraat\r\nHorison\r\n1724', '', '(061)-(578)-(7955)', '(026)-(237)-(9676)', '(093)-(882)-(2847)', '', 4),
-('3212110757087', 'Navisha', 'Baloyi', 'Posbus 5024\r\nHorison\r\n1730', '', '(095)-(228)-(6921)', '(064)-(897)-(8331)', '(070)-(491)-(1699)', 'Navisha@exxess.co.za', 2),
-('3305280817081', 'Mangope ', 'Engelbrecht', '8 Curlewis Road Bloubergrant', '7991', '(061)-(916)-(8185)', '(024)-(190)-(5802)', '(087)-(819)-(4351)', 'Mangope @telkomsa.net', NULL),
-('3306170196085', 'Sinqobile', 'Dzegere', '3399 Block Dd Soshanguve', '0152', '(068)-(847)-(4612)', '(036)-(985)-(1832)', '(020)-(482)-(8106)', '', 2),
-('3405190169081', 'Katlego ', 'Swanepoel', '5 The Hub Duchesses Avenue Windsor West', '2199', '(058)-(897)-(2417)', '(068)-(811)-(2093)', '(074)-(898)-(4001)', 'Katlego @hotmail.com', NULL),
-('3406130687081', 'Duane ', 'Zaverdinos', '6 Diaz Avenue Eastleigh', '1609', '(061)-(721)-(0007)', '(081)-(239)-(7486)', '(035)-(225)-(2605)', '', 2),
-('3406260688085', 'Sven ', 'Maswanganyi', 'P O Box 68032 Highveld', '0169', '(067)-(862)-(2614)', '(074)-(806)-(0792)', '(068)-(519)-(7630)', 'Sven @workmail.co.za', NULL),
-('3410210326084', 'Seturumane ', 'Banza', '13 Philips Road Escombe', '9093', '(055)-(737)-(3275)', '(079)-(236)-(8345)', '(051)-(263)-(1955)', 'Seturumane @nfrs.co.za', NULL),
-('3411260488085', 'Edwin ', 'Dzegere', 'Private Bag X01 Doornpoort', '0017', '(066)-(697)-(3800)', '(049)-(328)-(9463)', '(058)-(412)-(7931)', 'Edwin @gmail.com', 2),
-('341216047088', 'Sandiso', 'Naidoo', '88 Towerbridge Gardens Stone Bridge', '9068', '(038)-(261)-(4393)', '(010)-(689)-(1524)', '(033)-(458)-(6428)', 'Sandiso@abrahamkriel.org', 2),
-('34565454555', '', '', '', '', '', '', '', '', NULL),
-('3502010805081', 'Nasreen', 'Lee', 'PO Box 331\r\nFlorida\r\n1710', '', '(099)-(597)-(8618)', '(066)-(496)-(1886)', '(054)-(499)-(3418)', '', 2),
-('3503100678084', 'Jonathan', 'Phalane', 'F1902 Aintree Building 99 O\'Rielly & Tudhope Avenue Berea', '2198', '(096)-(576)-(3186)', '(068)-(610)-(4108)', '(078)-(858)-(4999)', '', NULL),
-('3505100334081', 'Asanda', 'Motsinone', '391 Rail Avenue Florida', '1709', '(083)-(342)-(6518)', '(026)-(786)-(1758)', '(090)-(554)-(9607)', 'Asanda@absamail.co.za', 2),
-('3508030550085', 'Sean', 'Cobokana', 'Posbus 6199 Secunda', '2302', '(028)-(582)-(4201)', '(063)-(273)-(8384)', '(062)-(194)-(0939)', 'Sean@nedbank.co.za', 2),
-('3508130716085', 'Mark ', 'Mtshali', 'P O Box 3981218 Moreleta Plaza', '0167', '(095)-(485)-(8436)', '(020)-(648)-(1991)', '(062)-(375)-(3297)', 'Mark @wirsam.com  rattanya@hotmail.com', 2),
-('3509040348083', 'Jaco', 'Ravhura', '23980 Cuba Location Butterworth', '9960', '(091)-(150)-(5446)', '(011)-(388)-(6501)', '(062)-(336)-(3531)', '', 2),
-('3601280328086', 'Mishack ', 'Morudu', '81 Bird Avenue No: 39 Vier Eike Stellenbosch', '7600', '(033)-(466)-(2466)', '(079)-(767)-(3080)', '(084)-(753)-(4387)', 'Mishack @telkomsa.net', 1),
-('3602250350086', 'Moyahabo ', 'Mbonani', '11 Gallinule Avenue Rooihuiskraal', '0157', '(084)-(780)-(3175)', '(030)-(900)-(6360)', '(026)-(724)-(4857)', 'Moyahabo @mweb.co.za', 2),
-('3605040496081', 'Steven', 'Shariff', '9935 Mulaudzi Avenue Tshiawelo', '1818', '(056)-(941)-(1755)', '(052)-(518)-(5093)', '(014)-(965)-(1656)', 'Steven@reatile.co.za', 1),
-('3605090332085', 'Portia ', 'Geitner', '51 Frangipani Chantelle Ext 16', '0182', '(085)-(337)-(5545)', '(073)-(276)-(7178)', '(020)-(353)-(0835)', '', NULL),
-('3610150249083', 'Candice', 'Moetapele', 'P O Box 130055 Bryanston', '2021', '(032)-(186)-(2704)', '(075)-(697)-(2539)', '(081)-(125)-(0036)', 'Candice@telkomsa.net', 2),
-('3708100193088', 'Piet', 'Mokgothu', 'P O Box 990 Mulbarton', '2059', '(036)-(464)-(6498)', '(071)-(428)-(2374)', '(098)-(527)-(9321)', 'Piet@edcon.co.za', 2),
-('3801170828084', 'Jonathan ', 'Du Plessis', 'P O Box 2205 Upington', '8800', '(045)-(790)-(3472)', '(033)-(555)-(9087)', '(032)-(317)-(1111)', 'Jonathan @gmail.com', NULL),
-('3809260231088', 'Morwamakgomo ', 'Lechelele', 'A2 Bel Eau Flats Victroia Seychelles', '0000', '(036)-(566)-(4119)', '(072)-(640)-(9737)', '(090)-(747)-(1877)', '', NULL),
-('3810250735087', 'Berry ', 'Chilinda', 'Postnet Suite 69 Private Bag X06 Quagga', '0058', '(055)-(447)-(9618)', '(086)-(108)-(6871)', '(047)-(517)-(6398)', 'Berry @gmail.com', 2),
-('3811210932081', 'Nontshumayelo ', 'Ntumba', 'Speldekussinglaan 16\r\nROODEKRANS', '', '(051)-(944)-(0681)', '(019)-(362)-(8555)', '(040)-(211)-(6070)', '', 2),
-('3902120576083', 'Sameer', 'Murindagomo', 'P O Box 1291 Parklands', '2121', '(058)-(139)-(0040)', '(050)-(413)-(7292)', '(040)-(682)-(5987)', '', 1),
-('3906160799085', 'Ntsakisi ', 'Ndou', '1158 MANCHESTER CRESCENT LENASIA SOUTH', '', '(059)-(347)-(6246)', '(060)-(581)-(5211)', '(037)-(963)-(7424)', 'Ntsakisi @gmail.com', 1),
-('3906250668088', 'Nkhetheni ', 'Phosa', 'P O Box 921 Letaba', '0870', '(095)-(260)-(1710)', '(075)-(430)-(0922)', '(088)-(655)-(0479)', 'Nkhetheni @mystudysmart.com', 1),
-('3909170450081', 'Johanna ', 'Jojo', 'P O Box 3999 Plettenberg Bay', '6600', '(041)-(724)-(3675)', '(082)-(563)-(0961)', '(085)-(773)-(3202)', 'Johanna @mac.com', 4),
-('3911070339085', 'Tshepiso ', 'Ngwa', '323 Ethafeni Section Tembisa', '1632', '(051)-(342)-(1997)', '(075)-(284)-(3209)', '(069)-(938)-(1761)', 'Tshepiso @erazyweb.co.za', 3),
-('3912200408082', 'Phaiphai ', 'Mputhi', 'P O Box 222 Philip Nel Park', '0029', '(056)-(742)-(2941)', '(073)-(943)-(8679)', '(077)-(202)-(9845)', 'Phaiphai @mweb.co.za', 2),
-('4003100886084', 'George ', 'Mhatlhe', '1206 Kuskoraal Avenue Moregloed', '0186', '(090)-(901)-(7137)', '(071)-(557)-(1855)', '(074)-(336)-(2832)', '', 2),
-('400422050085', 'Adriaan', 'Fourie', '208 Wattle Avenue Alveda Park Ext 2', '2091', '(090)-(749)-(3083)', '(094)-(931)-(1216)', '(084)-(115)-(6587)', '', 2),
-('4004220578084', 'Matthew ', 'Booysen', '15 Magnolia Way Ridgeworth Bellville', '7530', '(039)-(370)-(8432)', '(033)-(143)-(3745)', '(037)-(166)-(5231)', '', 1),
-('4005040289082', 'Thomas ', 'De Wet', 'No 2 Ironwood Sagewood X398 Noordwyk', '1687', '(012)-(981)-(2486)', '(063)-(494)-(7221)', '(019)-(182)-(8998)', 'Thomas @its.co.za', 2),
-('4011110520082', 'Michael ', 'Samwell', 'P O Box 133398 N1 City', '7963', '(052)-(992)-(5950)', '(057)-(319)-(6896)', '(080)-(937)-(0706)', 'Michael @liblink.co.za', 2),
-('4102140915085', 'Mmabogadi ', 'Magutshwa', '699 Abel Manana Avenue Mthambeka Section Tembisa', '1632', '(051)-(978)-(7394)', '(081)-(971)-(2079)', '(032)-(249)-(3833)', '', NULL),
-('4103240120082', 'Livhuwani ', 'Pillay', '3239 Lebese Avenue Mmesi Park', '1863', '(035)-(541)-(3390)', '(055)-(290)-(6194)', '(042)-(329)-(6564)', 'Livhuwani @wirsam.com', 2),
-('4104200140083', 'Thomas', 'Mtyobile', 'P O Box 2968 Rooihuiskraal', '159', '(083)-(640)-(1066)', '(020)-(750)-(8998)', '(087)-(795)-(9269)', 'Thomas@rebox.co.za', 1),
-('4106120248084', 'Gaotingwe', 'Nkabinde', 'PO Box 561\r\nGlenvista\r\n2058', '', '(082)-(870)-(1925)', '(079)-(126)-(3644)', '(010)-(429)-(7466)', 'Gaotingwe@mtnloaded.co.za', 2),
-('4110240825083', 'Devandren', 'Moshwela', '9395 Soshanguve Block Xx', '0152', '(074)-(102)-(2922)', '(062)-(200)-(5618)', '(040)-(115)-(8510)', '', 2),
-('4111180106083', 'Johannes ', 'Sayed', 'P O Box 11199 Selcourt', '1567', '(092)-(742)-(8352)', '(091)-(167)-(8056)', '(031)-(343)-(2940)', '', NULL),
-('4202160138084', 'Nomsa ', 'Van Eetveld', 'P O Box 2995 Bronkhorstspruit', '7820', '(017)-(684)-(0684)', '(048)-(375)-(8703)', '(089)-(984)-(0368)', 'Nomsa @webmail.co.za', 2),
-('4204250189082', 'Byron ', 'Booysen', 'No 39 Crystal Gardens 1 Lichi Lane 93 Circle Street Wyebank', '3678', '(072)-(367)-(8364)', '(074)-(663)-(4773)', '(084)-(179)-(0812)', 'Byron @iafrica.com', 2),
-('4207260415085', 'Matthew ', 'Mahlangu', 'P O Box 6659 Roggebaai', '8012', '(017)-(200)-(1709)', '(024)-(101)-(8093)', '(083)-(973)-(9729)', 'Matthew @mweb.co.za', NULL),
-('4211180586086', 'Stacy ', 'Smith', 'P O Box 3063939 Braamfontein', '2017', '(049)-(406)-(9996)', '(079)-(869)-(4968)', '(085)-(739)-(9439)', 'Stacy @gmail.com', 1),
-('4302130387083', 'Eunice ', 'Le Masson', '50239 Mocke Avenue Daveyton', '1520', '(033)-(677)-(7961)', '(022)-(428)-(5476)', '(070)-(156)-(8703)', 'Eunice @gmail.com', 2),
-('4307190367081', 'Penelope', 'Dube', 'P O Box 259 Radium', '983', '(039)-(391)-(8991)', '(059)-(376)-(0655)', '(095)-(817)-(2290)', 'Penelope@gmail.com', 2),
-('4308010928085', 'Brian ', 'Ratshefola', 'P O Box 591 Southern Paarl', '7629', '(018)-(387)-(1207)', '(093)-(856)-(9526)', '(093)-(347)-(1087)', 'Brian @smartcall.co.za', 2),
-('4401230403085', 'Cecil ', 'Swanepoel', 'Unit 139 Devon Valley 3 Weltevredenpark', '1709', '(097)-(476)-(9632)', '(071)-(198)-(5937)', '(058)-(992)-(2711)', 'Cecil @yahoo.com', 2),
-('4403190822084', 'Phindile ', 'Tong', 'P O Box 13992 Laudium', '0037', '(081)-(721)-(4307)', '(036)-(538)-(2454)', '(056)-(938)-(7569)', 'Phindile @unisa.ac.za', 4),
-('4403240664081', 'George ', 'Zawistowski', 'P O Box 6099 Weltevredenpark', '1715', '(098)-(446)-(4395)', '(039)-(673)-(0391)', '(093)-(602)-(0892)', 'George @inkcom.co.za', 2),
-('4410200801082', 'Nilukshi ', 'Shange', 'Africanarylaan 5\r\nBreaunanda', '', '(076)-(103)-(4531)', '(022)-(516)-(8914)', '(087)-(338)-(1603)', '', NULL),
-('4504280921086', 'Rodger ', 'Bomela', '521 Inanda Glebe Inanda Glebe', '9309', '(051)-(596)-(1096)', '(037)-(128)-(7714)', '(068)-(632)-(8048)', '', NULL),
-('4508260675083', 'Chris', 'Mohaleamalla', '983939 Nicholas Avenue Orlando East', '1809', '(077)-(463)-(7608)', '(045)-(328)-(2386)', '(056)-(578)-(7671)', '', 2),
-('4509140295084', 'Leshata ', 'Nhalungo', '639 Springfield Str Bellville', '7530', '(070)-(325)-(5060)', '(027)-(438)-(2476)', '(013)-(869)-(8523)', 'Leshata @nedbank.co.za', 2),
-('4509220879086', 'Vuyisile ', 'Ndou', '852 Hospital View Tembisa', '1632', '(092)-(570)-(8963)', '(048)-(889)-(0863)', '(085)-(248)-(5438)', 'Vuyisile @mbweb.co.za', 2),
-('4510260369082', 'Nomvula ', 'Baulraj', 'P O Box 39 Kwambonambi', '3915', '(057)-(225)-(3056)', '(020)-(496)-(7366)', '(022)-(944)-(3343)', 'Nomvula @telkomsa.net', 2),
-('4511070585086', 'Mcebisi ', 'Baloyi', '6008 Malmook Avenue Crystal Park', '1501', '(095)-(979)-(3460)', '(061)-(687)-(5206)', '(039)-(276)-(1991)', 'Mcebisi @absamail.co.za', 2),
-('451201089085', 'Wisani ', 'Naidoo', 'P O Box 3939 Witrivier', '1290', '(025)-(686)-(9875)', '(017)-(701)-(5211)', '(036)-(720)-(4105)', 'Wisani @andrewmiller.co.za', 2),
-('4512030696084', 'Marianna ', 'Ndzutha', 'P O Box 123939 The Tramshed', '0126', '(050)-(729)-(5090)', '(043)-(446)-(1989)', '(036)-(146)-(6188)', 'Marianna @global.co.za', NULL),
-('4512220543086', 'Frans ', 'Mynhardt', '26539 Setso Avenue Nellmapius Ext 9', '0122', '(081)-(523)-(3053)', '(067)-(698)-(6859)', '(031)-(888)-(9240)', '', 1),
-('4601060264085', 'Thato ', 'Mokoena', 'Postnet Suite 51 Private Bag X16392 Grahamstown', '6190', '(079)-(423)-(7645)', '(093)-(689)-(8711)', '(090)-(234)-(0285)', 'Thato @gmail.com', 1),
-('4601060401083', 'Francois', 'Mathobela', 'PO Box 1109\r\nMondeor\r\n2110', '', '(098)-(850)-(1057)', '(036)-(784)-(1914)', '(056)-(758)-(6695)', 'Francois@dhfoods.co.za', 1),
-('4603230789086', 'Nkgopoleng ', 'Maritz', '235 Veldman Avenue Eersterus', '0022', '(064)-(748)-(3955)', '(037)-(482)-(9390)', '(034)-(594)-(2225)', '', 2),
-('4605100562088', 'Ndivhuwo ', 'Easton', 'P O Box 39399 Newton Park', '6055', '(012)-(746)-(9790)', '(095)-(424)-(3548)', '(010)-(202)-(4187)', 'Ndivhuwo @eskom.co.za', 1),
-('4701240299087', 'Balungile ', 'Motsinone', '94 Florence Street\r\nNoordgesig\r\n1804', '', '(061)-(512)-(8780)', '(078)-(368)-(0656)', '(080)-(114)-(3244)', 'Balungile @computershare.co.za', NULL),
-('4702060556086', 'Tshilidzi', 'Iliev', 'P O Box 633 Riebeek-Wes', '7306', '(062)-(427)-(3660)', '(059)-(980)-(5988)', '(052)-(325)-(1206)', 'Tshilidzi@yahoo.co.uk', 1),
-('47072706087', 'Chippa ', 'Shange', '398 Kwane Avenue Motherwell Nu 6', '6211', '(075)-(182)-(9766)', '(051)-(634)-(9247)', '(081)-(241)-(0799)', 'Chippa @volsec.co.za', 2),
-('4708110702087', 'Gert ', 'Lea', 'MalanAvenue 9 Brackenfell', '7560', '(022)-(440)-(6104)', '(033)-(699)-(7599)', '(031)-(628)-(8419)', 'Gert @telkomsa.net', 2),
-('4710160845084', 'Daisy ', 'Makwana', '139 Cameron Crescent Mountain Rise', '3201', '(026)-(791)-(1523)', '(068)-(127)-(4419)', '(043)-(201)-(7828)', '', 2),
-('47120603088', 'Itumeleng ', 'Makapela', '569 Block P Soshanguve', '0152', '(048)-(608)-(3750)', '(022)-(873)-(7626)', '(099)-(417)-(7121)', 'Itumeleng @mweb.co.za', 2),
-('4802050681086', 'Mubarak', 'Van Wyk', '69639 Kulati Avenue Port Elizabeth', '6001', '(096)-(313)-(6489)', '(074)-(157)-(8867)', '(074)-(203)-(4931)', 'Mubarak@gmail.com', NULL),
-('4804180882084', 'Emmanuel', 'Mhlarhi', '2698 Kerriebos Ext6 Ebony Park Midrand', '1682', '(033)-(953)-(6591)', '(035)-(121)-(2717)', '(064)-(507)-(6047)', 'Emmanuel@absamail.co.za', 2),
-('4812160561083', 'Nkgopoleng ', 'Spengane', 'Ugie High School Ugie', '5970', '(056)-(592)-(1537)', '(019)-(945)-(5824)', '(042)-(294)-(6599)', 'Nkgopoleng @groupfive.co.za', 1),
-('4901240565082', 'Pedron ', 'Masuku', '9399 Block Y Soshanguve', '0152', '(065)-(224)-(3950)', '(068)-(741)-(1747)', '(042)-(364)-(0294)', 'Pedron @mweb.co.za', NULL),
-('4905080506087', 'Wilna', 'Lukasu', '920 Witchhazel Avenue Eco-Glades 2 Centurion', '0157', '(056)-(945)-(7708)', '(088)-(583)-(9678)', '(075)-(931)-(0307)', 'Wilna@gmail.com', 2),
-('4905210696087', 'Sheldon ', 'Sethole', '12 TWEEVINGERGRAS DANVILLE', '', '(064)-(523)-(5918)', '(039)-(951)-(3641)', '(021)-(493)-(7839)', '', 2),
-('4906270884086', 'Nompumelelo', 'Tsotetsi', 'P O Box 3989 Polokwane', '0700', '(023)-(692)-(8878)', '(047)-(939)-(0080)', '(010)-(941)-(8997)', 'Nompumelelo@gmail.com', 1),
-('490705046088', 'Ayanda', 'Mlawuli', '39 Wellington Avenue Goodwood', '7960', '(083)-(260)-(2972)', '(022)-(883)-(8524)', '(091)-(257)-(9320)', '', NULL),
-('4909110460081', 'Johannes ', 'Baale', 'P O Box 1663 Lillydale', '1281', '(039)-(774)-(3214)', '(043)-(177)-(4244)', '(024)-(500)-(6800)', '', NULL),
-('491010022086', 'Kivan', 'Dambuza', '6 Weber Crescent Penlyn Estate Lansdowne', '7780', '(066)-(940)-(2054)', '(015)-(865)-(4063)', '(020)-(605)-(0603)', 'Kivan@icon.co.za', 2),
-('4910190324088', 'Mduduzi ', 'Masungwini', 'P O Box 528 Cradock', '5880', '(088)-(900)-(2930)', '(093)-(850)-(9212)', '(069)-(330)-(0239)', '', 1),
-('4911280960085', 'Mamahooe ', 'Shoko', '31St Avenue 656 Villieria', '0186', '(017)-(470)-(7662)', '(047)-(169)-(4332)', '(073)-(637)-(1665)', 'Mamahooe @iburst.co.za', 2),
-('5001070584088', 'Linda', 'Brook', '28 1St Avenue Alexandra', '2090', '(025)-(119)-(3729)', '(035)-(668)-(7713)', '(019)-(913)-(8638)', '', 2),
-('5001110128088', 'Rene', 'Gumbi', '39 Barracuda Avenue Mossel Bay Ext 13', '6506', '(053)-(271)-(5660)', '(051)-(228)-(7636)', '(036)-(516)-(6153)', 'Rene@5gattorneys.co.za', 2),
-('5002080660085', 'Tlou ', 'Mabotja', '1158 Manchester Crescent Lenasia South', '1829', '(047)-(389)-(5659)', '(082)-(606)-(7726)', '(013)-(473)-(6015)', 'Tlou @rbiworld.co.za', 2),
-('5002180199088', 'Tshepiso ', 'Ekanayake', 'Posbus 6914\r\nANSFRERE\r\n1711', '', '(041)-(876)-(6597)', '(036)-(156)-(9914)', '(017)-(557)-(5732)', 'Tshepiso @arc.co.za', 2),
-('5007040974083', 'Calvin', 'Rosser', '16 Eaglestraat\r\nHorison\r\n1724', '', '(073)-(165)-(7166)', '(081)-(904)-(8770)', '(053)-(805)-(4989)', '', 4),
-('5008230824086', 'Daisy ', 'Machabaphala', 'P O Box 396181 Lynnwood Ridge', '90', '(096)-(450)-(9617)', '(044)-(955)-(0975)', '(098)-(641)-(6338)', 'Daisy @phbs.co.za', 4),
-('5009140926088', 'Olga', 'Lehola', '8 Marsdiep Mansions Kenilworth', '7708', '(092)-(748)-(6426)', '(048)-(258)-(9701)', '(086)-(992)-(2147)', 'Olga@gmail.com', 2),
-('5102060208085', 'Michiel ', 'Soare', 'Schultzstr. 17\r\nHorison\r\n1724\r\nPosbus 7145\r\nWestgate\r\n1734', '', '(022)-(311)-(3788)', '(069)-(264)-(1791)', '(063)-(793)-(3455)', '', NULL),
-('510523033088', 'Fezile', 'Nkabinde', '61 Tuscan Waters Gie Road Parklands', '7991', '(028)-(662)-(6165)', '(017)-(982)-(2477)', '(011)-(289)-(8994)', '', NULL),
-('5109040274081', 'Nthabiseng ', 'Banga', '53961 Rondebult Roodebult', '1901', '(045)-(111)-(1629)', '(015)-(228)-(5436)', '(022)-(168)-(1266)', 'Nthabiseng @unisa.ac.za', NULL),
-('5109080251088', 'Jaco ', 'Matji', '19 Sabierivier Avenue Norkem Park Ext 2', '1618', '(040)-(363)-(7084)', '(081)-(729)-(9235)', '(055)-(897)-(2553)', '', 4),
-('510915039082', 'Chrisna', 'Malemone', '7 Nurney Street\r\nCrosby', '', '(062)-(600)-(1913)', '(093)-(902)-(8011)', '(028)-(196)-(7457)', 'Chrisna@standardbank.co.za', NULL),
-('511127046082', 'Edwin', 'Dlamini', 'Hortense laan\r\nFlorida Glen', '', '(081)-(575)-(2418)', '(041)-(381)-(4846)', '(092)-(285)-(4922)', 'Edwin@telkomsa.net', 2),
-('5202230409086', 'Thobani ', 'Sehume', 'P O Box 12990 Centurion', '96', '(047)-(335)-(2479)', '(070)-(424)-(3994)', '(083)-(104)-(7613)', 'Thobani @vodamail.co.za', NULL),
-('5206110625085', 'Mduduzi', 'Mangena', '11 Mayibuye House No 19326 Joburg Ivory Park Ext 12', '1685', '(060)-(112)-(2791)', '(040)-(808)-(8039)', '(011)-(887)-(0096)', 'Mduduzi@rbiworld.co.za', 2),
-('5209150693082', 'Hendrick ', 'Tyhalithi', '55 Mercury Cresent Newholmes Pietermaritzburg', '3201', '(023)-(905)-(3672)', '(027)-(398)-(3285)', '(064)-(229)-(6225)', '', 2),
-('521023092081', 'Edwin ', 'Nkune', '21 Gildcroft Close Phoenix Longcroft', '9068', '(074)-(978)-(8437)', '(025)-(336)-(4813)', '(033)-(646)-(1699)', '', 1),
-('5210250933083', 'Mmadineo ', 'Cobokana', '36 Ilchester Avenue Somerset Park', '9319', '(088)-(459)-(8346)', '(082)-(143)-(0243)', '(010)-(926)-(7003)', 'Mmadineo @lantic.net', 2),
-('5212190473083', 'Celeste ', 'Fourie', 'P O Box 39819 Vredendal', '8160', '(054)-(612)-(9416)', '(080)-(520)-(4205)', '(065)-(409)-(8949)', '', NULL),
-('5304280232082', 'Nthateng ', 'Songo', '11399 Mphophoma Str Klipfontein View', '1685', '(083)-(279)-(1103)', '(037)-(364)-(4960)', '(053)-(664)-(0353)', 'Nthateng @hotmail.com', 1),
-('530628013085', 'Modisaotsile ', 'Van Rensburg', 'P O Box 356 Umkomaas', '9170', '(058)-(153)-(5944)', '(029)-(585)-(1426)', '(019)-(686)-(2915)', '', 2),
-('5307060340088', 'Nobubele ', 'Ndlovu', '3919 Makou Avenue Monumentpark Ext 39', '0181', '(049)-(976)-(9390)', '(052)-(442)-(9922)', '(047)-(265)-(2520)', 'Nobubele @vodamail.co.za', 2),
-('5308230754082', 'Segrin ', 'Mudzinganyama', 'P O Box 1696 Mafikeng South', '2791', '(083)-(889)-(4509)', '(063)-(738)-(9833)', '(094)-(198)-(8791)', 'Segrin @linhorn.co.za', 1),
-('531127094084', 'Shaun ', 'Naidoo', '200 Heron Avenue Kharwastan', '9092', '(016)-(554)-(7714)', '(017)-(158)-(6412)', '(081)-(662)-(9948)', 'Shaun @intekom.co.za', 1),
-('5404130544086', 'Oteng ', 'Moloisane', '3980 Ruth First Avenue Lotus Gardens', '0008', '(074)-(867)-(6318)', '(033)-(599)-(5134)', '(090)-(558)-(6014)', 'Oteng @pyromet.co.za', NULL),
-('5405270193088', 'Moses', 'Ketelo', '1 Kliprivier street Secunda SECUNDA', '', '(022)-(468)-(3821)', '(055)-(877)-(0279)', '(059)-(848)-(6973)', '', NULL),
-('5502200833083', 'Mabokale ', 'Nhalungo', 'Africanarylaan 5', '', '(066)-(232)-(4505)', '(018)-(655)-(7338)', '(022)-(132)-(9140)', 'Mabokale @global.co.za', NULL),
-('5505090581082', 'Moyahabo ', 'Maboko', 'P O Box 539 Lenasia', '1820', '(027)-(341)-(6603)', '(063)-(370)-(1534)', '(031)-(333)-(7862)', '', 2),
-('5505120413085', 'Bernard', 'Dinna', 'Dpt Of Rural Development 2390 Jabu Ndlovu Avenue Pietermaritzburg', '3201', '(023)-(722)-(4756)', '(035)-(468)-(5604)', '(019)-(687)-(6773)', 'Bernard@absa.co.za', NULL),
-('5505230875081', 'Rene', 'Van Huissteden', '35 Bebelele Avenue Duncan Village', '5209', '(072)-(391)-(4271)', '(048)-(309)-(6205)', '(056)-(306)-(1631)', '', 2),
-('5507130805081', 'Mosima ', 'Webb', '505 Madiba Avenue 5039 Scopus Heights Flat Arcadia', '0083', '(033)-(418)-(6181)', '(087)-(457)-(4550)', '(063)-(429)-(8017)', 'Mosima @polka.co.za', 1),
-('5507140417085', 'Derrick ', 'Busuku', '392 Brushwood Estate Sundowner', '2188', '(073)-(465)-(1581)', '(077)-(162)-(6894)', '(015)-(843)-(2058)', 'Derrick @worldonline.co.z', NULL),
-('5510220761085', 'Chrisna', 'Smits', '29583 Katse Avenue Mamelodi East Ext 9', '0122', '(052)-(529)-(1600)', '(086)-(854)-(9438)', '(038)-(353)-(8963)', '', 2),
-('5512080417086', 'Shelden', 'Ledwaba', 'P O Box 168 Pyramid', '0120', '(043)-(898)-(4456)', '(064)-(390)-(9351)', '(051)-(724)-(8675)', 'Shelden@absamail.co.za', 2),
-('5512160318087', 'Glen ', 'Mavimbela', '839 Fairmount View Punters Way Kenilworth Park', '7708', '(016)-(646)-(7619)', '(091)-(537)-(1151)', '(019)-(884)-(2716)', 'Glen @peg.co.za', 2),
-('5602060518087', 'Tshepo ', 'Julies', '2 Alwyn Road Unit 1 Sharon Villas Brooklyn', '7905', '(030)-(999)-(6368)', '(072)-(577)-(8957)', '(084)-(569)-(2643)', '', 2),
-('5608010370088', 'Emil', 'Snyman', '138 Tarragon Two Road 3 Weltevredenpark', '1709', '(015)-(632)-(5114)', '(048)-(474)-(2514)', '(090)-(110)-(4531)', 'Emil@mystudysmart.com', 1),
-('5608060712087', 'Johnson', 'Pillay', '9560 Birch Acres Isimuku Ext 26 Kempton Park', '1619', '(026)-(617)-(5105)', '(050)-(299)-(1990)', '(096)-(718)-(9333)', 'Johnson@mweb.co.za', 1),
-('5608240727082', 'Tshilidzi', 'Terry', 'P O Box 1393 Kanyamazane', '1219', '(081)-(943)-(2153)', '(086)-(854)-(4925)', '(075)-(364)-(8324)', 'Tshilidzi@unisa.ac.za', 4),
-('5612220214081', 'Tshepang ', 'Rudolph', 'Saglerstrasse 5 Hoehenkirchen-Siegertsbrunn 85635 Bavaria Germany', '0000', '(090)-(597)-(7657)', '(074)-(808)-(8208)', '(090)-(174)-(6045)', 'Tshepang @crown.org.za', 2),
-('5703210321082', 'Patrick', 'Faleni', 'P O Box 2001 Wingate Park', '0153', '(028)-(137)-(1874)', '(054)-(350)-(2005)', '(090)-(705)-(8636)', '', 2),
-('5704100297086', 'Amukelani ', 'Seloana', 'P O Box 239821 Yeoville', '2193', '(016)-(998)-(1168)', '(071)-(488)-(0554)', '(019)-(106)-(6210)', 'Amukelani @eoson.co.za', 1),
-('5705080129087', 'Pauline ', 'Ndala', '2699 Section J Ngoma Avenue Mamelodi West', '0122', '(089)-(780)-(7126)', '(082)-(673)-(9621)', '(029)-(161)-(1743)', '', NULL),
-('5706150123087', 'Pauline ', 'Semenya', 'no 35 Balalaika st\r\nStaalveld\r\n1043', '', '(095)-(147)-(7601)', '(085)-(393)-(3113)', '(092)-(412)-(9899)', 'Pauline @yahoo.com', 2),
-('5706200140082', 'Masekhanyane', 'Mothupi', 'P O Box 13216 Norkem Park', '1631', '(074)-(680)-(1048)', '(060)-(224)-(0633)', '(063)-(398)-(8248)', 'Masekhanyane@gmail.com', 5),
-('5710230923081', 'Precious ', 'Matlakeng', 'Stand No:39832 Peter Nchabele 03989 Mmotong', '789', '(036)-(676)-(5604)', '(068)-(325)-(0303)', '(044)-(804)-(4964)', '', NULL),
-('5711110485087', 'Vusi ', 'Bethlehem', '591 Ecaleni Section Mathole Avenue Tembisa', '1632', '(047)-(601)-(8014)', '(027)-(911)-(9283)', '(094)-(887)-(0945)', 'Vusi @telkomsa.net', 2),
-('5801140101084', 'Tomek ', 'Mshaisa', '6 Grafiet Crescent Welgelegen 3 Parow', '7500', '(022)-(652)-(6557)', '(062)-(677)-(1817)', '(047)-(734)-(5542)', '', 1),
-('580512061088', 'Bernhardt ', 'Magutshwa', 'Posbus 1122\r\nJEFFREYSBAY\r\n6330', '', '(078)-(471)-(8574)', '(049)-(195)-(2355)', '(056)-(458)-(1618)', 'Bernhardt @yahoo.com', 2),
-('5805130165085', 'Phuti ', 'Van Der Merwe', '9999 Qween Avenue Devland', '1811', '(068)-(384)-(9562)', '(099)-(292)-(4943)', '(053)-(918)-(6980)', 'Phuti @yahoo.co.uk', 2),
-('5809170914084', 'Cobus ', 'Sebate', '53399 Tumisang Avenue Nellmapius', '0122', '(077)-(651)-(9645)', '(056)-(600)-(8794)', '(077)-(103)-(5524)', '', 2),
-('5809250392081', 'Kaylen', 'Selabe', 'P O Box 239 Bonisani', '0927', '(076)-(155)-(8833)', '(079)-(482)-(7304)', '(067)-(636)-(8241)', 'Kaylen@gmail.com', 2),
-('5901150381088', 'Lebogang ', 'Seanego', '5039 Summerfields Estate 6821 Calamus Close Kosmosdal', '0157', '(074)-(867)-(0866)', '(045)-(914)-(6862)', '(039)-(448)-(7804)', 'Lebogang @polka.co.za', 1),
-('5902220915081', 'Goratamang ', 'Zwakala', '1179 MPHOPHOMA STR KLIPFONTEIN VIEW', '', '(048)-(246)-(0972)', '(042)-(915)-(8772)', '(037)-(125)-(0185)', '', NULL),
-('5907270761084', 'Mxoleleni ', 'Nkosi', '18059 Ivory Park Chrishani Ivory Park Ext 6', '1632', '(061)-(599)-(8762)', '(029)-(729)-(7946)', '(060)-(369)-(7411)', '', 2),
-('5910030388087', 'Reinhard', 'Msomi', 'P O Box 3950 Mooinooi', '0325', '(095)-(380)-(6431)', '(049)-(136)-(8400)', '(079)-(978)-(1752)', 'Reinhard@yahoo.com', 2),
-('6.70927E+12', 'Job', 'Engelbrecht', '1206 KUSKORAAL STREET MOREGLOED', '', '(010)-(207)-(8010)', '(060)-(950)-(3369)', '(042)-(627)-(9879)', '', NULL),
-('6005080590081', 'Moses', 'Semenya', '550A/89 Mokalane Avenue Naledi', '1861', '(055)-(634)-(2084)', '(089)-(575)-(4753)', '(034)-(542)-(5080)', 'Moses@langley.co.za', 1),
-('6102220345081', 'Busisiwe', 'Saunderson', 'P O Box 529 Groothoek Hospital', '0628', '(098)-(465)-(3325)', '(032)-(667)-(0042)', '(034)-(888)-(6748)', 'Busisiwe@mweb.co.za', 2),
-('6107030710088', 'Muhammad', 'Mokopi', '', '', '(074)-(926)-(4805)', '(077)-(445)-(1993)', '(063)-(327)-(5389)', '', 2),
-('6111040850088', 'Phaphama', 'Duminy', 'Mont Blanc Unit 16 160 Constantia Street Weltevredenpark', '1709', '(094)-(643)-(8114)', '(060)-(183)-(7274)', '(059)-(753)-(9862)', 'Phaphama@edcon.co.za', 2),
-('6111260929085', 'Nomalizo ', 'Malemone', '60 Emoyeni Section Tembisa', '1632', '(082)-(283)-(4778)', '(040)-(228)-(7280)', '(040)-(924)-(6759)', '', 2),
-('6112060275088', 'Magda', 'Peter', 'P O Box 692 Polokwane', '0700', '(087)-(397)-(4070)', '(029)-(475)-(1303)', '(088)-(990)-(3159)', '', 2),
-('6201140807084', 'Nicholas', 'Mdaka', '939 Louis Botha Bonaero Park', '1619', '(085)-(468)-(8449)', '(071)-(388)-(2254)', '(058)-(834)-(5145)', 'Nicholas@vodacom.co.za', 2),
-('6204260308088', 'Nomvula ', 'Mahlangu', 'P O Box 3939 Dobsonville', '1865', '(021)-(917)-(1095)', '(044)-(198)-(0320)', '(062)-(115)-(8096)', '', 1),
-('6207220448088', 'Ramadimetja ', 'Metene', '90 Lafayette Avenue Klein Parys', '7696', '(077)-(265)-(3122)', '(085)-(525)-(9252)', '(084)-(765)-(4873)', '', 4),
-('6209040562083', 'Neil', 'Makgatho', 'No 86939 Zone 8 Winnie Mandela', '1632', '(025)-(747)-(4580)', '(026)-(665)-(0004)', '(089)-(390)-(2427)', '', 2),
-('630710012087', 'Francois', 'Mosehane', '3 Ibsen Road Hillary', '9099', '(036)-(100)-(8445)', '(014)-(544)-(2727)', '(044)-(670)-(8746)', '', 2),
-('6308240548084', 'Mduduzi ', 'Buys', '06 Baileybridge Unit 9 Stonebridge Phoenix', '9068', '(067)-(592)-(4440)', '(098)-(839)-(0382)', '(097)-(837)-(1515)', 'Mduduzi @mweb.co.za', 1),
-('6310200940086', 'Dalisu ', 'Koeries', 'P O Box 90358 Amanzimtoti', '9125', '(032)-(330)-(2129)', '(069)-(425)-(6788)', '(096)-(395)-(2893)', 'Dalisu @live.co.za', 2),
-('6311250169086', 'Cilia ', 'Patel', '92 Marshall Grove Glenmore', '9001', '(012)-(225)-(3802)', '(048)-(787)-(8265)', '(024)-(890)-(9083)', 'Cilia @chanellegroup.ie', NULL),
-('6401240516085', 'Trevor ', 'Monyela', 'PO Box 467\r\nRant-en-Dal\r\n1751', '', '(021)-(668)-(6033)', '(061)-(353)-(2907)', '(088)-(951)-(7245)', '', 1),
-('6404030447088', 'Fezeka ', 'Oluwaleye', 'P O Box 2561 Koloti', '0709', '(027)-(983)-(0079)', '(099)-(714)-(8415)', '(047)-(633)-(4136)', '', 2),
-('6404210377085', 'Nkhetheni ', 'Cele', '19 Free State Road Beaconsfield', '8301', '(070)-(126)-(5023)', '(018)-(287)-(2369)', '(013)-(266)-(4876)', 'Nkhetheni @nashuaisp.co.za', 1),
-('6404230631085', 'Zukisa', 'Oloyede', '2635 Zone398 Zwelitsha', '5608', '(011)-(997)-(6564)', '(045)-(622)-(5791)', '(015)-(145)-(3663)', 'Zukisa@telkomsa.net', 1),
-('640428082086', 'Shane ', 'Matshazini', '939 Mlalazi Avenue Mamelodi West', '0122', '(011)-(405)-(4850)', '(029)-(114)-(2426)', '(087)-(364)-(9226)', 'Shane @westsidebrokers.co.za', 2),
-('6408200513081', 'Jade ', 'Ramoipone', 'Posbus 25685 Monumentpark', '785', '(076)-(546)-(2450)', '(062)-(318)-(5630)', '(072)-(631)-(2719)', '', NULL),
-('6412050862088', 'Mmasale ', 'Makhubu', '82 Apex Road East Apex Ext 3', '1501', '(034)-(322)-(1264)', '(067)-(529)-(4115)', '(084)-(881)-(2689)', '', NULL),
-('6412170702085', 'Shaun ', 'Van Rooyen', 'Cnr Jensen And Bosvlier Strt 96 Soldonne Complex Clarina', '0182', '(088)-(797)-(7508)', '(068)-(361)-(4963)', '(030)-(608)-(3145)', 'Shaun @safeguardchem.co.za', 2),
-('650402056081', 'Ruduwhan ', 'Khuluse', '3035/5 Extension 19 Naturena', '2095', '(091)-(620)-(1011)', '(013)-(327)-(1182)', '(071)-(816)-(8080)', '', 1),
-('6507050556081', 'Kgabo ', 'Mahlagaume', '25 Canavon Avenue Bertrams', '2099', '(026)-(311)-(3299)', '(013)-(497)-(3392)', '(015)-(560)-(3235)', 'Kgabo @absa.co.za', 4),
-('6507070463082', 'Celeste ', 'Masilo', '1399 Phake Section Katlehong', '1931', '(056)-(173)-(2521)', '(081)-(892)-(4571)', '(033)-(753)-(7002)', '', 2),
-('6507120107086', 'Tshepang ', 'Lourens', '21365 First Avenue Lucky Gardens Ethwathwa', '1519', '(089)-(675)-(2717)', '(060)-(182)-(6479)', '(046)-(614)-(8110)', '', 4),
-('6509050392085', 'Selson', 'Mthiyane', '139339 Phase8 Sekhabi Cresent Spruitview', '1931', '(090)-(651)-(1547)', '(065)-(191)-(9374)', '(094)-(168)-(8326)', 'Selson@n-counter.com', NULL),
-('6509220788082', 'Jurgen', 'Mokgerepi', '85 Ethel Avenue Fontainebleau', '2199', '(044)-(912)-(3347)', '(064)-(723)-(9881)', '(034)-(907)-(1918)', '', NULL),
-('6511130973087', 'Kalaivani', 'Rosser', '693 Namakwa Avenue Vredendal', '8160', '(028)-(670)-(0295)', '(057)-(746)-(5893)', '(040)-(718)-(8308)', '', 1),
-('6602070398082', 'Thandokazi', 'Lauder', '99 General Lucas Meyer Cres Welgelegen', '7500', '(012)-(117)-(7148)', '(069)-(353)-(6003)', '(023)-(227)-(6111)', '', NULL),
-('6603100144082', 'Otsile', 'Kubheka', '292 Crimson Avenue Laudium', '0037', '(058)-(930)-(8608)', '(054)-(212)-(1633)', '(046)-(245)-(6766)', '', 2),
-('6605260331087', 'Culnescia', 'Makhubela', '250 Bernini Avenue 98 La Comores Complex Lyttelton', '0157', '(061)-(581)-(5440)', '(085)-(104)-(8112)', '(027)-(200)-(3441)', '', 2),
-('660620054086', 'Cliff', 'Kunene', '2652 Ext 398 Nelmapius Pretoria', '0002', '(038)-(399)-(9879)', '(039)-(970)-(7777)', '(036)-(753)-(3557)', '', 2),
-('6607010903082', 'Olaleye ', 'Madula', 'P O Box 2663 Empumalanga', '958', '(058)-(939)-(1408)', '(049)-(191)-(2837)', '(036)-(222)-(6594)', 'Olaleye @inoxpa.com', NULL),
-('6609200993085', 'Victor ', 'Le Clus', '31 ParkAvenue Promosa', '2531', '(020)-(648)-(1963)', '(063)-(880)-(9800)', '(015)-(271)-(1015)', 'Victor @mweb.co.za', 2),
-('670305077081', 'Shephard ', 'Kitinya', 'P13963 Section 39 Madadeni', '2951', '(019)-(143)-(0520)', '(056)-(896)-(8974)', '(099)-(400)-(1295)', 'Shephard @esmartgroup.co.za', 2),
-('6705050635085', 'Dalisu ', 'Lehloka', '19 Dianthus Crescent Malabar', '6020', '(098)-(911)-(1468)', '(072)-(349)-(6273)', '(097)-(555)-(1952)', '', 2),
-('6705220156081', 'Mahlatse ', 'Busuku', '13 Ackermann street\r\nBreunanda Ext 2\r\nWilropark\r\n1724', '', '(018)-(860)-(1358)', '(035)-(359)-(9266)', '(099)-(125)-(2515)', '', 2),
-('6706090775083', 'Jaco', 'Koopman', 'PO Box 15151\r\nSecunda\r\n2302', '', '(040)-(564)-(4216)', '(024)-(938)-(5046)', '(079)-(378)-(1537)', 'Jaco@sasp;/cp,', 2),
-('6706260635082', 'Kehinde ', 'Phoshoko', 'P O Box 298539 Gezina', '0031', '(054)-(693)-(5568)', '(094)-(539)-(1422)', '(086)-(406)-(4173)', 'Kehinde @fpimail.co.za', 1),
-('6711170133088', 'Sven ', 'Teane', '1599 Sofasonke Avenue Orlando East', '1809', '(065)-(419)-(1811)', '(023)-(926)-(6059)', '(015)-(703)-(4229)', '', 2),
-('6802050633083', 'Precious ', 'Hucklesby', 'House No 9B Mohlakaneng Avenue Madibapark Seshego', '791', '(037)-(411)-(4583)', '(077)-(878)-(7586)', '(045)-(384)-(3085)', 'Precious @kama.co.za', 2),
-('6803010610087', 'Ricardo ', 'Malapela', 'P O Box 133988 The Tramshed', '0126', '(024)-(982)-(3230)', '(062)-(798)-(1674)', '(055)-(831)-(7727)', '', NULL),
-('6803160923084', 'Lionel ', 'Reinke', '199 Bramfischer Street Ferndale', '2199', '(092)-(354)-(4312)', '(016)-(745)-(2552)', '(030)-(217)-(1102)', '', 2),
-('6808120518082', 'Nthateng ', 'Ponnusamy', 'P O Box 60193 Katutura Windhoek Rep. Of Namibia Namibia', '0000', '(093)-(540)-(9295)', '(099)-(819)-(0642)', '(092)-(656)-(4161)', 'Nthateng @telkomsa.net', 2),
-('681014062082', 'Louis ', 'Kearley', '19 Lismore Avenue Crosby', '2092', '(067)-(873)-(1274)', '(037)-(752)-(2601)', '(030)-(239)-(6437)', 'Louis @icon.co.za', 3),
-('6810160795088', 'Precious ', 'Bodenstein', '2309 Nu 11 Mdantsane', '5219', '(067)-(526)-(9343)', '(051)-(139)-(3804)', '(067)-(650)-(6172)', 'Precious @Telkomsa.net', 3),
-('6907130694085', 'Hendrik ', 'Enyanga', 'P O Box 39813393 Moreleta Plaza', '0167', '(084)-(491)-(8832)', '(058)-(339)-(9257)', '(029)-(481)-(6737)', 'Hendrik @yahoo.com', 2),
-('6909200583086', 'Itumeleng ', 'Harri', '391 Rabat Avenue Esiphethweni Section 1 Tembisa', '1632', '(090)-(318)-(7347)', '(077)-(269)-(1138)', '(050)-(764)-(0637)', 'Itumeleng @telkomsa.net', 2);
-INSERT INTO `clients` (`client_id`, `client_name`, `client_surname`, `client_address`, `client_postalcode`, `client_tel_home`, `client_tel_work`, `client_tel_cell`, `client_email`, `ref_id`) VALUES
-('6910130773087', 'Regine', 'Prinsloo', 'P O Box 288 Thulamahashe', '1365', '(044)-(978)-(5365)', '(053)-(575)-(8334)', '(055)-(120)-(0742)', 'Regine@gmail.com', NULL),
-('7001190645085', 'Nilukshi ', 'Mokoena', '36 Umgeni River Avenue Norkem Park', '1618', '(071)-(681)-(0489)', '(065)-(173)-(1453)', '(034)-(728)-(2849)', 'Nilukshi @telkom.sa.nee', 3),
-('7002130927081', 'Christopher ', 'Matlhaba', 'P O Box 13339 Polokwane', '0700', '(095)-(506)-(5453)', '(087)-(806)-(6143)', '(030)-(797)-(7683)', 'Christopher @jsb.co.za', 3),
-('7003050348086', 'Nontshumayelo ', 'Muniappen', '29 La Provence Way Mitchell\'S Plain Westridge', '7798', '(044)-(580)-(2936)', '(084)-(285)-(2806)', '(023)-(156)-(5918)', 'Nontshumayelo @robertec.co.za', 2),
-('7004060440082', 'Gaotingwe', 'Jeffries', '299 Rosalind Avenue Lynnwood Ridge', '0081', '(060)-(996)-(2263)', '(039)-(228)-(5123)', '(080)-(322)-(8180)', '', NULL),
-('7009130331088', 'Selson', 'Moeketsi', 'P O Box 393993939 Mamelodi', '781', '(060)-(899)-(6510)', '(092)-(509)-(0566)', '(060)-(202)-(2965)', 'Selson@gmail.com', 2),
-('7101110702082', 'Matete', 'Zaverdinos', 'Posbus 21223\r\nHelderkruin\r\n1733', '', '(071)-(940)-(1110)', '(061)-(556)-(4855)', '(069)-(639)-(5064)', 'Matete@hotmail.com', 2),
-('7106160389084', 'Cedric ', 'Mason', 'House No 8393/58 Mqantsa Tembisa', '1632', '(054)-(957)-(3838)', '(019)-(309)-(1474)', '(068)-(578)-(3882)', 'Cedric @haasbroeksteyn.co.za', 2),
-('7107150227081', 'Mzukisi', 'Sithole', 'PO Box 477\r\nFlorida\r\n1710', '', '(068)-(690)-(4942)', '(049)-(928)-(5910)', '(022)-(579)-(5022)', 'Mzukisi@nighttocare.org', 1),
-('7108280360087', 'Maria ', 'Vorster', 'P O Box 652 Deer Park', '0852', '(089)-(451)-(1674)', '(041)-(199)-(8401)', '(098)-(174)-(3341)', 'Maria @hyundai.co.za', NULL),
-('7202270202087', 'Katlego', 'Gondo', 'P O Box 513 Nongoma', '3950', '(041)-(167)-(5489)', '(058)-(277)-(7598)', '(045)-(487)-(2696)', 'Katlego@hotmail.com', 2),
-('7203030169082', 'Yaseen', 'Mabena', 'P O Box 23991 Cresta', '2118', '(064)-(905)-(6712)', '(038)-(490)-(0865)', '(048)-(378)-(6073)', 'Yaseen@ananzi.co.za', 2),
-('7205020213082', 'Leesha', 'Phindiso', 'P O Box 6393998 Highveld', '0169', '(059)-(183)-(2997)', '(089)-(604)-(9637)', '(098)-(864)-(0585)', 'Leesha@lantic.net', 2),
-('7205120917082', 'Richard ', 'Banga', '', '', '(071)-(497)-(1338)', '(078)-(167)-(3492)', '(033)-(900)-(5511)', 'Richard @gmail.com', 2),
-('7212170290085', 'Daniel ', 'Buissinne', '869 Van Essche Place Moreletapark', '0181', '(092)-(217)-(0918)', '(063)-(565)-(0385)', '(042)-(860)-(9046)', 'Daniel @work.co.za', 5),
-('7303120569085', 'Letsoni ', 'Tshabalala', 'P O Box 39825 Chuenespoort', '795', '(095)-(467)-(4481)', '(046)-(282)-(2908)', '(067)-(239)-(4674)', 'Letsoni @gmail.com', 2),
-('7306050161086', 'Kishan', 'Masala', '129 Himalaya Street Shallcross', '9093', '(038)-(200)-(0327)', '(013)-(149)-(3803)', '(098)-(716)-(3189)', '', 2),
-('730823030086', 'Ngwagu ', 'Horwell', 'Private Bag X1398 Zeerust', '2865', '(013)-(149)-(9853)', '(085)-(637)-(0929)', '(080)-(598)-(9701)', 'Ngwagu @gmail.com', 4),
-('7309060944088', 'Paul ', 'Mongake', 'P O Box 53921 Durban', '9000', '(043)-(375)-(4248)', '(062)-(974)-(8272)', '(035)-(824)-(6441)', 'Paul @netcare.co.za', 1),
-('7312050486084', 'Matthew ', 'Makaleng', '90398/9 Bernina Place Extension 9 Lenasia South', '1829', '(079)-(285)-(3410)', '(095)-(557)-(1594)', '(085)-(939)-(2450)', 'Matthew @sci-bono.co.za', NULL),
-('7312170466084', 'Jesse', 'Retief', '35 Alamein Road Milnerton', '7991', '(085)-(627)-(0015)', '(029)-(644)-(4346)', '(084)-(576)-(1253)', '', 2),
-('7403250912088', 'Edmund', 'Ngobeni', 'P O Box 195539 Bracken Gardens', '1952', '(020)-(501)-(6292)', '(042)-(263)-(2986)', '(021)-(836)-(9118)', 'Edmund@gmail.com', 1),
-('740501094086', 'Mondli ', 'Mokwebo', '693 Block Dd Duduzane Avenue Soshanguve Block Dd', '0152', '(042)-(541)-(8345)', '(098)-(198)-(0264)', '(059)-(313)-(9812)', 'Mondli @dtep.co.3A', 2),
-('7410130630081', 'Marc ', 'Maseng', '92 Speciosa Road Paradyskloof', '7600', '(074)-(268)-(8805)', '(036)-(772)-(8261)', '(042)-(857)-(2238)', '', 2),
-('7411170290083', 'Jaco ', 'Syrzysko', 'P O Box 939 Makonde', '989', '(029)-(598)-(4965)', '(055)-(404)-(1142)', '(059)-(137)-(3859)', 'Jaco @gmail.com', 1),
-('7412210788083', 'Botshelo', 'Bhagwan', 'P O Box 13909 Riverside', '1226', '(083)-(158)-(1537)', '(064)-(419)-(9203)', '(071)-(836)-(5216)', 'Botshelo@rmcs.co.za', NULL),
-('7503060788083', 'Nasreen', 'Mbatha', '33 Ferreira Avenue Discovery', '1709', '(023)-(168)-(9987)', '(037)-(844)-(0506)', '(018)-(776)-(7405)', '', 2),
-('7505030416082', 'Nkululeko ', 'Ntumba', '6 Beacon Road Sunnyridge', '5201', '(095)-(590)-(4003)', '(098)-(649)-(7440)', '(074)-(370)-(5626)', '', NULL),
-('7511030931085', 'Maria ', 'Shihlomulo', '15 Circle Road Capetown Table View', '7991', '(077)-(268)-(3062)', '(098)-(775)-(2736)', '(095)-(241)-(1257)', '', 2),
-('7512130745085', 'Jesse', 'Ntshabele', 'Posbus 21617\r\nHelderkruin\r\n1733', '', '(086)-(294)-(7002)', '(077)-(451)-(8545)', '(024)-(307)-(8564)', 'Jesse@aforbes.co.za', NULL),
-('7602020209088', 'Baipidi', 'Van Der Walt', '906 Elmdor Marine Street Humewood', '6001', '(092)-(327)-(6127)', '(075)-(390)-(0726)', '(011)-(531)-(0381)', '', NULL),
-('7609090369085', 'Warren ', 'Harri', 'Room 3 Main Avenue Cambridge', '5297', '(088)-(143)-(8865)', '(030)-(926)-(9697)', '(055)-(520)-(4285)', 'Warren @hotmail.co.uk', 2),
-('7609110201086', 'Magda', 'Dlamini', '16 Johan Heunis Cresent Rooi Rivier Rif George', '6529', '(015)-(698)-(1506)', '(038)-(807)-(8639)', '(050)-(502)-(2257)', '', 2),
-('7609240686081', 'Morifi ', 'Malungani', 'P O Box 18168 Hillbrow', '2038', '(063)-(403)-(2181)', '(089)-(254)-(7064)', '(025)-(141)-(2772)', 'Morifi @metroweb.co.za', 2),
-('7610250179087', 'Thipe ', 'Mogotlane', '1991 Tau Avenue Zone9 Seshego', '791', '(025)-(824)-(8997)', '(052)-(797)-(0138)', '(038)-(579)-(4751)', '', 2),
-('7701030854083', 'Hisham', 'Khumalo', 'Ministry Of Education P O Box 98 Mont Fleuri Mahe Seychelles', '0000', '(034)-(903)-(8843)', '(053)-(429)-(7016)', '(053)-(607)-(2503)', '', NULL),
-('770124076088', 'Simphiwe ', 'Madia', 'Unit F9 Parksig Flats Durban Road Oakdale Lgd', '7530', '(063)-(218)-(0988)', '(044)-(609)-(6761)', '(031)-(738)-(9346)', 'Simphiwe @insuredoc.co.za', NULL),
-('7701260528087', 'Thabiso ', 'Nhlapo', 'P O Box 1258 Kwadukuza', '9950', '(039)-(695)-(5181)', '(071)-(906)-(2145)', '(016)-(235)-(0244)', 'Thabiso @mtnloaded.co.za', 2),
-('7704070438085', 'Muhammad', 'Vaphi', '3 Waterbok Flat 15 Echo Road Pietermaritzburg', '3201', '(083)-(356)-(8330)', '(064)-(654)-(1713)', '(050)-(668)-(6969)', '', 2),
-('7705180627087', 'Alex ', 'Genge', 'P O Box 650 Phalaborwa', '1390', '(099)-(979)-(8403)', '(024)-(853)-(6016)', '(079)-(295)-(7384)', 'Alex @iafrica.com', 2),
-('7707250934088', 'Kholofelo', 'Oppermann', 'B590 Mpungushe Road Ntuzuma T/Ship Kwamashu', '9359', '(058)-(359)-(2454)', '(072)-(366)-(8536)', '(046)-(798)-(9651)', 'Kholofelo@polka.co.za', 2),
-('771109035087', 'Otsile', 'Mshaisa', 'PO Box 412\r\nBergbron\r\n1712', '', '(059)-(556)-(7736)', '(066)-(825)-(4805)', '(079)-(505)-(1278)', 'Otsile@gmail.com', 2),
-('7801120638083', 'Kishan', 'Loliwe', 'P O Box 6152 Tyger Valley', '7536', '(021)-(888)-(3611)', '(072)-(785)-(0060)', '(091)-(512)-(2395)', 'Kishan@iburst.co.za', 2),
-('7804050808083', 'Shaun ', 'Pinto', '26 Logan Avenue Highveld', '0157', '(016)-(163)-(4755)', '(061)-(563)-(5077)', '(042)-(992)-(0567)', '', 2),
-('7805110427084', 'Shephard ', 'Nukeri', '201 Balaton Court 19 Pietersen Avenue Hillbrow', '2001', '(018)-(524)-(2893)', '(072)-(865)-(9816)', '(098)-(299)-(2130)', 'Shephard @sttreses.co.za', 2),
-('780622020088', 'Nkosikhona ', 'Nkgapele', 'P O Box 1905 Ga-Kgapane', '0838', '(014)-(280)-(7521)', '(068)-(726)-(4642)', '(018)-(769)-(6044)', 'Nkosikhona @UNIGRAIN.CO.ZA', 2),
-('7808140304084', 'Mothupi ', 'Hlongwane', '162 Apollost Ext 1 Ennerdale', '1830', '(096)-(469)-(2849)', '(034)-(351)-(2068)', '(016)-(626)-(6881)', '', 1),
-('7808220226082', 'Norman ', 'Mokopi', '65 Terrace Road Bertrams', '2099', '(068)-(542)-(0106)', '(094)-(679)-(9848)', '(032)-(954)-(9116)', 'Norman @tekton.co.za', 1),
-('7809130240082', 'Akho', 'Mathobela', '6392 Extension 2 Kwaxuma', '1868', '(065)-(484)-(2893)', '(092)-(202)-(1828)', '(053)-(887)-(5123)', 'Akho@cometkitchens.co.za', NULL),
-('7902150410084', 'Frans ', 'Sebate', '29 Naboomstraat\r\nWilropark\r\nRoodepoort\r\n1724', '', '(012)-(377)-(3292)', '(041)-(193)-(6531)', '(084)-(516)-(5478)', 'Frans @gmail.com', 2),
-('7906010195081', 'Richard ', 'Senabe', '28 Springbok Avenue Lime Acres', '8978', '(030)-(698)-(6143)', '(014)-(340)-(3335)', '(038)-(127)-(8356)', '', 2),
-('7907160124082', 'Phumzile ', 'Phiri', 'P O Box 191 Maraisburg', '1700', '(016)-(434)-(3543)', '(099)-(100)-(4080)', '(053)-(663)-(8466)', 'Phumzile @standardbank.co.za', 2),
-('7912110951087', 'Abdul ', 'Makuyi', 'P O Box 1959 Mondeor', '2178', '(093)-(136)-(6705)', '(074)-(250)-(1501)', '(015)-(592)-(9152)', 'Abdul @tracker.co.za', 1),
-('8004280354084', 'Matome ', 'Maharaj', '185639 Ext 12 Ikageng', '2539', '(028)-(471)-(3000)', '(031)-(344)-(0928)', '(029)-(396)-(1013)', '', 2),
-('8005030611082', 'Mduduzi', 'Linde', 'P O Box 55558 Northlands', '2116', '(071)-(253)-(3699)', '(046)-(362)-(4922)', '(017)-(540)-(5211)', 'Mduduzi@polosa.com', NULL),
-('8006220732085', 'Wouter', 'Mlawuli', 'Qalakabusha Correctional Cen P/Bag X 20088 Empangeni', '3880', '(091)-(108)-(3776)', '(055)-(673)-(8727)', '(036)-(239)-(2030)', '', NULL),
-('8008280468086', 'Sylvester ', 'Bhana', '19 Countess Avenue Windsor West', '2199', '(023)-(581)-(6674)', '(057)-(923)-(3664)', '(026)-(755)-(5182)', '', 2),
-('8009100659085', 'Hulisani ', 'Phakwago', '29 9Th Avenue Greymont', '2195', '(047)-(194)-(3209)', '(087)-(471)-(7649)', '(051)-(421)-(1092)', 'Hulisani @safeguardchem.co.za', 2),
-('8012160653084', 'Lucas', 'De Witt', 'P O Box 399 Mothotlung', '0268', '(098)-(560)-(9590)', '(062)-(911)-(0638)', '(043)-(869)-(2838)', 'Lucas@gmail.com', 2),
-('8101060996085', 'Nkosinathi ', 'Laka', '999 Smith Avenue Room 219 Vister View Durban', '9001', '(052)-(272)-(5690)', '(092)-(514)-(9829)', '(096)-(505)-(4294)', '', NULL),
-('8103140774084', 'Wendy ', 'Govender', 'P O Box 1526 Mahikeng', '2795', '(099)-(842)-(7664)', '(021)-(427)-(1477)', '(059)-(648)-(7824)', 'Wendy @gmail.com', 2),
-('8104260177081', 'Ntsakisi ', 'Rudolph', '392 Mashilwane Avenue Tladi', '1868', '(092)-(510)-(9664)', '(015)-(960)-(5135)', '(026)-(259)-(7316)', '', 1),
-('8105100593086', 'Sean', 'Lutrin', '205 Monaco 213 Troye Mucklenuek Pretoria', '0002', '(036)-(820)-(5625)', '(077)-(498)-(0110)', '(078)-(602)-(0683)', 'Sean@unisa.ac.za', 2),
-('820305040087', 'William', 'Sifile', '52 Rusticana Generaal Beyers Avenue Pentagonpark', '9301', '(016)-(351)-(4853)', '(049)-(384)-(4261)', '(047)-(198)-(7411)', 'William@sabc.co.za', NULL),
-('82032206087', 'Wouter', 'Burger', '2119 Tlhapi Avenue Cloverdene', '1513', '(085)-(927)-(1284)', '(087)-(284)-(9774)', '(062)-(400)-(2276)', '', 2),
-('8209140103086', 'Jan ', 'Lesolisa', '116 SELBOURNE STREET PAROW', '', '(046)-(368)-(6698)', '(065)-(497)-(3627)', '(034)-(681)-(8982)', '', 2),
-('8209260885087', 'Senyelo ', 'Koopman', '566 Buccaneer Avenue Elarduspark', '0181', '(080)-(949)-(5827)', '(078)-(208)-(7323)', '(057)-(235)-(6325)', 'Senyelo @mweb.co.za', 2),
-('8210240595083', 'Adrienne', 'Dambuza', '16 Forsyth street\r\nNoordheuwel\r\nKrugersdorp', '', '(066)-(408)-(9003)', '(067)-(200)-(3820)', '(089)-(724)-(4226)', 'Adrienne@deomar.com', 2),
-('8301170304085', 'Adrienne', 'Grobler', '295 Marine Street 33 Savanay Bluff', '9052', '(088)-(787)-(8494)', '(030)-(319)-(5350)', '(081)-(967)-(3959)', '', 2),
-('8306110412083', 'Saegan', 'Louw', '16 Villion Avenue De Zoete Inval Paarl', '7696', '(014)-(268)-(6402)', '(076)-(359)-(4675)', '(012)-(489)-(5787)', '', 2),
-('8309040682084', 'Lufuno', 'Soare', '398 Encore,Cresent Glades Cresent Glades Patchouli Cresent Noordwyk', '1687', '(098)-(178)-(2313)', '(060)-(367)-(2850)', '(029)-(549)-(7105)', 'Lufuno@telkomsa.net', 2),
-('8406270311082', 'Lunghile ', 'Malatji', '9 Sarie Marias Avenue Pellissier', '9301', '(022)-(953)-(2921)', '(086)-(953)-(7201)', '(068)-(507)-(8208)', 'Lunghile @mtnloaded.co.za', 2),
-('8407030360083', 'Sumitra', 'Ngcobo', '19 Eileen Court Kimberley', '8301', '(018)-(921)-(4507)', '(020)-(820)-(6391)', '(066)-(229)-(7179)', '', NULL),
-('8409280542088', 'Leesha', 'Madisha', '1529 Khakhu Avenue Daveyton', '1520', '(099)-(817)-(9127)', '(051)-(980)-(3553)', '(058)-(120)-(3164)', 'Leesha@envisionliving.co.za', 2),
-('8501030560088', 'Calvin', 'Mpatane', '305 Taaiboshof 200 Kraai Avenue Kwaggasrand', '0183', '(050)-(372)-(2630)', '(070)-(292)-(7146)', '(075)-(940)-(0292)', 'Calvin@FANEWS.CO.ZA', 1),
-('8501270465083', 'Nompilo ', 'Ndaba', 'P O Box 200 Gompies', '0631', '(047)-(479)-(6562)', '(091)-(619)-(0629)', '(051)-(914)-(1739)', 'Nompilo @ens.co.za', NULL),
-('8502060290083', 'Amukelani ', 'Naick', 'P O Box 33 Muizenberg', '7950', '(027)-(644)-(5375)', '(027)-(496)-(8846)', '(051)-(695)-(2281)', 'Amukelani @rbiworld.co.za', 2),
-('8504060165087', 'Brian ', 'Nkatu', 'P O Box 2396 Makonde', '989', '(067)-(357)-(0493)', '(068)-(204)-(6022)', '(068)-(263)-(5896)', '', 2),
-('8506270616083', 'Piet', 'Mynhardt', '20 Tweevingers Avenue Danville Ext 3', '0183', '(090)-(151)-(5877)', '(075)-(183)-(2735)', '(082)-(715)-(5796)', '', 1),
-('8508060640084', 'Neliswa', 'Kunene', 'Mondeor, Columbine Ave, Mondeor Gardens, Unit 2039 Mondeor', '2091', '(092)-(381)-(4333)', '(020)-(940)-(0947)', '(016)-(197)-(5363)', 'Neliswa@anchor.co.za', NULL),
-('8508170901082', 'Ntotole ', 'Mbung', 'Lower Germiston Road Room 163 Rosherville', '2099', '(037)-(309)-(8439)', '(059)-(431)-(0292)', '(038)-(650)-(8375)', 'Ntotole @yahoo.com', 2),
-('851123068082', 'Mongezi', 'Makhale', '839 Gauntlet Close Ormonde View', '2091', '(073)-(645)-(3807)', '(089)-(557)-(0499)', '(014)-(920)-(3508)', 'Mongezi@devoslicharus.co.za', 2),
-('8511250864088', 'Mxoleleni ', 'Burrows', 'P O Box 39892 Driekop', '1129', '(074)-(541)-(5335)', '(097)-(244)-(9876)', '(077)-(684)-(3321)', '', 2),
-('8512050670085', 'Tlou ', 'Ramushi', 'P O Box 58390 Durban', '9000', '(097)-(245)-(3972)', '(094)-(667)-(5578)', '(042)-(476)-(5212)', 'Tlou @gmail.com', 2),
-('8610120779086', 'Promise ', 'Mdluli', '308 Brook Avenue Menlo Park', '0081', '(041)-(990)-(0895)', '(056)-(978)-(3356)', '(014)-(332)-(9294)', 'Promise @polka.co.za', 1),
-('8612040918085', 'Tony ', 'Mgidi', '69639 Ext 3 Winterveldt', '0198', '(035)-(650)-(2366)', '(011)-(286)-(0669)', '(084)-(492)-(1875)', '', NULL),
-('8703170594084', 'Zukisa', 'Sifile', 'VygieAvenue 9 Denne-Oord', '6529', '(041)-(600)-(2790)', '(016)-(764)-(1354)', '(017)-(238)-(7499)', 'Zukisa@yahoo.com', NULL),
-('8703280117084', 'Petrus ', 'Naidoo', '5699 Moilao Street Kagiso 2', '1759', '(043)-(229)-(9780)', '(057)-(762)-(5347)', '(035)-(325)-(5373)', '', NULL),
-('8709250986088', 'Lungiswa ', 'Van Niekerk', 'George Post Office 95 York Avenue George', '6529', '(054)-(469)-(9968)', '(048)-(829)-(3794)', '(020)-(524)-(6990)', 'Lungiswa @unisa.ac.za', NULL),
-('8802220958083', 'Tshepo ', 'Pillay', 'Gonubie Palms Unit 230 Gonubie Palms East London Gonubie', '5257', '(014)-(327)-(1263)', '(045)-(284)-(0421)', '(048)-(203)-(7752)', '', NULL),
-('8807130418086', 'Muteba ', 'Phiri', '15 Sekwinya Saulsville', '0125', '(096)-(689)-(1484)', '(088)-(402)-(4873)', '(086)-(718)-(9175)', '', 1),
-('8807180866088', 'Mabokale ', 'Lephalala', '30 Nederburg Avenue Royldene', '8301', '(032)-(122)-(6306)', '(039)-(763)-(5593)', '(094)-(341)-(3768)', 'Mabokale @ananzi.co.za', 2),
-('8810240788083', 'Lee-Anne ', 'Zwakala', '3986A 3Rd Ave Fairland', '2170', '(048)-(933)-(5332)', '(038)-(769)-(0898)', '(078)-(990)-(7224)', 'Lee-Anne @wastegiant.co.za', 2),
-('8902010959088', 'Job', 'Spengane', '5 Rustenburg Dr Bellville', '7530', '(015)-(912)-(5678)', '(064)-(925)-(4571)', '(013)-(957)-(1818)', '', 2),
-('8906120948084', 'Ivo ', 'Naidoo', 'China Construction Bank 5Th Floor, 95 Grayston Street Sandhurst', '2196', '(084)-(418)-(7519)', '(050)-(141)-(2503)', '(052)-(805)-(9023)', 'Ivo @sciohealth4life.co.za', 4),
-('8906230122083', 'Tiishetjo', 'Makuwa', 'P O Box 2398 Nagina', '3609', '(020)-(428)-(1672)', '(090)-(253)-(4879)', '(053)-(535)-(9161)', 'Tiishetjo@lantic.net', 1),
-('8907090202087', 'Andre ', 'Letsoele', '23939 Polaris Avenue Waterkloof Ridge', '0181', '(028)-(531)-(2410)', '(025)-(261)-(1356)', '(042)-(352)-(6588)', '', NULL),
-('8907280730087', 'Moeketsi ', 'Chauke', 'P O Box 868 Port Edward', '9295', '(039)-(823)-(4035)', '(043)-(924)-(9730)', '(027)-(345)-(4048)', 'Moeketsi @mweb.co.za', 2),
-('8908220122088', 'Andre ', 'Schoeman', 'PO Bos 535\r\nHONEYDEW\r\n2040', '', '(066)-(489)-(8662)', '(023)-(794)-(9855)', '(057)-(850)-(4856)', 'Andre @work.co.za', 2),
-('9003280235085', 'Alex ', 'Mkhonto', '15 Beaufort Place 39 Beaufort Avenue Goodwood Park', '7960', '(097)-(965)-(1602)', '(061)-(129)-(0277)', '(029)-(270)-(8897)', '', 2),
-('9010200680087', 'Mothupi ', 'Xulubana', 'P O Box 3912 Pretoria', '0001', '(018)-(867)-(8067)', '(065)-(848)-(7223)', '(039)-(256)-(2775)', 'Mothupi @telkomsa.net', 2),
-('9011135082087', 'Jaco', 'Roux', '23B Transvaal Street, Lichtenburg', '2740', '(018)-(633)-(6163)', '(018)-(633)-(1394)', '(079)-(969)-(2440)', 'pjjroux@gmail.com', 1),
-('9012110306084', 'Thapelo ', 'Mokoena', 'C18239 Umsunduzi Road Kwamashu', '9359', '(055)-(900)-(9493)', '(053)-(715)-(3414)', '(043)-(775)-(4966)', 'Thapelo @gmail.com', 2),
-('9103060340082', 'Mpho ', 'Hleza', '9953 Motloung Avenue Dobsonville Ext 3', '1863', '(046)-(303)-(4847)', '(026)-(340)-(8970)', '(083)-(339)-(7282)', '', NULL),
-('9109140754088', 'Mashamokwena ', 'Van Vuuren', '995 30Th Avenue Villieria', '0186', '(072)-(432)-(4094)', '(099)-(338)-(6528)', '(097)-(273)-(6866)', 'Mashamokwena @mweb.co.za', NULL),
-('9109150355087', 'Kgabo ', 'Le Masson', 'Unit 20 Monte Rosa Complex 293 Moerdyk Avenue Kyalami Hills Ext 5', '1689', '(041)-(515)-(2513)', '(029)-(565)-(8731)', '(019)-(579)-(1839)', '', NULL),
-('9109270875081', 'Mavis', 'Khumalo', 'Mervelous Cyberworld 62C President Avenue Gemiston Georgetown', '1901', '(040)-(156)-(9201)', '(077)-(873)-(7623)', '(054)-(881)-(0606)', 'Mavis@telkomsa.net', 1),
-('9110230494081', 'Nonjabulo', 'Horwell', '39 Rose Avenue Florida Ext', '1709', '(068)-(334)-(6801)', '(031)-(273)-(2013)', '(081)-(360)-(2706)', 'Nonjabulo@stteresas.co.za', 2),
-('9202010527088', 'Nonhlanhla ', 'Rusch', '28 Moshoeshe Avenue Zone 11 Sebokeng', '1983', '(067)-(928)-(0725)', '(041)-(969)-(2681)', '(096)-(913)-(5807)', 'Nonhlanhla @iburst.co.za', 2),
-('9202050898085', 'Quentin', 'Lesolisa', '3986 Vukani Complex North Riding Ext 1', '2169', '(046)-(760)-(0774)', '(026)-(862)-(6096)', '(058)-(898)-(7227)', 'Quentin@vodamail.co.za', 2),
-('9204240981082', 'Emmanuel', 'Tyhalithi', 'PO Box 3154\r\nBedfordview\r\n2008', '', '(014)-(840)-(4566)', '(056)-(747)-(9182)', '(044)-(582)-(9841)', 'Emmanuel@ittesa.co.za', 2),
-('9210110388086', 'Itumeleng ', 'Maphoto', '11 RUTSTEIN AVENUE BEN KAMMA', '', '(054)-(223)-(8867)', '(020)-(761)-(3234)', '(099)-(788)-(3703)', '', 2),
-('9210160769082', 'Dinkonyane ', 'Monyela', '62 Major Road Clayville East Ext 39 Olifantsfontein', '1666', '(089)-(394)-(7495)', '(025)-(803)-(4678)', '(050)-(262)-(0275)', 'Dinkonyane @lantic.net', 2),
-('9212120894085', 'Sandile ', 'Ntshabele', '395 President Avenue Mutual N Federal Johhanesburg Johannesburg', '2001', '(046)-(662)-(2634)', '(060)-(733)-(8353)', '(057)-(827)-(8320)', '', 2),
-('9304280349087', 'Mmasaka ', 'Mkhonza', 'P O Box 626 Mokopane', '0600', '(061)-(236)-(9351)', '(091)-(988)-(7525)', '(044)-(268)-(8826)', 'Mmasaka @gmail.com', 1),
-('9307040620082', 'Reinhard', 'Mabowa', '163983 Thabanchu Avenue Kagiso Ext 12', '1759', '(038)-(340)-(0978)', '(013)-(283)-(8123)', '(024)-(589)-(5525)', '', 2),
-('9311100557082', 'Thilivhali ', 'Ramrathan', 'P O Box 1398 Thulamahashe', '1365', '(028)-(200)-(9583)', '(081)-(608)-(4835)', '(042)-(913)-(9140)', 'Thilivhali @mweb.co.za', 1),
-('9403280679088', 'Daniel ', 'Khoza', 'P O Box 20951 Spruitview', '1925', '(058)-(187)-(2165)', '(056)-(753)-(1230)', '(091)-(845)-(3880)', 'Daniel @vodamail.co.za', 1),
-('9405050739085', 'Hendrik ', 'Makama', '1399 Danie Theron Avenue Pretoria North', '0182', '(093)-(571)-(7843)', '(031)-(205)-(5814)', '(046)-(268)-(9024)', '', 1),
-('9408100658087', 'Lonwabo', 'Tandwa', '398 Florance 263 Von Willich Die Hoewes', '0157', '(073)-(654)-(9133)', '(084)-(973)-(5762)', '(011)-(179)-(9743)', 'Lonwabo@mikropul.co.za', 2),
-('9411220643082', 'Brandon ', 'Van Rooyen', 'P O Box 1966 Mathibestad', '918', '(078)-(373)-(4313)', '(073)-(645)-(2029)', '(073)-(841)-(5321)', '', 5),
-('9412180136082', 'Daniel ', 'Kholophe', 'P O Box 339 Nebo', '7859', '(032)-(577)-(2930)', '(079)-(365)-(1248)', '(037)-(517)-(8140)', 'Daniel @kmcs.co.za', 1),
-('9502240191083', 'Surendran', 'Mkhatswa', '93985 Ext 11 Tembisa', '1632', '(030)-(568)-(2595)', '(042)-(832)-(7961)', '(023)-(789)-(4089)', '', 2),
-('9503010970083', 'Dolly ', 'Mogano', 'F 602 Umlazi', '9066', '(092)-(422)-(8994)', '(039)-(941)-(5580)', '(093)-(272)-(6077)', 'Dolly @telkomsa.net', 2),
-('950310057086', 'Njabulo ', 'Bouwer', 'Edgemead Monte Vista Library Edgemead Street Edgemead', '7991', '(021)-(629)-(1008)', '(010)-(844)-(7197)', '(078)-(213)-(5281)', 'Njabulo @iafrica.com', 1),
-('9504060158084', 'Cecil ', 'Koopman', '2363 Vuma Avenue Phomolong', '1632', '(020)-(848)-(4437)', '(022)-(512)-(6633)', '(096)-(555)-(1765)', 'Cecil @telkomsa.net', 2),
-('9509040129082', 'Nomfundo ', 'Labuschagne', 'P O Box 195398 Madadeni', '2951', '(090)-(760)-(8625)', '(013)-(539)-(6148)', '(055)-(539)-(1341)', 'Nomfundo @gmail.com', NULL),
-('9601060188087', 'Jade ', 'Raolane', '205 Balaton Court 19 Petersien & Twist Avenue Hillbrow', '2001', '(036)-(625)-(2350)', '(018)-(847)-(2687)', '(066)-(720)-(9567)', '', 2),
-('960124047081', 'Phatte ', 'Yeki', 'Lot 225 Ohlange', '9309', '(025)-(393)-(9557)', '(071)-(791)-(1188)', '(074)-(192)-(3674)', '', 2),
-('9606270939081', 'Ntombekaya', 'Lubbe', '3039 Transburgr 308 Jacob Marais Avenue Pretoria', '0002', '(047)-(140)-(2743)', '(019)-(588)-(3416)', '(011)-(325)-(5291)', 'Ntombekaya@eject.co.za', 2),
-('9608280617083', 'Mamahooe ', 'Gumbi', '16 Speldekussinglaan\r\nRoodekrans', '', '(026)-(231)-(1537)', '(045)-(484)-(8031)', '(095)-(373)-(1093)', '', 2),
-('9609270686085', 'Charl ', 'Wamala', 'P O Box 52056 Wierdapark', '199', '(090)-(380)-(6037)', '(063)-(856)-(5967)', '(049)-(919)-(1120)', 'Charl @olg.co.za', 1),
-('9611120247088', 'Bernhardt ', 'Japudi', '3191 Poelano Avenue Extension 9 Nellmapius', '0122', '(082)-(871)-(2600)', '(057)-(119)-(6902)', '(054)-(528)-(2516)', 'Bernhardt @gmail.com', 2),
-('9611150348082', 'Vuyokazi ', 'Eckstein', 'P O Box 939 Lydenburg', '1120', '(014)-(696)-(2799)', '(032)-(757)-(6380)', '(053)-(145)-(7835)', 'Vuyokazi @hotmail.com', 2),
-('9612070824088', 'Culnescia', 'Webb', 'Unit 50 Camargue Complex Kerner Close Lakeside', '7995', '(068)-(355)-(5947)', '(087)-(271)-(5135)', '(053)-(437)-(5969)', 'Culnescia@gmail.com', NULL),
-('9701100285087', 'Moses', 'Maarman', '39 Corbett Crescent Avenue Westgate', '3201', '(010)-(809)-(4317)', '(065)-(470)-(4175)', '(021)-(931)-(1663)', 'Moses@mweb.co.za', 2),
-('9701100741082', 'Thipe ', 'Sibei', 'P O Box 9399 Braambos Military Base', '959', '(025)-(823)-(5885)', '(071)-(573)-(5389)', '(015)-(926)-(0923)', 'Thipe @edcon.co.za', NULL),
-('9706130545082', 'Josaya ', 'Chauke', '12 Tweevingergras Danville', '0183', '(024)-(396)-(9177)', '(015)-(456)-(6491)', '(048)-(560)-(9024)', 'Josaya @gmail.com', 1),
-('9710010812081', 'Phakamani ', 'Owens', 'Shopware Office, Whitehills Junxion Office Park, Whitehills Blv, Lonehill Lonehill Ext 391', '2191', '(067)-(697)-(9900)', '(091)-(519)-(4669)', '(094)-(115)-(0389)', 'Phakamani @gmail.com', 2),
-('9710230788081', 'Avela', 'Ketelo', '39801 Okapi Avenue Pennyville', '1809', '(083)-(610)-(7973)', '(055)-(878)-(3546)', '(051)-(405)-(0710)', '', NULL),
-('9712150845081', 'Nomvula ', 'Mchunu', '139 Riverclose Camelia Avenue Lynnwood', '0081', '(024)-(240)-(7132)', '(090)-(943)-(7917)', '(063)-(230)-(3631)', '', NULL),
-('9810260112082', 'Terrence ', 'Mafogo', '39823 Section P Mamelodi West', '0122', '(089)-(251)-(8210)', '(029)-(446)-(6180)', '(023)-(154)-(7680)', '', NULL),
-('9811220178083', 'Hulisani ', 'Bethlehem', '21 Yvonne street\r\nHelderkruin', '', '(045)-(805)-(7907)', '(021)-(676)-(2572)', '(091)-(247)-(8904)', '', NULL),
-('9901030534081', 'Thabelo ', 'Mabota', '9 Everlasting Avenue Unit 2 Trinity Place Primrose', '1901', '(097)-(574)-(6587)', '(099)-(549)-(5714)', '(024)-(765)-(4674)', 'Thabelo @telkomsa.net', 2),
-('9902110250084', 'Nkhetheni ', 'Maluleke', 'P O Box 1212 Kabokweni', '1295', '(058)-(917)-(9313)', '(089)-(913)-(4939)', '(034)-(415)-(6398)', '', 2),
-('9907280115082', 'Paul ', 'Phakathi', '11 Rutstein Avenue Ben Kamma', '6025', '(056)-(331)-(7137)', '(058)-(553)-(6363)', '(014)-(552)-(0288)', '', 2),
-('9908260536088', 'Kaone ', 'Mohammed', 'P O Box 3089 Knysna', '6570', '(092)-(559)-(8591)', '(057)-(591)-(8358)', '(014)-(633)-(0187)', '', 2),
-('9910060946082', 'Christopher', 'Mitchel', '9 Albatross Way Thornton', '7960', '(092)-(948)-(3804)', '(013)-(862)-(7848)', '(027)-(728)-(0178)', '', 2),
-('9910120124085', 'Emil', 'Venter', 'P O Box 63639 Weltevredenpark', '1715', '(023)-(574)-(1636)', '(061)-(382)-(4027)', '(065)-(592)-(8358)', 'Emil@transnet.net', NULL),
-('9911090794084', 'Lerato ', 'Gaanakgomo', 'P O Box 30099 Temba', '907', '(052)-(475)-(7713)', '(029)-(447)-(7819)', '(058)-(710)-(9574)', 'Lerato @gplat.co.za', NULL),
-('991212074083', 'Ayanda', 'Mukwevho', '11 MAYIBUYE HOUSE NO 19326 JOBURG IVORY PARK EXT 12', '', '(017)-(948)-(0516)', '(035)-(341)-(8986)', '(015)-(469)-(1082)', 'Ayanda@mweb.co.za', 2);
+INSERT INTO `clients` (`client_id`, `client_name`, `client_surname`, `client_address`, `client_postalcode`, `client_tel_home`, `client_tel_work`, `client_tel_cell`, `client_email`, `ref_id`, `admin`) VALUES
+('0000000000000', 'Admin', 'User', 'admin', '0000', '(000)-(000)-(0000)', '(000)-(000)-(0000)', '(000)-(000)-(0000)', 'xpresshealth000@gmail.com', 4, 1),
+('1003250239088', 'Brian ', 'Kekana', '116 Selbourne Avenue Parow', '7500', '(047)-(773)-(5345)', '(080)-(450)-(8061)', '(087)-(708)-(7445)', 'Brian @rbiworld.co.za', 2, 0),
+('1003280163086', 'Philani ', 'Khan', '802 Dalbergia 159 Justice Mohammed Avenue Sunnyside', '0002', '(015)-(763)-(0318)', '(093)-(327)-(2627)', '(034)-(252)-(7734)', '', NULL, 0),
+('1004050642083', 'Linda', 'Makapela', '', '', '(095)-(226)-(0905)', '(010)-(354)-(9589)', '(051)-(680)-(6529)', '', 2, 0),
+('1005260157083', 'Nepo ', 'Mukwevho', '3983 Fairbridge Corner Daniel&Davidson Str Fairlands', '2195', '(077)-(606)-(2017)', '(056)-(107)-(5076)', '(082)-(971)-(3584)', 'Nepo @mweb.co.za', 1, 0),
+('1007230144085', 'Mduduzi ', 'Mugeri', 'Flat112 Capito Hill 395 Justice Muhammed Avenue Muckleneuk', '0002', '(090)-(634)-(2145)', '(068)-(892)-(4609)', '(026)-(167)-(2681)', 'Mduduzi @icon.co.za', NULL, 0),
+('1010190221088', 'Sinqobile', 'Moloisane', '06 BAILEYBRIDGE UNIT 9 STONEBRIDGE PHOENIX', '', '(047)-(847)-(9730)', '(037)-(824)-(2370)', '(085)-(298)-(0219)', 'Sinqobile@telkomsa.net', 2, 0),
+('1011060902084', 'Balungile ', 'Klassen', '3222 Taylor Park Zamdela', '1999', '(045)-(596)-(0647)', '(017)-(644)-(9722)', '(035)-(727)-(6040)', 'Balungile @erazyweb.co.za', 1, 0),
+('1011160807087', 'Donavan ', 'Mthunywa', '92 Boundary Road Rouxville', '2192', '(083)-(359)-(3854)', '(036)-(803)-(3184)', '(079)-(654)-(2586)', 'Donavan @mjvn.co.za', 2, 0),
+('1012070281082', 'Phakamani ', 'Gamede', '22 Iris Avenue Reigerpark', '1959', '(082)-(238)-(3065)', '(062)-(187)-(6668)', '(080)-(192)-(4779)', '', 2, 0),
+('1104280343081', 'Mark ', 'Sifunda', '139392 Absolom Crescent Mankurwane', '8395', '(039)-(837)-(7998)', '(091)-(319)-(5376)', '(064)-(129)-(4237)', '', 1, 0),
+('1105280586088', 'Petrus ', 'Sithole', '398 Glenton Ave Clayville East', '1666', '(066)-(539)-(4574)', '(040)-(594)-(2354)', '(031)-(597)-(8845)', 'Petrus @sappi.com', 2, 0),
+('1107230618084', 'Timothy ', 'Mugagadeli', 'P O Box 169939 Lyttelton', '190', '(039)-(432)-(0974)', '(011)-(688)-(0786)', '(071)-(299)-(4911)', 'Timothy @gmail.com', 1, 0),
+('1203280171086', 'Lionel ', 'Myeki', 'P O Box 95999 Waterkloof', '195', '(042)-(863)-(2113)', '(012)-(914)-(8270)', '(029)-(358)-(0686)', '', 2, 0),
+('1204030632082', 'Sonica', 'Ebrahim', 'Kingsgate Primary School P O Box 169 Mafeteng 900 Lesotho', '0000', '(026)-(471)-(1491)', '(047)-(465)-(4475)', '(073)-(113)-(6410)', 'Sonica@africanrand.co.za', 2, 0),
+('1205040963082', 'Adam', 'Mugadi', '695 Francis Baard Avenue 506 Vicadia Flat Arcadia', '0083', '(031)-(991)-(7619)', '(076)-(395)-(9931)', '(042)-(864)-(4021)', '', NULL, 0),
+('1302080439088', 'Mzukisi', 'Letsie', '36 Olivers Court Cnr Hyperion & Pritchard Str North Riding Ext 1', '2169', '(038)-(597)-(2077)', '(057)-(306)-(9319)', '(086)-(858)-(7936)', '', NULL, 0),
+('1307090536085', 'Matome ', 'Khomola', 'P O Box 3993 Vongani', '0930', '(033)-(373)-(9047)', '(016)-(694)-(1286)', '(047)-(840)-(6135)', 'Matome @wandragconsulting.co.za', 2, 0),
+('1308190287088', 'Josaya ', 'Chabvonga', 'P O Box 60918 Karenpark', '0118', '(079)-(644)-(8637)', '(082)-(574)-(5772)', '(083)-(303)-(0923)', 'Josaya @liberty.co.za', 1, 0),
+('1311040718081', 'Gomotsegang ', 'Lee', '393 Binneman Avenue Oakdale Western Cape Oakdale Est', '7530', '(049)-(532)-(6344)', '(080)-(607)-(9009)', '(039)-(178)-(9996)', '', NULL, 0),
+('1311240354085', 'Donald', 'Sethole', '3990 Stellenberg Rd N0 99 Peters Place Equestria', '189', '(087)-(798)-(0943)', '(049)-(732)-(7824)', '(093)-(670)-(0881)', 'Donald@vodacom.co.a', 2, 0),
+('1401030341085', 'Adriaan', 'Letsie', 'Postnet Suite 398 Private Bag X09 Menlo Park', '782', '(055)-(593)-(5113)', '(090)-(790)-(1455)', '(028)-(508)-(1461)', '', NULL, 0),
+('1412130177086', 'Sumitra', 'Rehman', 'P O Box 9168 Verwoerdpark', '1953', '(042)-(260)-(3086)', '(097)-(804)-(8377)', '(039)-(833)-(5940)', 'Sumitra@parktowngirls.co.za', 2, 0),
+('1501200671081', 'Leon', 'Maphoto', '3983 Taronga Road Lansdowne', '7780', '(039)-(589)-(8313)', '(075)-(299)-(8952)', '(026)-(120)-(7054)', '', NULL, 0),
+('1503200793088', 'Promise ', 'Van Wyk', '', '', '(079)-(806)-(0010)', '(027)-(734)-(9270)', '(040)-(932)-(6418)', '', NULL, 0),
+('1504280313088', 'Thato ', 'Robertson', '2090 Tswelopele Ext08 Tembisa', '1632', '(067)-(429)-(8627)', '(050)-(867)-(1729)', '(073)-(988)-(0747)', '', 2, 0),
+('151021036088', 'Shaun ', 'Lesch', '21 Martinson Rd, Twee Pieke Unit 83 Mostertsdrift', '7600', '(028)-(699)-(2379)', '(071)-(870)-(0610)', '(033)-(657)-(6105)', '', 1, 0),
+('1512140600088', 'Tlou', 'Chibase', 'P O Box 1639 Ngqubusini', '5170', '(046)-(763)-(2689)', '(089)-(690)-(5609)', '(029)-(745)-(5153)', 'Tlou@aforbes.co.za', 2, 0),
+('1512170591085', 'Muteba ', 'Khobane', 'P O Box 639 Gans Bay', '7220', '(085)-(232)-(4944)', '(033)-(351)-(5265)', '(061)-(264)-(1633)', 'Muteba @lantic.net', 2, 0),
+('1603220911086', 'Ricardo ', 'Makhonza', '39592 Tswelopele Avenue Rietvlei Ext 1', '1739', '(054)-(938)-(6348)', '(083)-(555)-(9756)', '(087)-(326)-(7227)', 'Ricardo @gmail.com', 2, 0),
+('1604070370087', 'Abiot ', 'Dlamini', '398 Mopanie Avenue Florapark', '0699', '(045)-(468)-(3722)', '(068)-(449)-(6873)', '(076)-(873)-(0413)', 'Abiot @mweb.co.za', 2, 0),
+('1608130591087', 'Mahlatse ', 'Campbell', '33 Aldergate Mount Edgecombe', '9302', '(064)-(270)-(7408)', '(095)-(462)-(3055)', '(032)-(766)-(9796)', '', NULL, 0),
+('1704180177085', 'Leeto ', 'Legane', 'P O Box 956 Grahamstown', '6190', '(079)-(991)-(3083)', '(090)-(316)-(1396)', '(095)-(722)-(9998)', 'Leeto @hotmail.co.za', 2, 0),
+('1705180376087', 'Kaveshan', 'Mokonyane', 'P O Box 332 Jane Furse Hospital', '7885', '(082)-(717)-(3101)', '(090)-(545)-(8738)', '(016)-(820)-(2338)', 'Kaveshan@mweb.co.za', 2, 0),
+('1709240402082', 'Louis ', 'Van Der Westhuizen', 'P O Box 92200 Boordfontein', '0201', '(034)-(406)-(2034)', '(022)-(493)-(6494)', '(028)-(775)-(3157)', 'Louis @hotmail.com', 2, 0),
+('1709280678088', 'Stephan ', 'Nyalungu', '91 Juta Avenue Braamfontein', '2001', '(084)-(628)-(5658)', '(062)-(332)-(6416)', '(018)-(592)-(7076)', 'Stephan @gmail.com', 2, 0),
+('1803090222085', 'Tshepo ', 'Makhuvele', 'P O Box 9891 Polokwane', '0700', '(042)-(858)-(6305)', '(068)-(611)-(4953)', '(081)-(622)-(7192)', 'Tshepo @gmail.com', 2, 0),
+('1804030915086', 'Saegan', 'Hicks', 'P O Box 699 Velddrif', '7365', '(045)-(818)-(7526)', '(087)-(674)-(6107)', '(092)-(670)-(4100)', 'Saegan@pps.co.za', 2, 0),
+('1805020907085', 'Leeto ', 'Duiker', '1916 Tanong Ext5 Tembisa', '1632', '(078)-(737)-(1431)', '(096)-(254)-(4003)', '(016)-(174)-(7061)', '', 2, 0),
+('1807070505082', 'Livhuwani ', 'Ndlovu', 'PO Bos 7269\r\nKRUGERSDORP NORTH\r\n1741', '', '(040)-(626)-(9728)', '(015)-(171)-(0512)', '(052)-(358)-(3972)', 'Livhuwani @gmail.com', NULL, 0),
+('1810160413088', 'Nelisiwe', 'Mpofu', 'P O Box 19293 Laudium', '0037', '(010)-(118)-(9211)', '(059)-(273)-(5474)', '(068)-(442)-(8679)', 'Nelisiwe@standardbank.co.za', 2, 0),
+('1902060828085', 'Xolile', 'Gungudoo', 'P O Box 32896 Braamfontein', '2017', '(069)-(374)-(2180)', '(069)-(683)-(4871)', '(031)-(526)-(1444)', 'Xolile@anchor.co.za', 2, 0),
+('1906040694086', 'Ngwagu ', 'Khoza', '21 Thatchfield Hights Thatchfield Close Brakfontein Road Centurion', '0157', '(096)-(936)-(6354)', '(070)-(718)-(2066)', '(089)-(146)-(9790)', '', 2, 0),
+('1908150375082', 'Cliff', 'Bomela', 'Wonderpark Estate Unit 1369 90 First Avenue Karenpark', '0182', '(074)-(449)-(1722)', '(029)-(565)-(6703)', '(046)-(976)-(2408)', 'Cliff@live.co.za', 2, 0),
+('2005130271081', 'Navisha', 'Nyamupangedengu', '2939/59 Umfuyaneni Umfuyaneni Section', '1632', '(047)-(922)-(7532)', '(055)-(233)-(1573)', '(091)-(964)-(6830)', '', 2, 0),
+('2007100717086', 'Warren ', 'Piroe', '2128 Nu11 Mdantsane', '5219', '(057)-(406)-(2092)', '(012)-(519)-(8360)', '(081)-(853)-(0164)', '', 2, 0),
+('2008190919082', 'Shaun ', 'Maarman', 'Private Bag X1 Simon\'S Town', '7995', '(013)-(667)-(4505)', '(034)-(674)-(9222)', '(029)-(678)-(7921)', '', 2, 0),
+('2009210740082', 'Mari', 'Maredi', 'E6 Wilgerpark Stellenberg Road Oak Glen', '7530', '(045)-(103)-(4645)', '(099)-(891)-(3383)', '(097)-(777)-(6343)', 'Mari@vodamail.co.za', 2, 0),
+('2011240231088', 'Nhloso ', 'Schoeman', '553992 Nomzamo Avenue Phahameng Bloemfontein', '9301', '(014)-(388)-(2222)', '(097)-(361)-(7012)', '(094)-(473)-(4225)', 'Nhloso @work.co.za', 5, 0),
+('2012190284086', 'Kagiso', 'Ntuli', '219 Du Toit Avenue 209 Orpheum Mansions Pretoria', '0002', '(083)-(110)-(7144)', '(091)-(274)-(9119)', '(044)-(354)-(5287)', 'Kagiso@lantic.net', 2, 0),
+('2012200849081', 'Onele', 'Veeragaloo', 'F 395 Ntombela Road Kwamashu', '9359', '(013)-(304)-(1410)', '(047)-(157)-(4958)', '(034)-(157)-(0274)', 'Onele@afrihost.co.za', 1, 0),
+('2102130913085', 'Heinrich', 'Dlamini', 'P O Box 2993 Montana Park', '0159', '(044)-(698)-(4141)', '(083)-(433)-(8338)', '(060)-(857)-(4045)', 'Heinrich@wol.co.za', 2, 0),
+('2104030218083', 'Grace', 'Mudau', 'P O Box 5060 Batlharo', '8976', '(045)-(324)-(0994)', '(034)-(251)-(6709)', '(013)-(463)-(7629)', 'Grace@gmail.com', 2, 0),
+('2109050549084', 'Matete', 'Magodielo', '29 Regina Road Northdale', '3201', '(018)-(226)-(0355)', '(088)-(176)-(6830)', '(095)-(111)-(3227)', '', 2, 0),
+('2109180750085', 'Chaguwa ', 'Matlala', '98 Grosvenor Burberry Office Park Amadeus Place Bryanston', '2191', '(046)-(555)-(0179)', '(042)-(281)-(4579)', '(086)-(775)-(9455)', '', NULL, 0),
+('2111130577081', 'Seturumane ', 'Dharamraj', 'P O Box 626 St Helenabaai', '7390', '(068)-(229)-(8911)', '(077)-(369)-(0677)', '(059)-(887)-(6249)', 'Seturumane @yahoo.com', 2, 0),
+('2201120350085', 'Wilhelm', 'Seanego', 'Unit 35 San Monroe 26 Logan Avenue Highveld Ext 8', '0157', '(023)-(968)-(4596)', '(066)-(985)-(5282)', '(039)-(170)-(4278)', 'Wilhelm@yahoo.com', 2, 0),
+('2202040449087', 'Sheldon ', 'Matlakeng', '5 Ntsu Avenue Saulsville', '0125', '(095)-(929)-(6409)', '(052)-(951)-(8041)', '(016)-(918)-(8075)', 'Sheldon @absamail.co.za', 2, 0),
+('2205140565082', 'Echelle ', 'Koeberg', 'P O Box 239250 Sunnyside', '0132', '(089)-(550)-(1302)', '(034)-(444)-(6256)', '(047)-(717)-(2614)', 'Echelle @gmail.com', 2, 0),
+('2207010632083', 'Nyakallo', 'Kupke', '9393/138 Sophiatown Difateng', '1632', '(069)-(890)-(2589)', '(014)-(793)-(1379)', '(076)-(660)-(5008)', 'Nyakallo@telkomsa.net', 2, 0),
+('2210130900088', 'Dion', 'Mabanga', '99398 Illovo Township Amanzimtoti', '9126', '(056)-(682)-(7433)', '(094)-(748)-(1506)', '(091)-(561)-(6328)', 'Dion@artizans.co.za', 2, 0),
+('2303030988083', 'Fortunate', 'Ndzulu', 'P O Box 21822 Helderkruin', '1733', '(098)-(411)-(7536)', '(044)-(650)-(7520)', '(087)-(185)-(6226)', 'Fortunate@mweb.co.za', 1, 0),
+('2309220589087', 'Sylvester ', 'Xhakaza', 'P O Box 90195 Cleveland', '2022', '(074)-(666)-(7434)', '(064)-(290)-(1537)', '(024)-(131)-(2549)', 'Sylvester @yahoo.com', 3, 0),
+('2411070180081', 'Wilhelm', 'Mokansi', '25 Owl Avenue 6Th Floor Johannesburg', '2001', '(069)-(998)-(1771)', '(049)-(265)-(0519)', '(079)-(198)-(6828)', '', 2, 0),
+('2511130529083', 'Tshilidzi', 'Metcalf', '1359 Mahlangu Stand Winterveldt', '0198', '(091)-(822)-(4741)', '(030)-(891)-(2945)', '(040)-(576)-(1210)', 'Tshilidzi@anglocoal.co.za', 1, 0),
+('2605130248088', 'Letsoni ', 'Baepane', '18 Mngadi Str Atteridgeville', '0008', '(078)-(529)-(2729)', '(084)-(569)-(0643)', '(081)-(584)-(8655)', '', NULL, 0),
+('2605150205088', 'Busisiwe', 'Du Plessis', '1 Kliprivier Avenue Secunda Secunda', '2302', '(066)-(762)-(2975)', '(086)-(193)-(7436)', '(058)-(901)-(5043)', '', 1, 0),
+('2608180553088', 'Vuyokazi ', 'Nanub', '19 Pamaphosa Avenue Payneville', '1565', '(041)-(484)-(8269)', '(045)-(918)-(9059)', '(082)-(367)-(9809)', '', 1, 0),
+('2611180135088', 'Moeketsi ', 'Noko', '1891 Kriel', '2271', '(094)-(515)-(4612)', '(080)-(884)-(9304)', '(091)-(535)-(6362)', '', 3, 0),
+('2612230397082', 'Mbheki ', 'Ekanayake', '39165 Ext 398 Diepsloot', '2189', '(082)-(456)-(6558)', '(078)-(858)-(5438)', '(094)-(917)-(3773)', 'Mbheki @transnet.co.za', 4, 0),
+('2702250305088', 'Shaun ', 'Kafile', 'P O Box 9961 Protea Glen Ext 12', '1819', '(028)-(487)-(6443)', '(099)-(760)-(0121)', '(031)-(971)-(9512)', 'Shaun @yahoo.com', NULL, 0),
+('2703080994088', 'Berry ', 'Mutamba', '21 Fourie Cresant Kibler Park', '2091', '(088)-(260)-(8598)', '(017)-(648)-(4808)', '(079)-(817)-(9844)', '', 2, 0),
+('2704170868088', 'Shelley-Anne ', 'Madia', '51 Pearce Avenue Clayville Ext 9', '1666', '(074)-(148)-(7156)', '(087)-(414)-(0779)', '(012)-(919)-(2724)', '', 2, 0),
+('2706070629087', 'Victor ', 'Mgidi', '28 Paling Drive\r\nMeerensee\r\nRichardsbaai\r\n3901', '', '(054)-(385)-(7798)', '(018)-(224)-(2553)', '(097)-(121)-(5412)', '', NULL, 0),
+('2707050803087', 'Marc ', 'Baloyi', 'P O Box 199339 Middelburg', '7850', '(047)-(916)-(0130)', '(076)-(570)-(4161)', '(088)-(221)-(7304)', '', 2, 0),
+('2707140905083', 'Nokukhanya', 'Ndou', '3986 Die Hoewes Towers 20 Gropius Road Die Hoewes', '0157', '(084)-(570)-(3890)', '(052)-(485)-(2084)', '(084)-(700)-(9028)', 'Nokukhanya@acenet.co.za', 2, 0),
+('2709110853083', 'Ndivhuwo ', 'Oliver', '16239 Block Hh Soshanguve', '0152', '(043)-(452)-(8545)', '(072)-(720)-(8195)', '(078)-(178)-(8394)', 'Ndivhuwo @actionford.co.za', 1, 0),
+('2709210905082', 'Kagiso', 'Robinson', 'Santam Head Office 1 Sportica Cresent Tyger Valley', '7530', '(068)-(469)-(9297)', '(066)-(375)-(7645)', '(071)-(749)-(6368)', 'Kagiso@costoutterz.co.za', 2, 0),
+('2711130236088', 'Sango', 'Brown', '8 Klopper Avenue Libradene', '1959', '(054)-(537)-(0684)', '(071)-(819)-(0681)', '(020)-(836)-(2141)', 'Sango@gmail.com', 2, 0),
+('2712250489081', 'Ruduwhan ', 'Mokwebo', '5 Hortense Laan\r\nFlorida-Glen', '', '(042)-(254)-(6694)', '(063)-(139)-(3871)', '(034)-(319)-(9514)', 'Ruduwhan @telkomsa.net', 2, 0),
+('2802230303081', 'Lance ', 'Mulaudzi', 'P O Box 16355 Nelspruit', '1200', '(049)-(466)-(3934)', '(050)-(479)-(7057)', '(090)-(721)-(8754)', 'Lance @sa-tec.co.za / mboshoff141@gmail.com', NULL, 0),
+('2802270531083', 'Nonjabulo', 'Mafogo', '11 GALLINULE STREET ROOIHUISKRAAL', '', '(068)-(535)-(6596)', '(088)-(942)-(5179)', '(062)-(571)-(6982)', '', 2, 0),
+('2804070757085', 'Edwin', 'Chilinda', '33961 Meadowlands Zone 398', '1852', '(040)-(139)-(2394)', '(082)-(568)-(0086)', '(057)-(658)-(7492)', '', 1, 0),
+('2804220399085', 'Tsholofelo ', 'Benjamin', 'P O Box 22539 Letlhabile', '269', '(069)-(642)-(6052)', '(024)-(785)-(8235)', '(098)-(916)-(2699)', 'Tsholofelo @medallist.comau', 2, 0),
+('2805070756085', 'Benjamin', 'Mofokeng', 'P O Box 23989 Rustenburg', '0300', '(019)-(631)-(6781)', '(078)-(333)-(5176)', '(040)-(324)-(8409)', 'Benjamin@hotmail.com', 2, 0),
+('2807090965085', 'Michiel ', 'Mathabatha', '351 Mavimbela Section Katlehong', '1931', '(054)-(511)-(4156)', '(045)-(998)-(6940)', '(070)-(390)-(5312)', 'Michiel @GMAIL.COM', NULL, 0),
+('2808250506083', 'Nishandhran ', 'Shezi', '9 Fern Close 9996 Thornhill Estate Bendor Polokwane Thornhill Plaza', '0699', '(060)-(802)-(5793)', '(033)-(521)-(6539)', '(047)-(228)-(2683)', 'Nishandhran @standardbank.co.za', 2, 0),
+('2809260609084', 'Mmasaka ', 'Myeza', '13 Garrick Road University Estate Woodstock', '7925', '(057)-(441)-(7996)', '(079)-(590)-(7728)', '(051)-(628)-(9781)', 'Mmasaka @mweb.co.za', NULL, 0),
+('2809270394087', 'Simphiwe ', 'Jacobs', '26 Swartkops Avenue Extension 2 Eldorado Park', '1811', '(056)-(696)-(9341)', '(046)-(824)-(4917)', '(063)-(901)-(4440)', 'Simphiwe @nashuaisp.co.za', 1, 0),
+('2811170937087', 'Jan ', 'Robinson', '395 Erica Avenue Boksburg', '1959', '(036)-(230)-(3090)', '(065)-(740)-(1390)', '(089)-(275)-(3191)', '', 2, 0),
+('2811240555087', 'Rene', 'Makhonza', '', '', '(018)-(691)-(6329)', '(093)-(745)-(6785)', '(098)-(359)-(9033)', 'Rene@gmail.com', 2, 0),
+('2902030264083', 'Trevor ', 'Ganga-Scott', '3 Denise Road, Unit 16 Sandton', '2196', '(026)-(738)-(3010)', '(066)-(653)-(3994)', '(028)-(372)-(8183)', '', 2, 0),
+('2905080185087', 'Shivesh', 'Mathebula', 'P O Box 1320 Pietermaritzburg', '3200', '(071)-(945)-(7843)', '(091)-(810)-(1781)', '(019)-(517)-(7409)', 'Shivesh@gmail.com', NULL, 0),
+('2906040747081', 'Johanna ', 'Muselli', '18398 Riet Avenue Barkly West', '8375', '(011)-(853)-(5976)', '(030)-(259)-(2683)', '(043)-(619)-(0387)', '', NULL, 0),
+('290611026087', 'Goratamang ', 'Owens', '5 Mosiliki Katlehong', '1931', '(034)-(452)-(4032)', '(045)-(984)-(6194)', '(046)-(536)-(3745)', 'Goratamang @telkomsa.net', 2, 0),
+('2907080814082', 'Tumelo ', 'Molepo', 'P O Box 16502 Lyttelton', '190', '(042)-(531)-(1149)', '(089)-(758)-(1415)', '(085)-(723)-(6298)', 'Tumelo @mannas.co.za', 2, 0),
+('2909270467081', 'Desmond', 'Louvouezo Banzouzi', '8 Jarvis Road Berea', '5291', '(063)-(659)-(5343)', '(072)-(927)-(3033)', '(010)-(405)-(4523)', '', 2, 0),
+('3001280724084', 'Nkani ', 'Mohlala', 'P O Box 2326 Ermelo', '2350', '(011)-(142)-(0649)', '(014)-(519)-(7920)', '(079)-(241)-(0467)', 'Nkani @telkomsa.net', 2, 0),
+('3004230801084', 'Shaun ', 'Geitner', 'Unit 52 35 Jules Avenue Jeppestown', '2099', '(016)-(274)-(7068)', '(078)-(840)-(6582)', '(050)-(869)-(3499)', 'Shaun @gmail.com', 2, 0),
+('3203230938086', 'Fulufhelo ', 'Zombene', 'Jean Avenue Lyttelton', '0157', '(075)-(221)-(8555)', '(017)-(979)-(1283)', '(070)-(956)-(6994)', 'Fulufhelo @mtn.co.za', 2, 0),
+('3205070928081', 'Mmadineo ', 'Tandwa', 'Andesstr.1361\r\nBergbron', '', '(058)-(380)-(5593)', '(034)-(754)-(4986)', '(062)-(113)-(2202)', '', 2, 0),
+('3205230915086', 'Ntombekaya', 'Mugadi', '3 Edmund Street\r\nConstantia Kloof\r\n1712', '', '(068)-(737)-(3325)', '(054)-(764)-(9500)', '(054)-(518)-(4549)', '', 2, 0),
+('3208130215083', 'Koena ', 'Viviers', '9 Besembos Amandasig', '0182', '(019)-(867)-(9883)', '(037)-(958)-(3816)', '(054)-(447)-(0733)', 'Koena @yahoo.com', 2, 0),
+('3211200919082', 'Loyald ', 'Nthani', 'No: 39862 Lakeside Proper Evaton', '1989', '(033)-(903)-(7765)', '(033)-(750)-(8047)', '(039)-(342)-(4198)', 'Loyald @tiscali.co.za', 2, 0),
+('3211280908087', 'Nonhlanhla ', 'Naidoo', '16 Eaglestraat\r\nHorison\r\n1724', '', '(061)-(578)-(7955)', '(026)-(237)-(9676)', '(093)-(882)-(2847)', '', 4, 0),
+('3212110757087', 'Navisha', 'Baloyi', 'Posbus 5024\r\nHorison\r\n1730', '', '(095)-(228)-(6921)', '(064)-(897)-(8331)', '(070)-(491)-(1699)', 'Navisha@exxess.co.za', 2, 0),
+('3305280817081', 'Mangope ', 'Engelbrecht', '8 Curlewis Road Bloubergrant', '7991', '(061)-(916)-(8185)', '(024)-(190)-(5802)', '(087)-(819)-(4351)', 'Mangope @telkomsa.net', NULL, 0),
+('3306170196085', 'Sinqobile', 'Dzegere', '3399 Block Dd Soshanguve', '0152', '(068)-(847)-(4612)', '(036)-(985)-(1832)', '(020)-(482)-(8106)', '', 2, 0),
+('3405190169081', 'Katlego ', 'Swanepoel', '5 The Hub Duchesses Avenue Windsor West', '2199', '(058)-(897)-(2417)', '(068)-(811)-(2093)', '(074)-(898)-(4001)', 'Katlego @hotmail.com', NULL, 0),
+('3406130687081', 'Duane ', 'Zaverdinos', '6 Diaz Avenue Eastleigh', '1609', '(061)-(721)-(0007)', '(081)-(239)-(7486)', '(035)-(225)-(2605)', '', 2, 0),
+('3406260688085', 'Sven ', 'Maswanganyi', 'P O Box 68032 Highveld', '0169', '(067)-(862)-(2614)', '(074)-(806)-(0792)', '(068)-(519)-(7630)', 'Sven @workmail.co.za', NULL, 0),
+('3410210326084', 'Seturumane ', 'Banza', '13 Philips Road Escombe', '9093', '(055)-(737)-(3275)', '(079)-(236)-(8345)', '(051)-(263)-(1955)', 'Seturumane @nfrs.co.za', NULL, 0),
+('3411260488085', 'Edwin ', 'Dzegere', 'Private Bag X01 Doornpoort', '0017', '(066)-(697)-(3800)', '(049)-(328)-(9463)', '(058)-(412)-(7931)', 'Edwin @gmail.com', 2, 0),
+('341216047088', 'Sandiso', 'Naidoo', '88 Towerbridge Gardens Stone Bridge', '9068', '(038)-(261)-(4393)', '(010)-(689)-(1524)', '(033)-(458)-(6428)', 'Sandiso@abrahamkriel.org', 2, 0),
+('34565454555', '', '', '', '', '', '', '', '', NULL, 0),
+('3502010805081', 'Nasreen', 'Lee', 'PO Box 331\r\nFlorida\r\n1710', '', '(099)-(597)-(8618)', '(066)-(496)-(1886)', '(054)-(499)-(3418)', '', 2, 0),
+('3503100678084', 'Jonathan', 'Phalane', 'F1902 Aintree Building 99 O\'Rielly & Tudhope Avenue Berea', '2198', '(096)-(576)-(3186)', '(068)-(610)-(4108)', '(078)-(858)-(4999)', '', NULL, 0),
+('3505100334081', 'Asanda', 'Motsinone', '391 Rail Avenue Florida', '1709', '(083)-(342)-(6518)', '(026)-(786)-(1758)', '(090)-(554)-(9607)', 'Asanda@absamail.co.za', 2, 0),
+('3508030550085', 'Sean', 'Cobokana', 'Posbus 6199 Secunda', '2302', '(028)-(582)-(4201)', '(063)-(273)-(8384)', '(062)-(194)-(0939)', 'Sean@nedbank.co.za', 2, 0),
+('3508130716085', 'Mark ', 'Mtshali', 'P O Box 3981218 Moreleta Plaza', '0167', '(095)-(485)-(8436)', '(020)-(648)-(1991)', '(062)-(375)-(3297)', 'Mark @wirsam.com  rattanya@hotmail.com', 2, 0),
+('3509040348083', 'Jaco', 'Ravhura', '23980 Cuba Location Butterworth', '9960', '(091)-(150)-(5446)', '(011)-(388)-(6501)', '(062)-(336)-(3531)', '', 2, 0),
+('3601280328086', 'Mishack ', 'Morudu', '81 Bird Avenue No: 39 Vier Eike Stellenbosch', '7600', '(033)-(466)-(2466)', '(079)-(767)-(3080)', '(084)-(753)-(4387)', 'Mishack @telkomsa.net', 1, 0),
+('3602250350086', 'Moyahabo ', 'Mbonani', '11 Gallinule Avenue Rooihuiskraal', '0157', '(084)-(780)-(3175)', '(030)-(900)-(6360)', '(026)-(724)-(4857)', 'Moyahabo @mweb.co.za', 2, 0),
+('3605040496081', 'Steven', 'Shariff', '9935 Mulaudzi Avenue Tshiawelo', '1818', '(056)-(941)-(1755)', '(052)-(518)-(5093)', '(014)-(965)-(1656)', 'Steven@reatile.co.za', 1, 0),
+('3605090332085', 'Portia ', 'Geitner', '51 Frangipani Chantelle Ext 16', '0182', '(085)-(337)-(5545)', '(073)-(276)-(7178)', '(020)-(353)-(0835)', '', NULL, 0),
+('3610150249083', 'Candice', 'Moetapele', 'P O Box 130055 Bryanston', '2021', '(032)-(186)-(2704)', '(075)-(697)-(2539)', '(081)-(125)-(0036)', 'Candice@telkomsa.net', 2, 0),
+('3708100193088', 'Piet', 'Mokgothu', 'P O Box 990 Mulbarton', '2059', '(036)-(464)-(6498)', '(071)-(428)-(2374)', '(098)-(527)-(9321)', 'Piet@edcon.co.za', 2, 0),
+('3801170828084', 'Jonathan ', 'Du Plessis', 'P O Box 2205 Upington', '8800', '(045)-(790)-(3472)', '(033)-(555)-(9087)', '(032)-(317)-(1111)', 'Jonathan @gmail.com', NULL, 0),
+('3809260231088', 'Morwamakgomo ', 'Lechelele', 'A2 Bel Eau Flats Victroia Seychelles', '0000', '(036)-(566)-(4119)', '(072)-(640)-(9737)', '(090)-(747)-(1877)', '', NULL, 0),
+('3810250735087', 'Berry ', 'Chilinda', 'Postnet Suite 69 Private Bag X06 Quagga', '0058', '(055)-(447)-(9618)', '(086)-(108)-(6871)', '(047)-(517)-(6398)', 'Berry @gmail.com', 2, 0),
+('3811210932081', 'Nontshumayelo ', 'Ntumba', 'Speldekussinglaan 16\r\nROODEKRANS', '', '(051)-(944)-(0681)', '(019)-(362)-(8555)', '(040)-(211)-(6070)', '', 2, 0),
+('3902120576083', 'Sameer', 'Murindagomo', 'P O Box 1291 Parklands', '2121', '(058)-(139)-(0040)', '(050)-(413)-(7292)', '(040)-(682)-(5987)', '', 1, 0),
+('3906160799085', 'Ntsakisi ', 'Ndou', '1158 MANCHESTER CRESCENT LENASIA SOUTH', '', '(059)-(347)-(6246)', '(060)-(581)-(5211)', '(037)-(963)-(7424)', 'Ntsakisi @gmail.com', 1, 0),
+('3906250668088', 'Nkhetheni ', 'Phosa', 'P O Box 921 Letaba', '0870', '(095)-(260)-(1710)', '(075)-(430)-(0922)', '(088)-(655)-(0479)', 'Nkhetheni @mystudysmart.com', 1, 0),
+('3909170450081', 'Johanna ', 'Jojo', 'P O Box 3999 Plettenberg Bay', '6600', '(041)-(724)-(3675)', '(082)-(563)-(0961)', '(085)-(773)-(3202)', 'Johanna @mac.com', 4, 0),
+('3911070339085', 'Tshepiso ', 'Ngwa', '323 Ethafeni Section Tembisa', '1632', '(051)-(342)-(1997)', '(075)-(284)-(3209)', '(069)-(938)-(1761)', 'Tshepiso @erazyweb.co.za', 3, 0),
+('3912200408082', 'Phaiphai ', 'Mputhi', 'P O Box 222 Philip Nel Park', '0029', '(056)-(742)-(2941)', '(073)-(943)-(8679)', '(077)-(202)-(9845)', 'Phaiphai @mweb.co.za', 2, 0),
+('4003100886084', 'George ', 'Mhatlhe', '1206 Kuskoraal Avenue Moregloed', '0186', '(090)-(901)-(7137)', '(071)-(557)-(1855)', '(074)-(336)-(2832)', '', 2, 0),
+('400422050085', 'Adriaan', 'Fourie', '208 Wattle Avenue Alveda Park Ext 2', '2091', '(090)-(749)-(3083)', '(094)-(931)-(1216)', '(084)-(115)-(6587)', '', 2, 0),
+('4004220578084', 'Matthew ', 'Booysen', '15 Magnolia Way Ridgeworth Bellville', '7530', '(039)-(370)-(8432)', '(033)-(143)-(3745)', '(037)-(166)-(5231)', '', 1, 0),
+('4005040289082', 'Thomas ', 'De Wet', 'No 2 Ironwood Sagewood X398 Noordwyk', '1687', '(012)-(981)-(2486)', '(063)-(494)-(7221)', '(019)-(182)-(8998)', 'Thomas @its.co.za', 2, 0),
+('4011110520082', 'Michael ', 'Samwell', 'P O Box 133398 N1 City', '7963', '(052)-(992)-(5950)', '(057)-(319)-(6896)', '(080)-(937)-(0706)', 'Michael @liblink.co.za', 2, 0),
+('4102140915085', 'Mmabogadi ', 'Magutshwa', '699 Abel Manana Avenue Mthambeka Section Tembisa', '1632', '(051)-(978)-(7394)', '(081)-(971)-(2079)', '(032)-(249)-(3833)', '', NULL, 0),
+('4103240120082', 'Livhuwani ', 'Pillay', '3239 Lebese Avenue Mmesi Park', '1863', '(035)-(541)-(3390)', '(055)-(290)-(6194)', '(042)-(329)-(6564)', 'Livhuwani @wirsam.com', 2, 0),
+('4104200140083', 'Thomas', 'Mtyobile', 'P O Box 2968 Rooihuiskraal', '159', '(083)-(640)-(1066)', '(020)-(750)-(8998)', '(087)-(795)-(9269)', 'Thomas@rebox.co.za', 1, 0),
+('4106120248084', 'Gaotingwe', 'Nkabinde', 'PO Box 561\r\nGlenvista\r\n2058', '', '(082)-(870)-(1925)', '(079)-(126)-(3644)', '(010)-(429)-(7466)', 'Gaotingwe@mtnloaded.co.za', 2, 0),
+('4110240825083', 'Devandren', 'Moshwela', '9395 Soshanguve Block Xx', '0152', '(074)-(102)-(2922)', '(062)-(200)-(5618)', '(040)-(115)-(8510)', '', 2, 0),
+('4111180106083', 'Johannes ', 'Sayed', 'P O Box 11199 Selcourt', '1567', '(092)-(742)-(8352)', '(091)-(167)-(8056)', '(031)-(343)-(2940)', '', NULL, 0),
+('4202160138084', 'Nomsa ', 'Van Eetveld', 'P O Box 2995 Bronkhorstspruit', '7820', '(017)-(684)-(0684)', '(048)-(375)-(8703)', '(089)-(984)-(0368)', 'Nomsa @webmail.co.za', 2, 0),
+('4204250189082', 'Byron ', 'Booysen', 'No 39 Crystal Gardens 1 Lichi Lane 93 Circle Street Wyebank', '3678', '(072)-(367)-(8364)', '(074)-(663)-(4773)', '(084)-(179)-(0812)', 'Byron @iafrica.com', 2, 0),
+('4207260415085', 'Matthew ', 'Mahlangu', 'P O Box 6659 Roggebaai', '8012', '(017)-(200)-(1709)', '(024)-(101)-(8093)', '(083)-(973)-(9729)', 'Matthew @mweb.co.za', NULL, 0),
+('4211180586086', 'Stacy ', 'Smith', 'P O Box 3063939 Braamfontein', '2017', '(049)-(406)-(9996)', '(079)-(869)-(4968)', '(085)-(739)-(9439)', 'Stacy @gmail.com', 1, 0),
+('4302130387083', 'Eunice ', 'Le Masson', '50239 Mocke Avenue Daveyton', '1520', '(033)-(677)-(7961)', '(022)-(428)-(5476)', '(070)-(156)-(8703)', 'Eunice @gmail.com', 2, 0),
+('4307190367081', 'Penelope', 'Dube', 'P O Box 259 Radium', '983', '(039)-(391)-(8991)', '(059)-(376)-(0655)', '(095)-(817)-(2290)', 'Penelope@gmail.com', 2, 0),
+('4308010928085', 'Brian ', 'Ratshefola', 'P O Box 591 Southern Paarl', '7629', '(018)-(387)-(1207)', '(093)-(856)-(9526)', '(093)-(347)-(1087)', 'Brian @smartcall.co.za', 2, 0),
+('4401230403085', 'Cecil ', 'Swanepoel', 'Unit 139 Devon Valley 3 Weltevredenpark', '1709', '(097)-(476)-(9632)', '(071)-(198)-(5937)', '(058)-(992)-(2711)', 'Cecil @yahoo.com', 2, 0),
+('4403190822084', 'Phindile ', 'Tong', 'P O Box 13992 Laudium', '0037', '(081)-(721)-(4307)', '(036)-(538)-(2454)', '(056)-(938)-(7569)', 'Phindile @unisa.ac.za', 4, 0),
+('4403240664081', 'George ', 'Zawistowski', 'P O Box 6099 Weltevredenpark', '1715', '(098)-(446)-(4395)', '(039)-(673)-(0391)', '(093)-(602)-(0892)', 'George @inkcom.co.za', 2, 0),
+('4410200801082', 'Nilukshi ', 'Shange', 'Africanarylaan 5\r\nBreaunanda', '', '(076)-(103)-(4531)', '(022)-(516)-(8914)', '(087)-(338)-(1603)', '', NULL, 0),
+('4504280921086', 'Rodger ', 'Bomela', '521 Inanda Glebe Inanda Glebe', '9309', '(051)-(596)-(1096)', '(037)-(128)-(7714)', '(068)-(632)-(8048)', '', NULL, 0),
+('4508260675083', 'Chris', 'Mohaleamalla', '983939 Nicholas Avenue Orlando East', '1809', '(077)-(463)-(7608)', '(045)-(328)-(2386)', '(056)-(578)-(7671)', '', 2, 0),
+('4509140295084', 'Leshata ', 'Nhalungo', '639 Springfield Str Bellville', '7530', '(070)-(325)-(5060)', '(027)-(438)-(2476)', '(013)-(869)-(8523)', 'Leshata @nedbank.co.za', 2, 0),
+('4509220879086', 'Vuyisile ', 'Ndou', '852 Hospital View Tembisa', '1632', '(092)-(570)-(8963)', '(048)-(889)-(0863)', '(085)-(248)-(5438)', 'Vuyisile @mbweb.co.za', 2, 0),
+('4510260369082', 'Nomvula ', 'Baulraj', 'P O Box 39 Kwambonambi', '3915', '(057)-(225)-(3056)', '(020)-(496)-(7366)', '(022)-(944)-(3343)', 'Nomvula @telkomsa.net', 2, 0),
+('4511070585086', 'Mcebisi ', 'Baloyi', '6008 Malmook Avenue Crystal Park', '1501', '(095)-(979)-(3460)', '(061)-(687)-(5206)', '(039)-(276)-(1991)', 'Mcebisi @absamail.co.za', 2, 0),
+('451201089085', 'Wisani ', 'Naidoo', 'P O Box 3939 Witrivier', '1290', '(025)-(686)-(9875)', '(017)-(701)-(5211)', '(036)-(720)-(4105)', 'Wisani @andrewmiller.co.za', 2, 0),
+('4512030696084', 'Marianna ', 'Ndzutha', 'P O Box 123939 The Tramshed', '0126', '(050)-(729)-(5090)', '(043)-(446)-(1989)', '(036)-(146)-(6188)', 'Marianna @global.co.za', NULL, 0),
+('4512220543086', 'Frans ', 'Mynhardt', '26539 Setso Avenue Nellmapius Ext 9', '0122', '(081)-(523)-(3053)', '(067)-(698)-(6859)', '(031)-(888)-(9240)', '', 1, 0),
+('4601060264085', 'Thato ', 'Mokoena', 'Postnet Suite 51 Private Bag X16392 Grahamstown', '6190', '(079)-(423)-(7645)', '(093)-(689)-(8711)', '(090)-(234)-(0285)', 'Thato @gmail.com', 1, 0),
+('4601060401083', 'Francois', 'Mathobela', 'PO Box 1109\r\nMondeor\r\n2110', '', '(098)-(850)-(1057)', '(036)-(784)-(1914)', '(056)-(758)-(6695)', 'Francois@dhfoods.co.za', 1, 0),
+('4603230789086', 'Nkgopoleng ', 'Maritz', '235 Veldman Avenue Eersterus', '0022', '(064)-(748)-(3955)', '(037)-(482)-(9390)', '(034)-(594)-(2225)', '', 2, 0),
+('4605100562088', 'Ndivhuwo ', 'Easton', 'P O Box 39399 Newton Park', '6055', '(012)-(746)-(9790)', '(095)-(424)-(3548)', '(010)-(202)-(4187)', 'Ndivhuwo @eskom.co.za', 1, 0),
+('4701240299087', 'Balungile ', 'Motsinone', '94 Florence Street\r\nNoordgesig\r\n1804', '', '(061)-(512)-(8780)', '(078)-(368)-(0656)', '(080)-(114)-(3244)', 'Balungile @computershare.co.za', NULL, 0),
+('4702060556086', 'Tshilidzi', 'Iliev', 'P O Box 633 Riebeek-Wes', '7306', '(062)-(427)-(3660)', '(059)-(980)-(5988)', '(052)-(325)-(1206)', 'Tshilidzi@yahoo.co.uk', 1, 0),
+('47072706087', 'Chippa ', 'Shange', '398 Kwane Avenue Motherwell Nu 6', '6211', '(075)-(182)-(9766)', '(051)-(634)-(9247)', '(081)-(241)-(0799)', 'Chippa @volsec.co.za', 2, 0),
+('4708110702087', 'Gert ', 'Lea', 'MalanAvenue 9 Brackenfell', '7560', '(022)-(440)-(6104)', '(033)-(699)-(7599)', '(031)-(628)-(8419)', 'Gert @telkomsa.net', 2, 0),
+('4710160845084', 'Daisy ', 'Makwana', '139 Cameron Crescent Mountain Rise', '3201', '(026)-(791)-(1523)', '(068)-(127)-(4419)', '(043)-(201)-(7828)', '', 2, 0),
+('47120603088', 'Itumeleng ', 'Makapela', '569 Block P Soshanguve', '0152', '(048)-(608)-(3750)', '(022)-(873)-(7626)', '(099)-(417)-(7121)', 'Itumeleng @mweb.co.za', 2, 0),
+('4802050681086', 'Mubarak', 'Van Wyk', '69639 Kulati Avenue Port Elizabeth', '6001', '(096)-(313)-(6489)', '(074)-(157)-(8867)', '(074)-(203)-(4931)', 'Mubarak@gmail.com', NULL, 0),
+('4804180882084', 'Emmanuel', 'Mhlarhi', '2698 Kerriebos Ext6 Ebony Park Midrand', '1682', '(033)-(953)-(6591)', '(035)-(121)-(2717)', '(064)-(507)-(6047)', 'Emmanuel@absamail.co.za', 2, 0),
+('4812160561083', 'Nkgopoleng ', 'Spengane', 'Ugie High School Ugie', '5970', '(056)-(592)-(1537)', '(019)-(945)-(5824)', '(042)-(294)-(6599)', 'Nkgopoleng @groupfive.co.za', 1, 0),
+('4901240565082', 'Pedron ', 'Masuku', '9399 Block Y Soshanguve', '0152', '(065)-(224)-(3950)', '(068)-(741)-(1747)', '(042)-(364)-(0294)', 'Pedron @mweb.co.za', NULL, 0),
+('4905080506087', 'Wilna', 'Lukasu', '920 Witchhazel Avenue Eco-Glades 2 Centurion', '0157', '(056)-(945)-(7708)', '(088)-(583)-(9678)', '(075)-(931)-(0307)', 'Wilna@gmail.com', 2, 0),
+('4905210696087', 'Sheldon ', 'Sethole', '12 TWEEVINGERGRAS DANVILLE', '', '(064)-(523)-(5918)', '(039)-(951)-(3641)', '(021)-(493)-(7839)', '', 2, 0),
+('4906270884086', 'Nompumelelo', 'Tsotetsi', 'P O Box 3989 Polokwane', '0700', '(023)-(692)-(8878)', '(047)-(939)-(0080)', '(010)-(941)-(8997)', 'Nompumelelo@gmail.com', 1, 0),
+('490705046088', 'Ayanda', 'Mlawuli', '39 Wellington Avenue Goodwood', '7960', '(083)-(260)-(2972)', '(022)-(883)-(8524)', '(091)-(257)-(9320)', '', NULL, 0),
+('4909110460081', 'Johannes ', 'Baale', 'P O Box 1663 Lillydale', '1281', '(039)-(774)-(3214)', '(043)-(177)-(4244)', '(024)-(500)-(6800)', '', NULL, 0),
+('491010022086', 'Kivan', 'Dambuza', '6 Weber Crescent Penlyn Estate Lansdowne', '7780', '(066)-(940)-(2054)', '(015)-(865)-(4063)', '(020)-(605)-(0603)', 'Kivan@icon.co.za', 2, 0),
+('4910190324088', 'Mduduzi ', 'Masungwini', 'P O Box 528 Cradock', '5880', '(088)-(900)-(2930)', '(093)-(850)-(9212)', '(069)-(330)-(0239)', '', 1, 0),
+('4911280960085', 'Mamahooe ', 'Shoko', '31St Avenue 656 Villieria', '0186', '(017)-(470)-(7662)', '(047)-(169)-(4332)', '(073)-(637)-(1665)', 'Mamahooe @iburst.co.za', 2, 0),
+('5001070584088', 'Linda', 'Brook', '28 1St Avenue Alexandra', '2090', '(025)-(119)-(3729)', '(035)-(668)-(7713)', '(019)-(913)-(8638)', '', 2, 0),
+('5001110128088', 'Rene', 'Gumbi', '39 Barracuda Avenue Mossel Bay Ext 13', '6506', '(053)-(271)-(5660)', '(051)-(228)-(7636)', '(036)-(516)-(6153)', 'Rene@5gattorneys.co.za', 2, 0),
+('5002080660085', 'Tlou ', 'Mabotja', '1158 Manchester Crescent Lenasia South', '1829', '(047)-(389)-(5659)', '(082)-(606)-(7726)', '(013)-(473)-(6015)', 'Tlou @rbiworld.co.za', 2, 0),
+('5002180199088', 'Tshepiso ', 'Ekanayake', 'Posbus 6914\r\nANSFRERE\r\n1711', '', '(041)-(876)-(6597)', '(036)-(156)-(9914)', '(017)-(557)-(5732)', 'Tshepiso @arc.co.za', 2, 0),
+('5007040974083', 'Calvin', 'Rosser', '16 Eaglestraat\r\nHorison\r\n1724', '', '(073)-(165)-(7166)', '(081)-(904)-(8770)', '(053)-(805)-(4989)', '', 4, 0),
+('5008230824086', 'Daisy ', 'Machabaphala', 'P O Box 396181 Lynnwood Ridge', '90', '(096)-(450)-(9617)', '(044)-(955)-(0975)', '(098)-(641)-(6338)', 'Daisy @phbs.co.za', 4, 0),
+('5009140926088', 'Olga', 'Lehola', '8 Marsdiep Mansions Kenilworth', '7708', '(092)-(748)-(6426)', '(048)-(258)-(9701)', '(086)-(992)-(2147)', 'Olga@gmail.com', 2, 0),
+('5102060208085', 'Michiel ', 'Soare', 'Schultzstr. 17\r\nHorison\r\n1724\r\nPosbus 7145\r\nWestgate\r\n1734', '', '(022)-(311)-(3788)', '(069)-(264)-(1791)', '(063)-(793)-(3455)', '', NULL, 0),
+('510523033088', 'Fezile', 'Nkabinde', '61 Tuscan Waters Gie Road Parklands', '7991', '(028)-(662)-(6165)', '(017)-(982)-(2477)', '(011)-(289)-(8994)', '', NULL, 0),
+('5109040274081', 'Nthabiseng ', 'Banga', '53961 Rondebult Roodebult', '1901', '(045)-(111)-(1629)', '(015)-(228)-(5436)', '(022)-(168)-(1266)', 'Nthabiseng @unisa.ac.za', NULL, 0),
+('5109080251088', 'Jaco ', 'Matji', '19 Sabierivier Avenue Norkem Park Ext 2', '1618', '(040)-(363)-(7084)', '(081)-(729)-(9235)', '(055)-(897)-(2553)', '', 4, 0),
+('510915039082', 'Chrisna', 'Malemone', '7 Nurney Street\r\nCrosby', '', '(062)-(600)-(1913)', '(093)-(902)-(8011)', '(028)-(196)-(7457)', 'Chrisna@standardbank.co.za', NULL, 0),
+('511127046082', 'Edwin', 'Dlamini', 'Hortense laan\r\nFlorida Glen', '', '(081)-(575)-(2418)', '(041)-(381)-(4846)', '(092)-(285)-(4922)', 'Edwin@telkomsa.net', 2, 0),
+('5202230409086', 'Thobani ', 'Sehume', 'P O Box 12990 Centurion', '96', '(047)-(335)-(2479)', '(070)-(424)-(3994)', '(083)-(104)-(7613)', 'Thobani @vodamail.co.za', NULL, 0),
+('5206110625085', 'Mduduzi', 'Mangena', '11 Mayibuye House No 19326 Joburg Ivory Park Ext 12', '1685', '(060)-(112)-(2791)', '(040)-(808)-(8039)', '(011)-(887)-(0096)', 'Mduduzi@rbiworld.co.za', 2, 0),
+('5209150693082', 'Hendrick ', 'Tyhalithi', '55 Mercury Cresent Newholmes Pietermaritzburg', '3201', '(023)-(905)-(3672)', '(027)-(398)-(3285)', '(064)-(229)-(6225)', '', 2, 0),
+('521023092081', 'Edwin ', 'Nkune', '21 Gildcroft Close Phoenix Longcroft', '9068', '(074)-(978)-(8437)', '(025)-(336)-(4813)', '(033)-(646)-(1699)', '', 1, 0),
+('5210250933083', 'Mmadineo ', 'Cobokana', '36 Ilchester Avenue Somerset Park', '9319', '(088)-(459)-(8346)', '(082)-(143)-(0243)', '(010)-(926)-(7003)', 'Mmadineo @lantic.net', 2, 0),
+('5212190473083', 'Celeste ', 'Fourie', 'P O Box 39819 Vredendal', '8160', '(054)-(612)-(9416)', '(080)-(520)-(4205)', '(065)-(409)-(8949)', '', NULL, 0),
+('5304280232082', 'Nthateng ', 'Songo', '11399 Mphophoma Str Klipfontein View', '1685', '(083)-(279)-(1103)', '(037)-(364)-(4960)', '(053)-(664)-(0353)', 'Nthateng @hotmail.com', 1, 0),
+('530628013085', 'Modisaotsile ', 'Van Rensburg', 'P O Box 356 Umkomaas', '9170', '(058)-(153)-(5944)', '(029)-(585)-(1426)', '(019)-(686)-(2915)', '', 2, 0),
+('5307060340088', 'Nobubele ', 'Ndlovu', '3919 Makou Avenue Monumentpark Ext 39', '0181', '(049)-(976)-(9390)', '(052)-(442)-(9922)', '(047)-(265)-(2520)', 'Nobubele @vodamail.co.za', 2, 0),
+('5308230754082', 'Segrin ', 'Mudzinganyama', 'P O Box 1696 Mafikeng South', '2791', '(083)-(889)-(4509)', '(063)-(738)-(9833)', '(094)-(198)-(8791)', 'Segrin @linhorn.co.za', 1, 0),
+('531127094084', 'Shaun ', 'Naidoo', '200 Heron Avenue Kharwastan', '9092', '(016)-(554)-(7714)', '(017)-(158)-(6412)', '(081)-(662)-(9948)', 'Shaun @intekom.co.za', 1, 0),
+('5404130544086', 'Oteng ', 'Moloisane', '3980 Ruth First Avenue Lotus Gardens', '0008', '(074)-(867)-(6318)', '(033)-(599)-(5134)', '(090)-(558)-(6014)', 'Oteng @pyromet.co.za', NULL, 0),
+('5405270193088', 'Moses', 'Ketelo', '1 Kliprivier street Secunda SECUNDA', '', '(022)-(468)-(3821)', '(055)-(877)-(0279)', '(059)-(848)-(6973)', '', NULL, 0),
+('5502200833083', 'Mabokale ', 'Nhalungo', 'Africanarylaan 5', '', '(066)-(232)-(4505)', '(018)-(655)-(7338)', '(022)-(132)-(9140)', 'Mabokale @global.co.za', NULL, 0),
+('5505090581082', 'Moyahabo ', 'Maboko', 'P O Box 539 Lenasia', '1820', '(027)-(341)-(6603)', '(063)-(370)-(1534)', '(031)-(333)-(7862)', '', 2, 0),
+('5505120413085', 'Bernard', 'Dinna', 'Dpt Of Rural Development 2390 Jabu Ndlovu Avenue Pietermaritzburg', '3201', '(023)-(722)-(4756)', '(035)-(468)-(5604)', '(019)-(687)-(6773)', 'Bernard@absa.co.za', NULL, 0),
+('5505230875081', 'Rene', 'Van Huissteden', '35 Bebelele Avenue Duncan Village', '5209', '(072)-(391)-(4271)', '(048)-(309)-(6205)', '(056)-(306)-(1631)', '', 2, 0),
+('5507130805081', 'Mosima ', 'Webb', '505 Madiba Avenue 5039 Scopus Heights Flat Arcadia', '0083', '(033)-(418)-(6181)', '(087)-(457)-(4550)', '(063)-(429)-(8017)', 'Mosima @polka.co.za', 1, 0),
+('5507140417085', 'Derrick ', 'Busuku', '392 Brushwood Estate Sundowner', '2188', '(073)-(465)-(1581)', '(077)-(162)-(6894)', '(015)-(843)-(2058)', 'Derrick @worldonline.co.z', NULL, 0),
+('5510220761085', 'Chrisna', 'Smits', '29583 Katse Avenue Mamelodi East Ext 9', '0122', '(052)-(529)-(1600)', '(086)-(854)-(9438)', '(038)-(353)-(8963)', '', 2, 0),
+('5512080417086', 'Shelden', 'Ledwaba', 'P O Box 168 Pyramid', '0120', '(043)-(898)-(4456)', '(064)-(390)-(9351)', '(051)-(724)-(8675)', 'Shelden@absamail.co.za', 2, 0),
+('5512160318087', 'Glen ', 'Mavimbela', '839 Fairmount View Punters Way Kenilworth Park', '7708', '(016)-(646)-(7619)', '(091)-(537)-(1151)', '(019)-(884)-(2716)', 'Glen @peg.co.za', 2, 0),
+('5602060518087', 'Tshepo ', 'Julies', '2 Alwyn Road Unit 1 Sharon Villas Brooklyn', '7905', '(030)-(999)-(6368)', '(072)-(577)-(8957)', '(084)-(569)-(2643)', '', 2, 0),
+('5608010370088', 'Emil', 'Snyman', '138 Tarragon Two Road 3 Weltevredenpark', '1709', '(015)-(632)-(5114)', '(048)-(474)-(2514)', '(090)-(110)-(4531)', 'Emil@mystudysmart.com', 1, 0),
+('5608060712087', 'Johnson', 'Pillay', '9560 Birch Acres Isimuku Ext 26 Kempton Park', '1619', '(026)-(617)-(5105)', '(050)-(299)-(1990)', '(096)-(718)-(9333)', 'Johnson@mweb.co.za', 1, 0),
+('5608240727082', 'Tshilidzi', 'Terry', 'P O Box 1393 Kanyamazane', '1219', '(081)-(943)-(2153)', '(086)-(854)-(4925)', '(075)-(364)-(8324)', 'Tshilidzi@unisa.ac.za', 4, 0),
+('5612220214081', 'Tshepang ', 'Rudolph', 'Saglerstrasse 5 Hoehenkirchen-Siegertsbrunn 85635 Bavaria Germany', '0000', '(090)-(597)-(7657)', '(074)-(808)-(8208)', '(090)-(174)-(6045)', 'Tshepang @crown.org.za', 2, 0),
+('5703210321082', 'Patrick', 'Faleni', 'P O Box 2001 Wingate Park', '0153', '(028)-(137)-(1874)', '(054)-(350)-(2005)', '(090)-(705)-(8636)', '', 2, 0),
+('5704100297086', 'Amukelani ', 'Seloana', 'P O Box 239821 Yeoville', '2193', '(016)-(998)-(1168)', '(071)-(488)-(0554)', '(019)-(106)-(6210)', 'Amukelani @eoson.co.za', 1, 0),
+('5705080129087', 'Pauline ', 'Ndala', '2699 Section J Ngoma Avenue Mamelodi West', '0122', '(089)-(780)-(7126)', '(082)-(673)-(9621)', '(029)-(161)-(1743)', '', NULL, 0),
+('5706150123087', 'Pauline ', 'Semenya', 'no 35 Balalaika st\r\nStaalveld\r\n1043', '', '(095)-(147)-(7601)', '(085)-(393)-(3113)', '(092)-(412)-(9899)', 'Pauline @yahoo.com', 2, 0),
+('5706200140082', 'Masekhanyane', 'Mothupi', 'P O Box 13216 Norkem Park', '1631', '(074)-(680)-(1048)', '(060)-(224)-(0633)', '(063)-(398)-(8248)', 'Masekhanyane@gmail.com', 5, 0),
+('5710230923081', 'Precious ', 'Matlakeng', 'Stand No:39832 Peter Nchabele 03989 Mmotong', '789', '(036)-(676)-(5604)', '(068)-(325)-(0303)', '(044)-(804)-(4964)', '', NULL, 0),
+('5711110485087', 'Vusi ', 'Bethlehem', '591 Ecaleni Section Mathole Avenue Tembisa', '1632', '(047)-(601)-(8014)', '(027)-(911)-(9283)', '(094)-(887)-(0945)', 'Vusi @telkomsa.net', 2, 0),
+('5801140101084', 'Tomek ', 'Mshaisa', '6 Grafiet Crescent Welgelegen 3 Parow', '7500', '(022)-(652)-(6557)', '(062)-(677)-(1817)', '(047)-(734)-(5542)', '', 1, 0),
+('580512061088', 'Bernhardt ', 'Magutshwa', 'Posbus 1122\r\nJEFFREYSBAY\r\n6330', '', '(078)-(471)-(8574)', '(049)-(195)-(2355)', '(056)-(458)-(1618)', 'Bernhardt @yahoo.com', 2, 0),
+('5805130165085', 'Phuti ', 'Van Der Merwe', '9999 Qween Avenue Devland', '1811', '(068)-(384)-(9562)', '(099)-(292)-(4943)', '(053)-(918)-(6980)', 'Phuti @yahoo.co.uk', 2, 0),
+('5809170914084', 'Cobus ', 'Sebate', '53399 Tumisang Avenue Nellmapius', '0122', '(077)-(651)-(9645)', '(056)-(600)-(8794)', '(077)-(103)-(5524)', '', 2, 0),
+('5809250392081', 'Kaylen', 'Selabe', 'P O Box 239 Bonisani', '0927', '(076)-(155)-(8833)', '(079)-(482)-(7304)', '(067)-(636)-(8241)', 'Kaylen@gmail.com', 2, 0),
+('5901150381088', 'Lebogang ', 'Seanego', '5039 Summerfields Estate 6821 Calamus Close Kosmosdal', '0157', '(074)-(867)-(0866)', '(045)-(914)-(6862)', '(039)-(448)-(7804)', 'Lebogang @polka.co.za', 1, 0),
+('5902220915081', 'Goratamang ', 'Zwakala', '1179 MPHOPHOMA STR KLIPFONTEIN VIEW', '', '(048)-(246)-(0972)', '(042)-(915)-(8772)', '(037)-(125)-(0185)', '', NULL, 0),
+('5907270761084', 'Mxoleleni ', 'Nkosi', '18059 Ivory Park Chrishani Ivory Park Ext 6', '1632', '(061)-(599)-(8762)', '(029)-(729)-(7946)', '(060)-(369)-(7411)', '', 2, 0),
+('5910030388087', 'Reinhard', 'Msomi', 'P O Box 3950 Mooinooi', '0325', '(095)-(380)-(6431)', '(049)-(136)-(8400)', '(079)-(978)-(1752)', 'Reinhard@yahoo.com', 2, 0),
+('6.70927E+12', 'Job', 'Engelbrecht', '1206 KUSKORAAL STREET MOREGLOED', '', '(010)-(207)-(8010)', '(060)-(950)-(3369)', '(042)-(627)-(9879)', '', NULL, 0),
+('6005080590081', 'Moses', 'Semenya', '550A/89 Mokalane Avenue Naledi', '1861', '(055)-(634)-(2084)', '(089)-(575)-(4753)', '(034)-(542)-(5080)', 'Moses@langley.co.za', 1, 0),
+('6102220345081', 'Busisiwe', 'Saunderson', 'P O Box 529 Groothoek Hospital', '0628', '(098)-(465)-(3325)', '(032)-(667)-(0042)', '(034)-(888)-(6748)', 'Busisiwe@mweb.co.za', 2, 0),
+('6107030710088', 'Muhammad', 'Mokopi', '', '', '(074)-(926)-(4805)', '(077)-(445)-(1993)', '(063)-(327)-(5389)', '', 2, 0),
+('6111040850088', 'Phaphama', 'Duminy', 'Mont Blanc Unit 16 160 Constantia Street Weltevredenpark', '1709', '(094)-(643)-(8114)', '(060)-(183)-(7274)', '(059)-(753)-(9862)', 'Phaphama@edcon.co.za', 2, 0),
+('6111260929085', 'Nomalizo ', 'Malemone', '60 Emoyeni Section Tembisa', '1632', '(082)-(283)-(4778)', '(040)-(228)-(7280)', '(040)-(924)-(6759)', '', 2, 0),
+('6112060275088', 'Magda', 'Peter', 'P O Box 692 Polokwane', '0700', '(087)-(397)-(4070)', '(029)-(475)-(1303)', '(088)-(990)-(3159)', '', 2, 0),
+('6201140807084', 'Nicholas', 'Mdaka', '939 Louis Botha Bonaero Park', '1619', '(085)-(468)-(8449)', '(071)-(388)-(2254)', '(058)-(834)-(5145)', 'Nicholas@vodacom.co.za', 2, 0),
+('6204260308088', 'Nomvula ', 'Mahlangu', 'P O Box 3939 Dobsonville', '1865', '(021)-(917)-(1095)', '(044)-(198)-(0320)', '(062)-(115)-(8096)', '', 1, 0),
+('6207220448088', 'Ramadimetja ', 'Metene', '90 Lafayette Avenue Klein Parys', '7696', '(077)-(265)-(3122)', '(085)-(525)-(9252)', '(084)-(765)-(4873)', '', 4, 0),
+('6209040562083', 'Neil', 'Makgatho', 'No 86939 Zone 8 Winnie Mandela', '1632', '(025)-(747)-(4580)', '(026)-(665)-(0004)', '(089)-(390)-(2427)', '', 2, 0),
+('630710012087', 'Francois', 'Mosehane', '3 Ibsen Road Hillary', '9099', '(036)-(100)-(8445)', '(014)-(544)-(2727)', '(044)-(670)-(8746)', '', 2, 0),
+('6308240548084', 'Mduduzi ', 'Buys', '06 Baileybridge Unit 9 Stonebridge Phoenix', '9068', '(067)-(592)-(4440)', '(098)-(839)-(0382)', '(097)-(837)-(1515)', 'Mduduzi @mweb.co.za', 1, 0),
+('6310200940086', 'Dalisu ', 'Koeries', 'P O Box 90358 Amanzimtoti', '9125', '(032)-(330)-(2129)', '(069)-(425)-(6788)', '(096)-(395)-(2893)', 'Dalisu @live.co.za', 2, 0),
+('6311250169086', 'Cilia ', 'Patel', '92 Marshall Grove Glenmore', '9001', '(012)-(225)-(3802)', '(048)-(787)-(8265)', '(024)-(890)-(9083)', 'Cilia @chanellegroup.ie', NULL, 0),
+('6401240516085', 'Trevor ', 'Monyela', 'PO Box 467\r\nRant-en-Dal\r\n1751', '', '(021)-(668)-(6033)', '(061)-(353)-(2907)', '(088)-(951)-(7245)', '', 1, 0),
+('6404030447088', 'Fezeka ', 'Oluwaleye', 'P O Box 2561 Koloti', '0709', '(027)-(983)-(0079)', '(099)-(714)-(8415)', '(047)-(633)-(4136)', '', 2, 0),
+('6404210377085', 'Nkhetheni ', 'Cele', '19 Free State Road Beaconsfield', '8301', '(070)-(126)-(5023)', '(018)-(287)-(2369)', '(013)-(266)-(4876)', 'Nkhetheni @nashuaisp.co.za', 1, 0),
+('6404230631085', 'Zukisa', 'Oloyede', '2635 Zone398 Zwelitsha', '5608', '(011)-(997)-(6564)', '(045)-(622)-(5791)', '(015)-(145)-(3663)', 'Zukisa@telkomsa.net', 1, 0),
+('640428082086', 'Shane ', 'Matshazini', '939 Mlalazi Avenue Mamelodi West', '0122', '(011)-(405)-(4850)', '(029)-(114)-(2426)', '(087)-(364)-(9226)', 'Shane @westsidebrokers.co.za', 2, 0),
+('6408200513081', 'Jade ', 'Ramoipone', 'Posbus 25685 Monumentpark', '785', '(076)-(546)-(2450)', '(062)-(318)-(5630)', '(072)-(631)-(2719)', '', NULL, 0),
+('6412050862088', 'Mmasale ', 'Makhubu', '82 Apex Road East Apex Ext 3', '1501', '(034)-(322)-(1264)', '(067)-(529)-(4115)', '(084)-(881)-(2689)', '', NULL, 0),
+('6412170702085', 'Shaun ', 'Van Rooyen', 'Cnr Jensen And Bosvlier Strt 96 Soldonne Complex Clarina', '0182', '(088)-(797)-(7508)', '(068)-(361)-(4963)', '(030)-(608)-(3145)', 'Shaun @safeguardchem.co.za', 2, 0),
+('650402056081', 'Ruduwhan ', 'Khuluse', '3035/5 Extension 19 Naturena', '2095', '(091)-(620)-(1011)', '(013)-(327)-(1182)', '(071)-(816)-(8080)', '', 1, 0),
+('6507050556081', 'Kgabo ', 'Mahlagaume', '25 Canavon Avenue Bertrams', '2099', '(026)-(311)-(3299)', '(013)-(497)-(3392)', '(015)-(560)-(3235)', 'Kgabo @absa.co.za', 4, 0),
+('6507070463082', 'Celeste ', 'Masilo', '1399 Phake Section Katlehong', '1931', '(056)-(173)-(2521)', '(081)-(892)-(4571)', '(033)-(753)-(7002)', '', 2, 0),
+('6507120107086', 'Tshepang ', 'Lourens', '21365 First Avenue Lucky Gardens Ethwathwa', '1519', '(089)-(675)-(2717)', '(060)-(182)-(6479)', '(046)-(614)-(8110)', '', 4, 0),
+('6509050392085', 'Selson', 'Mthiyane', '139339 Phase8 Sekhabi Cresent Spruitview', '1931', '(090)-(651)-(1547)', '(065)-(191)-(9374)', '(094)-(168)-(8326)', 'Selson@n-counter.com', NULL, 0),
+('6509220788082', 'Jurgen', 'Mokgerepi', '85 Ethel Avenue Fontainebleau', '2199', '(044)-(912)-(3347)', '(064)-(723)-(9881)', '(034)-(907)-(1918)', '', NULL, 0),
+('6511130973087', 'Kalaivani', 'Rosser', '693 Namakwa Avenue Vredendal', '8160', '(028)-(670)-(0295)', '(057)-(746)-(5893)', '(040)-(718)-(8308)', '', 1, 0),
+('6602070398082', 'Thandokazi', 'Lauder', '99 General Lucas Meyer Cres Welgelegen', '7500', '(012)-(117)-(7148)', '(069)-(353)-(6003)', '(023)-(227)-(6111)', '', NULL, 0),
+('6603100144082', 'Otsile', 'Kubheka', '292 Crimson Avenue Laudium', '0037', '(058)-(930)-(8608)', '(054)-(212)-(1633)', '(046)-(245)-(6766)', '', 2, 0),
+('6605260331087', 'Culnescia', 'Makhubela', '250 Bernini Avenue 98 La Comores Complex Lyttelton', '0157', '(061)-(581)-(5440)', '(085)-(104)-(8112)', '(027)-(200)-(3441)', '', 2, 0),
+('660620054086', 'Cliff', 'Kunene', '2652 Ext 398 Nelmapius Pretoria', '0002', '(038)-(399)-(9879)', '(039)-(970)-(7777)', '(036)-(753)-(3557)', '', 2, 0),
+('6607010903082', 'Olaleye ', 'Madula', 'P O Box 2663 Empumalanga', '958', '(058)-(939)-(1408)', '(049)-(191)-(2837)', '(036)-(222)-(6594)', 'Olaleye @inoxpa.com', NULL, 0),
+('6609200993085', 'Victor ', 'Le Clus', '31 ParkAvenue Promosa', '2531', '(020)-(648)-(1963)', '(063)-(880)-(9800)', '(015)-(271)-(1015)', 'Victor @mweb.co.za', 2, 0),
+('670305077081', 'Shephard ', 'Kitinya', 'P13963 Section 39 Madadeni', '2951', '(019)-(143)-(0520)', '(056)-(896)-(8974)', '(099)-(400)-(1295)', 'Shephard @esmartgroup.co.za', 2, 0),
+('6705050635085', 'Dalisu ', 'Lehloka', '19 Dianthus Crescent Malabar', '6020', '(098)-(911)-(1468)', '(072)-(349)-(6273)', '(097)-(555)-(1952)', '', 2, 0),
+('6705220156081', 'Mahlatse ', 'Busuku', '13 Ackermann street\r\nBreunanda Ext 2\r\nWilropark\r\n1724', '', '(018)-(860)-(1358)', '(035)-(359)-(9266)', '(099)-(125)-(2515)', '', 2, 0),
+('6706090775083', 'Jaco', 'Koopman', 'PO Box 15151\r\nSecunda\r\n2302', '', '(040)-(564)-(4216)', '(024)-(938)-(5046)', '(079)-(378)-(1537)', 'Jaco@sasp;/cp,', 2, 0),
+('6706260635082', 'Kehinde ', 'Phoshoko', 'P O Box 298539 Gezina', '0031', '(054)-(693)-(5568)', '(094)-(539)-(1422)', '(086)-(406)-(4173)', 'Kehinde @fpimail.co.za', 1, 0),
+('6711170133088', 'Sven ', 'Teane', '1599 Sofasonke Avenue Orlando East', '1809', '(065)-(419)-(1811)', '(023)-(926)-(6059)', '(015)-(703)-(4229)', '', 2, 0),
+('6802050633083', 'Precious ', 'Hucklesby', 'House No 9B Mohlakaneng Avenue Madibapark Seshego', '791', '(037)-(411)-(4583)', '(077)-(878)-(7586)', '(045)-(384)-(3085)', 'Precious @kama.co.za', 2, 0),
+('6803010610087', 'Ricardo ', 'Malapela', 'P O Box 133988 The Tramshed', '0126', '(024)-(982)-(3230)', '(062)-(798)-(1674)', '(055)-(831)-(7727)', '', NULL, 0);
+INSERT INTO `clients` (`client_id`, `client_name`, `client_surname`, `client_address`, `client_postalcode`, `client_tel_home`, `client_tel_work`, `client_tel_cell`, `client_email`, `ref_id`, `admin`) VALUES
+('6803160923084', 'Lionel ', 'Reinke', '199 Bramfischer Street Ferndale', '2199', '(092)-(354)-(4312)', '(016)-(745)-(2552)', '(030)-(217)-(1102)', '', 2, 0),
+('6808120518082', 'Nthateng ', 'Ponnusamy', 'P O Box 60193 Katutura Windhoek Rep. Of Namibia Namibia', '0000', '(093)-(540)-(9295)', '(099)-(819)-(0642)', '(092)-(656)-(4161)', 'Nthateng @telkomsa.net', 2, 0),
+('681014062082', 'Louis ', 'Kearley', '19 Lismore Avenue Crosby', '2092', '(067)-(873)-(1274)', '(037)-(752)-(2601)', '(030)-(239)-(6437)', 'Louis @icon.co.za', 3, 0),
+('6810160795088', 'Precious ', 'Bodenstein', '2309 Nu 11 Mdantsane', '5219', '(067)-(526)-(9343)', '(051)-(139)-(3804)', '(067)-(650)-(6172)', 'Precious @Telkomsa.net', 3, 0),
+('6907130694085', 'Hendrik ', 'Enyanga', 'P O Box 39813393 Moreleta Plaza', '0167', '(084)-(491)-(8832)', '(058)-(339)-(9257)', '(029)-(481)-(6737)', 'Hendrik @yahoo.com', 2, 0),
+('6909200583086', 'Itumeleng ', 'Harri', '391 Rabat Avenue Esiphethweni Section 1 Tembisa', '1632', '(090)-(318)-(7347)', '(077)-(269)-(1138)', '(050)-(764)-(0637)', 'Itumeleng @telkomsa.net', 2, 0),
+('6910130773087', 'Regine', 'Prinsloo', 'P O Box 288 Thulamahashe', '1365', '(044)-(978)-(5365)', '(053)-(575)-(8334)', '(055)-(120)-(0742)', 'Regine@gmail.com', NULL, 0),
+('7001190645085', 'Nilukshi ', 'Mokoena', '36 Umgeni River Avenue Norkem Park', '1618', '(071)-(681)-(0489)', '(065)-(173)-(1453)', '(034)-(728)-(2849)', 'Nilukshi @telkom.sa.nee', 3, 0),
+('7002130927081', 'Christopher ', 'Matlhaba', 'P O Box 13339 Polokwane', '0700', '(095)-(506)-(5453)', '(087)-(806)-(6143)', '(030)-(797)-(7683)', 'Christopher @jsb.co.za', 3, 0),
+('7003050348086', 'Nontshumayelo ', 'Muniappen', '29 La Provence Way Mitchell\'S Plain Westridge', '7798', '(044)-(580)-(2936)', '(084)-(285)-(2806)', '(023)-(156)-(5918)', 'Nontshumayelo @robertec.co.za', 2, 0),
+('7004060440082', 'Gaotingwe', 'Jeffries', '299 Rosalind Avenue Lynnwood Ridge', '0081', '(060)-(996)-(2263)', '(039)-(228)-(5123)', '(080)-(322)-(8180)', '', NULL, 0),
+('7009130331088', 'Selson', 'Moeketsi', 'P O Box 393993939 Mamelodi', '781', '(060)-(899)-(6510)', '(092)-(509)-(0566)', '(060)-(202)-(2965)', 'Selson@gmail.com', 2, 0),
+('7101110702082', 'Matete', 'Zaverdinos', 'Posbus 21223\r\nHelderkruin\r\n1733', '', '(071)-(940)-(1110)', '(061)-(556)-(4855)', '(069)-(639)-(5064)', 'Matete@hotmail.com', 2, 0),
+('7106160389084', 'Cedric ', 'Mason', 'House No 8393/58 Mqantsa Tembisa', '1632', '(054)-(957)-(3838)', '(019)-(309)-(1474)', '(068)-(578)-(3882)', 'Cedric @haasbroeksteyn.co.za', 2, 0),
+('7107150227081', 'Mzukisi', 'Sithole', 'PO Box 477\r\nFlorida\r\n1710', '', '(068)-(690)-(4942)', '(049)-(928)-(5910)', '(022)-(579)-(5022)', 'Mzukisi@nighttocare.org', 1, 0),
+('7108280360087', 'Maria ', 'Vorster', 'P O Box 652 Deer Park', '0852', '(089)-(451)-(1674)', '(041)-(199)-(8401)', '(098)-(174)-(3341)', 'Maria @hyundai.co.za', NULL, 0),
+('7202270202087', 'Katlego', 'Gondo', 'P O Box 513 Nongoma', '3950', '(041)-(167)-(5489)', '(058)-(277)-(7598)', '(045)-(487)-(2696)', 'Katlego@hotmail.com', 2, 0),
+('7203030169082', 'Yaseen', 'Mabena', 'P O Box 23991 Cresta', '2118', '(064)-(905)-(6712)', '(038)-(490)-(0865)', '(048)-(378)-(6073)', 'Yaseen@ananzi.co.za', 2, 0),
+('7205020213082', 'Leesha', 'Phindiso', 'P O Box 6393998 Highveld', '0169', '(059)-(183)-(2997)', '(089)-(604)-(9637)', '(098)-(864)-(0585)', 'Leesha@lantic.net', 2, 0),
+('7205120917082', 'Richard ', 'Banga', '', '', '(071)-(497)-(1338)', '(078)-(167)-(3492)', '(033)-(900)-(5511)', 'Richard @gmail.com', 2, 0),
+('7212170290085', 'Daniel ', 'Buissinne', '869 Van Essche Place Moreletapark', '0181', '(092)-(217)-(0918)', '(063)-(565)-(0385)', '(042)-(860)-(9046)', 'Daniel @work.co.za', 5, 0),
+('7303120569085', 'Letsoni ', 'Tshabalala', 'P O Box 39825 Chuenespoort', '795', '(095)-(467)-(4481)', '(046)-(282)-(2908)', '(067)-(239)-(4674)', 'Letsoni @gmail.com', 2, 0),
+('7306050161086', 'Kishan', 'Masala', '129 Himalaya Street Shallcross', '9093', '(038)-(200)-(0327)', '(013)-(149)-(3803)', '(098)-(716)-(3189)', '', 2, 0),
+('730823030086', 'Ngwagu ', 'Horwell', 'Private Bag X1398 Zeerust', '2865', '(013)-(149)-(9853)', '(085)-(637)-(0929)', '(080)-(598)-(9701)', 'Ngwagu @gmail.com', 4, 0),
+('7309060944088', 'Paul ', 'Mongake', 'P O Box 53921 Durban', '9000', '(043)-(375)-(4248)', '(062)-(974)-(8272)', '(035)-(824)-(6441)', 'Paul @netcare.co.za', 1, 0),
+('7312050486084', 'Matthew ', 'Makaleng', '90398/9 Bernina Place Extension 9 Lenasia South', '1829', '(079)-(285)-(3410)', '(095)-(557)-(1594)', '(085)-(939)-(2450)', 'Matthew @sci-bono.co.za', NULL, 0),
+('7312170466084', 'Jesse', 'Retief', '35 Alamein Road Milnerton', '7991', '(085)-(627)-(0015)', '(029)-(644)-(4346)', '(084)-(576)-(1253)', '', 2, 0),
+('7403250912088', 'Edmund', 'Ngobeni', 'P O Box 195539 Bracken Gardens', '1952', '(020)-(501)-(6292)', '(042)-(263)-(2986)', '(021)-(836)-(9118)', 'Edmund@gmail.com', 1, 0),
+('740501094086', 'Mondli ', 'Mokwebo', '693 Block Dd Duduzane Avenue Soshanguve Block Dd', '0152', '(042)-(541)-(8345)', '(098)-(198)-(0264)', '(059)-(313)-(9812)', 'Mondli @dtep.co.3A', 2, 0),
+('7410130630081', 'Marc ', 'Maseng', '92 Speciosa Road Paradyskloof', '7600', '(074)-(268)-(8805)', '(036)-(772)-(8261)', '(042)-(857)-(2238)', '', 2, 0),
+('7411170290083', 'Jaco ', 'Syrzysko', 'P O Box 939 Makonde', '989', '(029)-(598)-(4965)', '(055)-(404)-(1142)', '(059)-(137)-(3859)', 'Jaco @gmail.com', 1, 0),
+('7412210788083', 'Botshelo', 'Bhagwan', 'P O Box 13909 Riverside', '1226', '(083)-(158)-(1537)', '(064)-(419)-(9203)', '(071)-(836)-(5216)', 'Botshelo@rmcs.co.za', NULL, 0),
+('7503060788083', 'Nasreen', 'Mbatha', '33 Ferreira Avenue Discovery', '1709', '(023)-(168)-(9987)', '(037)-(844)-(0506)', '(018)-(776)-(7405)', '', 2, 0),
+('7505030416082', 'Nkululeko ', 'Ntumba', '6 Beacon Road Sunnyridge', '5201', '(095)-(590)-(4003)', '(098)-(649)-(7440)', '(074)-(370)-(5626)', '', NULL, 0),
+('7511030931085', 'Maria ', 'Shihlomulo', '15 Circle Road Capetown Table View', '7991', '(077)-(268)-(3062)', '(098)-(775)-(2736)', '(095)-(241)-(1257)', '', 2, 0),
+('7512130745085', 'Jesse', 'Ntshabele', 'Posbus 21617\r\nHelderkruin\r\n1733', '', '(086)-(294)-(7002)', '(077)-(451)-(8545)', '(024)-(307)-(8564)', 'Jesse@aforbes.co.za', NULL, 0),
+('7602020209088', 'Baipidi', 'Van Der Walt', '906 Elmdor Marine Street Humewood', '6001', '(092)-(327)-(6127)', '(075)-(390)-(0726)', '(011)-(531)-(0381)', '', NULL, 0),
+('7609090369085', 'Warren ', 'Harri', 'Room 3 Main Avenue Cambridge', '5297', '(088)-(143)-(8865)', '(030)-(926)-(9697)', '(055)-(520)-(4285)', 'Warren @hotmail.co.uk', 2, 0),
+('7609110201086', 'Magda', 'Dlamini', '16 Johan Heunis Cresent Rooi Rivier Rif George', '6529', '(015)-(698)-(1506)', '(038)-(807)-(8639)', '(050)-(502)-(2257)', '', 2, 0),
+('7609240686081', 'Morifi ', 'Malungani', 'P O Box 18168 Hillbrow', '2038', '(063)-(403)-(2181)', '(089)-(254)-(7064)', '(025)-(141)-(2772)', 'Morifi @metroweb.co.za', 2, 0),
+('7610250179087', 'Thipe ', 'Mogotlane', '1991 Tau Avenue Zone9 Seshego', '791', '(025)-(824)-(8997)', '(052)-(797)-(0138)', '(038)-(579)-(4751)', '', 2, 0),
+('7701030854083', 'Hisham', 'Khumalo', 'Ministry Of Education P O Box 98 Mont Fleuri Mahe Seychelles', '0000', '(034)-(903)-(8843)', '(053)-(429)-(7016)', '(053)-(607)-(2503)', '', NULL, 0),
+('770124076088', 'Simphiwe ', 'Madia', 'Unit F9 Parksig Flats Durban Road Oakdale Lgd', '7530', '(063)-(218)-(0988)', '(044)-(609)-(6761)', '(031)-(738)-(9346)', 'Simphiwe @insuredoc.co.za', NULL, 0),
+('7701260528087', 'Thabiso ', 'Nhlapo', 'P O Box 1258 Kwadukuza', '9950', '(039)-(695)-(5181)', '(071)-(906)-(2145)', '(016)-(235)-(0244)', 'Thabiso @mtnloaded.co.za', 2, 0),
+('7704070438085', 'Muhammad', 'Vaphi', '3 Waterbok Flat 15 Echo Road Pietermaritzburg', '3201', '(083)-(356)-(8330)', '(064)-(654)-(1713)', '(050)-(668)-(6969)', '', 2, 0),
+('7705180627087', 'Alex ', 'Genge', 'P O Box 650 Phalaborwa', '1390', '(099)-(979)-(8403)', '(024)-(853)-(6016)', '(079)-(295)-(7384)', 'Alex @iafrica.com', 2, 0),
+('7707250934088', 'Kholofelo', 'Oppermann', 'B590 Mpungushe Road Ntuzuma T/Ship Kwamashu', '9359', '(058)-(359)-(2454)', '(072)-(366)-(8536)', '(046)-(798)-(9651)', 'Kholofelo@polka.co.za', 2, 0),
+('771109035087', 'Otsile', 'Mshaisa', 'PO Box 412\r\nBergbron\r\n1712', '', '(059)-(556)-(7736)', '(066)-(825)-(4805)', '(079)-(505)-(1278)', 'Otsile@gmail.com', 2, 0),
+('7801120638083', 'Kishan', 'Loliwe', 'P O Box 6152 Tyger Valley', '7536', '(021)-(888)-(3611)', '(072)-(785)-(0060)', '(091)-(512)-(2395)', 'Kishan@iburst.co.za', 2, 0),
+('7804050808083', 'Shaun ', 'Pinto', '26 Logan Avenue Highveld', '0157', '(016)-(163)-(4755)', '(061)-(563)-(5077)', '(042)-(992)-(0567)', '', 2, 0),
+('7805110427084', 'Shephard ', 'Nukeri', '201 Balaton Court 19 Pietersen Avenue Hillbrow', '2001', '(018)-(524)-(2893)', '(072)-(865)-(9816)', '(098)-(299)-(2130)', 'Shephard @sttreses.co.za', 2, 0),
+('780622020088', 'Nkosikhona ', 'Nkgapele', 'P O Box 1905 Ga-Kgapane', '0838', '(014)-(280)-(7521)', '(068)-(726)-(4642)', '(018)-(769)-(6044)', 'Nkosikhona @UNIGRAIN.CO.ZA', 2, 0),
+('7808140304084', 'Mothupi ', 'Hlongwane', '162 Apollost Ext 1 Ennerdale', '1830', '(096)-(469)-(2849)', '(034)-(351)-(2068)', '(016)-(626)-(6881)', '', 1, 0),
+('7808220226082', 'Norman ', 'Mokopi', '65 Terrace Road Bertrams', '2099', '(068)-(542)-(0106)', '(094)-(679)-(9848)', '(032)-(954)-(9116)', 'Norman @tekton.co.za', 1, 0),
+('7809130240082', 'Akho', 'Mathobela', '6392 Extension 2 Kwaxuma', '1868', '(065)-(484)-(2893)', '(092)-(202)-(1828)', '(053)-(887)-(5123)', 'Akho@cometkitchens.co.za', NULL, 0),
+('7902150410084', 'Frans ', 'Sebate', '29 Naboomstraat\r\nWilropark\r\nRoodepoort\r\n1724', '', '(012)-(377)-(3292)', '(041)-(193)-(6531)', '(084)-(516)-(5478)', 'Frans @gmail.com', 2, 0),
+('7906010195081', 'Richard ', 'Senabe', '28 Springbok Avenue Lime Acres', '8978', '(030)-(698)-(6143)', '(014)-(340)-(3335)', '(038)-(127)-(8356)', '', 2, 0),
+('7907160124082', 'Phumzile ', 'Phiri', 'P O Box 191 Maraisburg', '1700', '(016)-(434)-(3543)', '(099)-(100)-(4080)', '(053)-(663)-(8466)', 'Phumzile @standardbank.co.za', 2, 0),
+('7912110951087', 'Abdul ', 'Makuyi', 'P O Box 1959 Mondeor', '2178', '(093)-(136)-(6705)', '(074)-(250)-(1501)', '(015)-(592)-(9152)', 'Abdul @tracker.co.za', 1, 0),
+('8004280354084', 'Matome ', 'Maharaj', '185639 Ext 12 Ikageng', '2539', '(028)-(471)-(3000)', '(031)-(344)-(0928)', '(029)-(396)-(1013)', '', 2, 0),
+('8005030611082', 'Mduduzi', 'Linde', 'P O Box 55558 Northlands', '2116', '(071)-(253)-(3699)', '(046)-(362)-(4922)', '(017)-(540)-(5211)', 'Mduduzi@polosa.com', NULL, 0),
+('8006220732085', 'Wouter', 'Mlawuli', 'Qalakabusha Correctional Cen P/Bag X 20088 Empangeni', '3880', '(091)-(108)-(3776)', '(055)-(673)-(8727)', '(036)-(239)-(2030)', '', NULL, 0),
+('8008280468086', 'Sylvester ', 'Bhana', '19 Countess Avenue Windsor West', '2199', '(023)-(581)-(6674)', '(057)-(923)-(3664)', '(026)-(755)-(5182)', '', 2, 0),
+('8009100659085', 'Hulisani ', 'Phakwago', '29 9Th Avenue Greymont', '2195', '(047)-(194)-(3209)', '(087)-(471)-(7649)', '(051)-(421)-(1092)', 'Hulisani @safeguardchem.co.za', 2, 0),
+('8012160653084', 'Lucas', 'De Witt', 'P O Box 399 Mothotlung', '0268', '(098)-(560)-(9590)', '(062)-(911)-(0638)', '(043)-(869)-(2838)', 'Lucas@gmail.com', 2, 0),
+('8101060996085', 'Nkosinathi ', 'Laka', '999 Smith Avenue Room 219 Vister View Durban', '9001', '(052)-(272)-(5690)', '(092)-(514)-(9829)', '(096)-(505)-(4294)', '', NULL, 0),
+('8103140774084', 'Wendy ', 'Govender', 'P O Box 1526 Mahikeng', '2795', '(099)-(842)-(7664)', '(021)-(427)-(1477)', '(059)-(648)-(7824)', 'Wendy @gmail.com', 2, 0),
+('8104260177081', 'Ntsakisi ', 'Rudolph', '392 Mashilwane Avenue Tladi', '1868', '(092)-(510)-(9664)', '(015)-(960)-(5135)', '(026)-(259)-(7316)', '', 1, 0),
+('8105100593086', 'Sean', 'Lutrin', '205 Monaco 213 Troye Mucklenuek Pretoria', '0002', '(036)-(820)-(5625)', '(077)-(498)-(0110)', '(078)-(602)-(0683)', 'Sean@unisa.ac.za', 2, 0),
+('820305040087', 'William', 'Sifile', '52 Rusticana Generaal Beyers Avenue Pentagonpark', '9301', '(016)-(351)-(4853)', '(049)-(384)-(4261)', '(047)-(198)-(7411)', 'William@sabc.co.za', NULL, 0),
+('82032206087', 'Wouter', 'Burger', '2119 Tlhapi Avenue Cloverdene', '1513', '(085)-(927)-(1284)', '(087)-(284)-(9774)', '(062)-(400)-(2276)', '', 2, 0),
+('8209140103086', 'Jan ', 'Lesolisa', '116 SELBOURNE STREET PAROW', '', '(046)-(368)-(6698)', '(065)-(497)-(3627)', '(034)-(681)-(8982)', '', 2, 0),
+('8209260885087', 'Senyelo ', 'Koopman', '566 Buccaneer Avenue Elarduspark', '0181', '(080)-(949)-(5827)', '(078)-(208)-(7323)', '(057)-(235)-(6325)', 'Senyelo @mweb.co.za', 2, 0),
+('8210240595083', 'Adrienne', 'Dambuza', '16 Forsyth street\r\nNoordheuwel\r\nKrugersdorp', '', '(066)-(408)-(9003)', '(067)-(200)-(3820)', '(089)-(724)-(4226)', 'Adrienne@deomar.com', 2, 0),
+('8301170304085', 'Adrienne', 'Grobler', '295 Marine Street 33 Savanay Bluff', '9052', '(088)-(787)-(8494)', '(030)-(319)-(5350)', '(081)-(967)-(3959)', '', 2, 0),
+('8306110412083', 'Saegan', 'Louw', '16 Villion Avenue De Zoete Inval Paarl', '7696', '(014)-(268)-(6402)', '(076)-(359)-(4675)', '(012)-(489)-(5787)', '', 2, 0),
+('8309040682084', 'Lufuno', 'Soare', '398 Encore,Cresent Glades Cresent Glades Patchouli Cresent Noordwyk', '1687', '(098)-(178)-(2313)', '(060)-(367)-(2850)', '(029)-(549)-(7105)', 'Lufuno@telkomsa.net', 2, 0),
+('8406270311082', 'Lunghile ', 'Malatji', '9 Sarie Marias Avenue Pellissier', '9301', '(022)-(953)-(2921)', '(086)-(953)-(7201)', '(068)-(507)-(8208)', 'Lunghile @mtnloaded.co.za', 2, 0),
+('8407030360083', 'Sumitra', 'Ngcobo', '19 Eileen Court Kimberley', '8301', '(018)-(921)-(4507)', '(020)-(820)-(6391)', '(066)-(229)-(7179)', '', NULL, 0),
+('8409280542088', 'Leesha', 'Madisha', '1529 Khakhu Avenue Daveyton', '1520', '(099)-(817)-(9127)', '(051)-(980)-(3553)', '(058)-(120)-(3164)', 'Leesha@envisionliving.co.za', 2, 0),
+('8501030560088', 'Calvin', 'Mpatane', '305 Taaiboshof 200 Kraai Avenue Kwaggasrand', '0183', '(050)-(372)-(2630)', '(070)-(292)-(7146)', '(075)-(940)-(0292)', 'Calvin@FANEWS.CO.ZA', 1, 0),
+('8501270465083', 'Nompilo ', 'Ndaba', 'P O Box 200 Gompies', '0631', '(047)-(479)-(6562)', '(091)-(619)-(0629)', '(051)-(914)-(1739)', 'Nompilo @ens.co.za', NULL, 0),
+('8502060290083', 'Amukelani ', 'Naick', 'P O Box 33 Muizenberg', '7950', '(027)-(644)-(5375)', '(027)-(496)-(8846)', '(051)-(695)-(2281)', 'Amukelani @rbiworld.co.za', 2, 0),
+('8504060165087', 'Brian ', 'Nkatu', 'P O Box 2396 Makonde', '989', '(067)-(357)-(0493)', '(068)-(204)-(6022)', '(068)-(263)-(5896)', '', 2, 0),
+('8506270616083', 'Piet', 'Mynhardt', '20 Tweevingers Avenue Danville Ext 3', '0183', '(090)-(151)-(5877)', '(075)-(183)-(2735)', '(082)-(715)-(5796)', '', 1, 0),
+('8508060640084', 'Neliswa', 'Kunene', 'Mondeor, Columbine Ave, Mondeor Gardens, Unit 2039 Mondeor', '2091', '(092)-(381)-(4333)', '(020)-(940)-(0947)', '(016)-(197)-(5363)', 'Neliswa@anchor.co.za', NULL, 0),
+('8508170901082', 'Ntotole ', 'Mbung', 'Lower Germiston Road Room 163 Rosherville', '2099', '(037)-(309)-(8439)', '(059)-(431)-(0292)', '(038)-(650)-(8375)', 'Ntotole @yahoo.com', 2, 0),
+('851123068082', 'Mongezi', 'Makhale', '839 Gauntlet Close Ormonde View', '2091', '(073)-(645)-(3807)', '(089)-(557)-(0499)', '(014)-(920)-(3508)', 'Mongezi@devoslicharus.co.za', 2, 0),
+('8511250864088', 'Mxoleleni ', 'Burrows', 'P O Box 39892 Driekop', '1129', '(074)-(541)-(5335)', '(097)-(244)-(9876)', '(077)-(684)-(3321)', '', 2, 0),
+('8512050670085', 'Tlou ', 'Ramushi', 'P O Box 58390 Durban', '9000', '(097)-(245)-(3972)', '(094)-(667)-(5578)', '(042)-(476)-(5212)', 'Tlou @gmail.com', 2, 0),
+('8610120779086', 'Promise ', 'Mdluli', '308 Brook Avenue Menlo Park', '0081', '(041)-(990)-(0895)', '(056)-(978)-(3356)', '(014)-(332)-(9294)', 'Promise @polka.co.za', 1, 0),
+('8612040918085', 'Tony ', 'Mgidi', '69639 Ext 3 Winterveldt', '0198', '(035)-(650)-(2366)', '(011)-(286)-(0669)', '(084)-(492)-(1875)', '', NULL, 0),
+('8703170594084', 'Zukisa', 'Sifile', 'VygieAvenue 9 Denne-Oord', '6529', '(041)-(600)-(2790)', '(016)-(764)-(1354)', '(017)-(238)-(7499)', 'Zukisa@yahoo.com', NULL, 0),
+('8703280117084', 'Petrus ', 'Naidoo', '5699 Moilao Street Kagiso 2', '1759', '(043)-(229)-(9780)', '(057)-(762)-(5347)', '(035)-(325)-(5373)', '', NULL, 0),
+('8709250986088', 'Lungiswa ', 'Van Niekerk', 'George Post Office 95 York Avenue George', '6529', '(054)-(469)-(9968)', '(048)-(829)-(3794)', '(020)-(524)-(6990)', 'Lungiswa @unisa.ac.za', NULL, 0),
+('8802220958083', 'Tshepo ', 'Pillay', 'Gonubie Palms Unit 230 Gonubie Palms East London Gonubie', '5257', '(014)-(327)-(1263)', '(045)-(284)-(0421)', '(048)-(203)-(7752)', '', NULL, 0),
+('8807130418086', 'Muteba ', 'Phiri', '15 Sekwinya Saulsville', '0125', '(096)-(689)-(1484)', '(088)-(402)-(4873)', '(086)-(718)-(9175)', '', 1, 0),
+('8807180866088', 'Mabokale ', 'Lephalala', '30 Nederburg Avenue Royldene', '8301', '(032)-(122)-(6306)', '(039)-(763)-(5593)', '(094)-(341)-(3768)', 'Mabokale @ananzi.co.za', 2, 0),
+('8810240788083', 'Lee-Anne ', 'Zwakala', '3986A 3Rd Ave Fairland', '2170', '(048)-(933)-(5332)', '(038)-(769)-(0898)', '(078)-(990)-(7224)', 'Lee-Anne @wastegiant.co.za', 2, 0),
+('8902010959088', 'Job', 'Spengane', '5 Rustenburg Dr Bellville', '7530', '(015)-(912)-(5678)', '(064)-(925)-(4571)', '(013)-(957)-(1818)', '', 2, 0),
+('8906120948084', 'Ivo ', 'Naidoo', 'China Construction Bank 5Th Floor, 95 Grayston Street Sandhurst', '2196', '(084)-(418)-(7519)', '(050)-(141)-(2503)', '(052)-(805)-(9023)', 'Ivo @sciohealth4life.co.za', 4, 0),
+('8906230122083', 'Tiishetjo', 'Makuwa', 'P O Box 2398 Nagina', '3609', '(020)-(428)-(1672)', '(090)-(253)-(4879)', '(053)-(535)-(9161)', 'Tiishetjo@lantic.net', 1, 0),
+('8907090202087', 'Andre ', 'Letsoele', '23939 Polaris Avenue Waterkloof Ridge', '0181', '(028)-(531)-(2410)', '(025)-(261)-(1356)', '(042)-(352)-(6588)', '', NULL, 0),
+('8907280730087', 'Moeketsi ', 'Chauke', 'P O Box 868 Port Edward', '9295', '(039)-(823)-(4035)', '(043)-(924)-(9730)', '(027)-(345)-(4048)', 'Moeketsi @mweb.co.za', 2, 0),
+('8908220122088', 'Andre ', 'Schoeman', 'PO Bos 535\r\nHONEYDEW\r\n2040', '', '(066)-(489)-(8662)', '(023)-(794)-(9855)', '(057)-(850)-(4856)', 'Andre @work.co.za', 2, 0),
+('9003280235085', 'Alex ', 'Mkhonto', '15 Beaufort Place 39 Beaufort Avenue Goodwood Park', '7960', '(097)-(965)-(1602)', '(061)-(129)-(0277)', '(029)-(270)-(8897)', '', 2, 0),
+('9010200680087', 'Mothupi ', 'Xulubana', 'P O Box 3912 Pretoria', '0001', '(018)-(867)-(8067)', '(065)-(848)-(7223)', '(039)-(256)-(2775)', 'Mothupi @telkomsa.net', 2, 0),
+('9011135082087', 'Jaco', 'Roux', '23B Transvaal Street, Lichtenburg', '2740', '(018)-(633)-(6163)', '(018)-(633)-(1394)', '(079)-(969)-(2440)', 'pjjroux@gmail.com', 1, 0),
+('9012110306084', 'Thapelo ', 'Mokoena', 'C18239 Umsunduzi Road Kwamashu', '9359', '(055)-(900)-(9493)', '(053)-(715)-(3414)', '(043)-(775)-(4966)', 'Thapelo @gmail.com', 2, 0),
+('9103060340082', 'Mpho ', 'Hleza', '9953 Motloung Avenue Dobsonville Ext 3', '1863', '(046)-(303)-(4847)', '(026)-(340)-(8970)', '(083)-(339)-(7282)', '', NULL, 0),
+('9109140754088', 'Mashamokwena ', 'Van Vuuren', '995 30Th Avenue Villieria', '0186', '(072)-(432)-(4094)', '(099)-(338)-(6528)', '(097)-(273)-(6866)', 'Mashamokwena @mweb.co.za', NULL, 0),
+('9109150355087', 'Kgabo ', 'Le Masson', 'Unit 20 Monte Rosa Complex 293 Moerdyk Avenue Kyalami Hills Ext 5', '1689', '(041)-(515)-(2513)', '(029)-(565)-(8731)', '(019)-(579)-(1839)', '', NULL, 0),
+('9109270875081', 'Mavis', 'Khumalo', 'Mervelous Cyberworld 62C President Avenue Gemiston Georgetown', '1901', '(040)-(156)-(9201)', '(077)-(873)-(7623)', '(054)-(881)-(0606)', 'Mavis@telkomsa.net', 1, 0),
+('9110230494081', 'Nonjabulo', 'Horwell', '39 Rose Avenue Florida Ext', '1709', '(068)-(334)-(6801)', '(031)-(273)-(2013)', '(081)-(360)-(2706)', 'Nonjabulo@stteresas.co.za', 2, 0),
+('9202010527088', 'Nonhlanhla ', 'Rusch', '28 Moshoeshe Avenue Zone 11 Sebokeng', '1983', '(067)-(928)-(0725)', '(041)-(969)-(2681)', '(096)-(913)-(5807)', 'Nonhlanhla @iburst.co.za', 2, 0),
+('9202050898085', 'Quentin', 'Lesolisa', '3986 Vukani Complex North Riding Ext 1', '2169', '(046)-(760)-(0774)', '(026)-(862)-(6096)', '(058)-(898)-(7227)', 'Quentin@vodamail.co.za', 2, 0),
+('9204240981082', 'Emmanuel', 'Tyhalithi', 'PO Box 3154\r\nBedfordview\r\n2008', '', '(014)-(840)-(4566)', '(056)-(747)-(9182)', '(044)-(582)-(9841)', 'Emmanuel@ittesa.co.za', 2, 0),
+('9210110388086', 'Itumeleng ', 'Maphoto', '11 RUTSTEIN AVENUE BEN KAMMA', '', '(054)-(223)-(8867)', '(020)-(761)-(3234)', '(099)-(788)-(3703)', '', 2, 0),
+('9210160769082', 'Dinkonyane ', 'Monyela', '62 Major Road Clayville East Ext 39 Olifantsfontein', '1666', '(089)-(394)-(7495)', '(025)-(803)-(4678)', '(050)-(262)-(0275)', 'Dinkonyane @lantic.net', 2, 0),
+('9212120894085', 'Sandile ', 'Ntshabele', '395 President Avenue Mutual N Federal Johhanesburg Johannesburg', '2001', '(046)-(662)-(2634)', '(060)-(733)-(8353)', '(057)-(827)-(8320)', '', 2, 0),
+('9304280349087', 'Mmasaka ', 'Mkhonza', 'P O Box 626 Mokopane', '0600', '(061)-(236)-(9351)', '(091)-(988)-(7525)', '(044)-(268)-(8826)', 'Mmasaka @gmail.com', 1, 0),
+('9307040620082', 'Reinhard', 'Mabowa', '163983 Thabanchu Avenue Kagiso Ext 12', '1759', '(038)-(340)-(0978)', '(013)-(283)-(8123)', '(024)-(589)-(5525)', '', 2, 0),
+('9311100557082', 'Thilivhali ', 'Ramrathan', 'P O Box 1398 Thulamahashe', '1365', '(028)-(200)-(9583)', '(081)-(608)-(4835)', '(042)-(913)-(9140)', 'Thilivhali @mweb.co.za', 1, 0),
+('9403280679088', 'Daniel ', 'Khoza', 'P O Box 20951 Spruitview', '1925', '(058)-(187)-(2165)', '(056)-(753)-(1230)', '(091)-(845)-(3880)', 'Daniel @vodamail.co.za', 1, 0),
+('9405050739085', 'Hendrik ', 'Makama', '1399 Danie Theron Avenue Pretoria North', '0182', '(093)-(571)-(7843)', '(031)-(205)-(5814)', '(046)-(268)-(9024)', '', 1, 0),
+('9408100658087', 'Lonwabo', 'Tandwa', '398 Florance 263 Von Willich Die Hoewes', '0157', '(073)-(654)-(9133)', '(084)-(973)-(5762)', '(011)-(179)-(9743)', 'Lonwabo@mikropul.co.za', 2, 0),
+('9411220643082', 'Brandon ', 'Van Rooyen', 'P O Box 1966 Mathibestad', '918', '(078)-(373)-(4313)', '(073)-(645)-(2029)', '(073)-(841)-(5321)', '', 5, 0),
+('9412180136082', 'Daniel ', 'Kholophe', 'P O Box 339 Nebo', '7859', '(032)-(577)-(2930)', '(079)-(365)-(1248)', '(037)-(517)-(8140)', 'Daniel @kmcs.co.za', 1, 0),
+('9502240191083', 'Surendran', 'Mkhatswa', '93985 Ext 11 Tembisa', '1632', '(030)-(568)-(2595)', '(042)-(832)-(7961)', '(023)-(789)-(4089)', '', 2, 0),
+('9503010970083', 'Dolly ', 'Mogano', 'F 602 Umlazi', '9066', '(092)-(422)-(8994)', '(039)-(941)-(5580)', '(093)-(272)-(6077)', 'Dolly @telkomsa.net', 2, 0),
+('950310057086', 'Njabulo ', 'Bouwer', 'Edgemead Monte Vista Library Edgemead Street Edgemead', '7991', '(021)-(629)-(1008)', '(010)-(844)-(7197)', '(078)-(213)-(5281)', 'Njabulo @iafrica.com', 1, 0),
+('9504060158084', 'Cecil ', 'Koopman', '2363 Vuma Avenue Phomolong', '1632', '(020)-(848)-(4437)', '(022)-(512)-(6633)', '(096)-(555)-(1765)', 'Cecil @telkomsa.net', 2, 0),
+('9509040129082', 'Nomfundo ', 'Labuschagne', 'P O Box 195398 Madadeni', '2951', '(090)-(760)-(8625)', '(013)-(539)-(6148)', '(055)-(539)-(1341)', 'Nomfundo @gmail.com', NULL, 0),
+('9601060188087', 'Jade ', 'Raolane', '205 Balaton Court 19 Petersien & Twist Avenue Hillbrow', '2001', '(036)-(625)-(2350)', '(018)-(847)-(2687)', '(066)-(720)-(9567)', '', 2, 0),
+('960124047081', 'Phatte ', 'Yeki', 'Lot 225 Ohlange', '9309', '(025)-(393)-(9557)', '(071)-(791)-(1188)', '(074)-(192)-(3674)', '', 2, 0),
+('9606270939081', 'Ntombekaya', 'Lubbe', '3039 Transburgr 308 Jacob Marais Avenue Pretoria', '0002', '(047)-(140)-(2743)', '(019)-(588)-(3416)', '(011)-(325)-(5291)', 'Ntombekaya@eject.co.za', 2, 0),
+('9608280617083', 'Mamahooe ', 'Gumbi', '16 Speldekussinglaan\r\nRoodekrans', '', '(026)-(231)-(1537)', '(045)-(484)-(8031)', '(095)-(373)-(1093)', '', 2, 0),
+('9609270686085', 'Charl ', 'Wamala', 'P O Box 52056 Wierdapark', '199', '(090)-(380)-(6037)', '(063)-(856)-(5967)', '(049)-(919)-(1120)', 'Charl @olg.co.za', 1, 0),
+('9611120247088', 'Bernhardt ', 'Japudi', '3191 Poelano Avenue Extension 9 Nellmapius', '0122', '(082)-(871)-(2600)', '(057)-(119)-(6902)', '(054)-(528)-(2516)', 'Bernhardt @gmail.com', 2, 0),
+('9611150348082', 'Vuyokazi ', 'Eckstein', 'P O Box 939 Lydenburg', '1120', '(014)-(696)-(2799)', '(032)-(757)-(6380)', '(053)-(145)-(7835)', 'Vuyokazi @hotmail.com', 2, 0),
+('9612070824088', 'Culnescia', 'Webb', 'Unit 50 Camargue Complex Kerner Close Lakeside', '7995', '(068)-(355)-(5947)', '(087)-(271)-(5135)', '(053)-(437)-(5969)', 'Culnescia@gmail.com', NULL, 0),
+('9701100285087', 'Moses', 'Maarman', '39 Corbett Crescent Avenue Westgate', '3201', '(010)-(809)-(4317)', '(065)-(470)-(4175)', '(021)-(931)-(1663)', 'Moses@mweb.co.za', 2, 0),
+('9701100741082', 'Thipe ', 'Sibei', 'P O Box 9399 Braambos Military Base', '959', '(025)-(823)-(5885)', '(071)-(573)-(5389)', '(015)-(926)-(0923)', 'Thipe @edcon.co.za', NULL, 0),
+('9706130545082', 'Josaya ', 'Chauke', '12 Tweevingergras Danville', '0183', '(024)-(396)-(9177)', '(015)-(456)-(6491)', '(048)-(560)-(9024)', 'Josaya @gmail.com', 1, 0),
+('9710010812081', 'Phakamani ', 'Owens', 'Shopware Office, Whitehills Junxion Office Park, Whitehills Blv, Lonehill Lonehill Ext 391', '2191', '(067)-(697)-(9900)', '(091)-(519)-(4669)', '(094)-(115)-(0389)', 'Phakamani @gmail.com', 2, 0),
+('9710230788081', 'Avela', 'Ketelo', '39801 Okapi Avenue Pennyville', '1809', '(083)-(610)-(7973)', '(055)-(878)-(3546)', '(051)-(405)-(0710)', '', NULL, 0),
+('9712150845081', 'Nomvula ', 'Mchunu', '139 Riverclose Camelia Avenue Lynnwood', '0081', '(024)-(240)-(7132)', '(090)-(943)-(7917)', '(063)-(230)-(3631)', '', NULL, 0),
+('9810260112082', 'Terrence ', 'Mafogo', '39823 Section P Mamelodi West', '0122', '(089)-(251)-(8210)', '(029)-(446)-(6180)', '(023)-(154)-(7680)', '', NULL, 0),
+('9811220178083', 'Hulisani ', 'Bethlehem', '21 Yvonne street\r\nHelderkruin', '', '(045)-(805)-(7907)', '(021)-(676)-(2572)', '(091)-(247)-(8904)', '', NULL, 0),
+('9901030534081', 'Thabelo ', 'Mabota', '9 Everlasting Avenue Unit 2 Trinity Place Primrose', '1901', '(097)-(574)-(6587)', '(099)-(549)-(5714)', '(024)-(765)-(4674)', 'Thabelo @telkomsa.net', 2, 0),
+('9902110250084', 'Nkhetheni ', 'Maluleke', 'P O Box 1212 Kabokweni', '1295', '(058)-(917)-(9313)', '(089)-(913)-(4939)', '(034)-(415)-(6398)', '', 2, 0),
+('9907280115082', 'Paul ', 'Phakathi', '11 Rutstein Avenue Ben Kamma', '6025', '(056)-(331)-(7137)', '(058)-(553)-(6363)', '(014)-(552)-(0288)', '', 2, 0),
+('9908260536088', 'Kaone ', 'Mohammed', 'P O Box 3089 Knysna', '6570', '(092)-(559)-(8591)', '(057)-(591)-(8358)', '(014)-(633)-(0187)', '', 2, 0),
+('9910060946082', 'Christopher', 'Mitchel', '9 Albatross Way Thornton', '7960', '(092)-(948)-(3804)', '(013)-(862)-(7848)', '(027)-(728)-(0178)', '', 2, 0),
+('9910120124085', 'Emil', 'Venter', 'P O Box 63639 Weltevredenpark', '1715', '(023)-(574)-(1636)', '(061)-(382)-(4027)', '(065)-(592)-(8358)', 'Emil@transnet.net', NULL, 0),
+('9911090794084', 'Lerato ', 'Gaanakgomo', 'P O Box 30099 Temba', '907', '(052)-(475)-(7713)', '(029)-(447)-(7819)', '(058)-(710)-(9574)', 'Lerato @gplat.co.za', NULL, 0),
+('991212074083', 'Ayanda', 'Mukwevho', '11 MAYIBUYE HOUSE NO 19326 JOBURG IVORY PARK EXT 12', '', '(017)-(948)-(0516)', '(035)-(341)-(8986)', '(015)-(469)-(1082)', 'Ayanda@mweb.co.za', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -1298,9 +1301,38 @@ INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `tot
 ('INV01514', '2017-06-26', '6310200940086', '0.00', '816.28', '816.28'),
 ('INV01515', '2017-06-26', '2303030988083', '480.00', '1594.80', '2074.80'),
 ('INV01516', '2017-06-28', '2902030264083', '0.00', '3106.76', '3106.76'),
+('INV01517', '2018-09-28', '9011135082087', '0.00', '772.34', '772.34'),
+('INV01518', '2018-09-28', '9011135082087', '0.00', '0.00', '0.00'),
+('INV01519', '2018-09-28', '9011135082087', '0.00', '0.00', '0.00'),
 ('INV0152', '2012-06-17', '4605100562088', '0.00', '928.68', '928.68'),
+('INV01520', '2018-09-28', '9011135082087', '0.00', '1934.10', '1934.10'),
+('INV01521', '2018-09-28', '9011135082087', '0.00', '1133.12', '1133.12'),
+('INV01522', '2018-09-28', '9011135082087', '0.00', '0.00', '0.00'),
+('INV01523', '2018-09-28', '9011135082087', '0.00', '8.00', '8.00'),
+('INV01524', '2018-09-28', '9011135082087', '0.00', '0.00', '0.00'),
+('INV01525', '2018-09-29', '9011135082087', '0.00', '8.00', '8.00'),
+('INV01526', '2018-09-29', '9011135082087', '0.00', '0.00', '0.00'),
+('INV01527', '2018-09-29', '9011135082087', '0.00', '4815.76', '4815.76'),
+('INV01528', '2018-09-29', '9011135082087', '0.00', '1744.70', '1744.70'),
+('INV01529', '2018-09-29', '9011135082087', '0.00', '809.90', '809.90'),
 ('INV0153', '2012-06-22', '5507130805081', '0.00', '183.02', '183.02'),
+('INV01530', '2018-09-29', '9011135082087', '0.00', '233.70', '233.70'),
+('INV01531', '2018-09-29', '9011135082087', '0.00', '2.00', '2.00');
+INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `total_supplement`, `grand_total`) VALUES
+('INV01532', '2018-09-29', '9011135082087', '0.00', '701.10', '701.10'),
+('INV01533', '2018-09-29', '9011135082087', '0.00', '302.46', '302.46'),
+('INV01534', '2018-09-29', '9011135082087', '0.00', '2.00', '2.00'),
+('INV01535', '2018-09-29', '9011135082087', '0.00', '234.94', '234.94'),
+('INV01536', '2018-09-29', '9011135082087', '0.00', '2098.80', '2098.80'),
+('INV01537', '2018-09-29', '9011135082087', '0.00', '0.00', '0.00'),
+('INV01538', '2018-09-29', '9011135082087', '0.00', '1300.78', '1300.78'),
+('INV01539', '2018-09-29', '9011135082087', '0.00', '1886.32', '1886.32'),
 ('INV0154', '2012-06-23', '4104200140083', '0.00', '1512.45', '1512.45'),
+('INV01540', '2018-09-29', '9011135082087', '0.00', '704.82', '704.82'),
+('INV01541', '2018-09-29', '9011135082087', '0.00', '704.82', '704.82'),
+('INV01542', '2018-09-29', '9011135082087', '0.00', '1384.36', '1384.36'),
+('INV01543', '2018-09-29', '9011135082087', '0.00', '2804.40', '2804.40'),
+('INV01544', '2018-09-29', '9011135082087', '0.00', '1617.18', '1617.18'),
 ('INV0155', '2012-06-25', '3410210326084', '350.00', '387.60', '737.60'),
 ('INV0156', '2012-07-01', '8612040918085', '350.00', '271.42', '621.42'),
 ('INV0157', '2012-07-04', '7003050348086', '350.00', '195.04', '545.04'),
@@ -1313,8 +1345,7 @@ INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `tot
 ('INV0164', '2012-07-15', '8004280354084', '350.00', '1242.48', '1592.48'),
 ('INV0165', '2012-07-16', '8209260885087', '0.00', '1713.14', '1713.14'),
 ('INV0166', '2012-07-16', '1810160413088', '350.00', '2293.34', '2643.34'),
-('INV0167', '2012-07-17', '8101060996085', '0.00', '1240.18', '1240.18');
-INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `total_supplement`, `grand_total`) VALUES
+('INV0167', '2012-07-17', '8101060996085', '0.00', '1240.18', '1240.18'),
 ('INV0168', '2012-08-01', '2807090965085', '0.00', '497.11', '497.11'),
 ('INV0169', '2012-08-11', '6102220345081', '0.00', '282.92', '282.92'),
 ('INV0170', '2012-08-15', '7906010195081', '350.00', '808.93', '1158.93'),
@@ -1980,7 +2011,8 @@ INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `tot
 ('INV0830', '2014-11-24', '5510220761085', '0.00', '752.80', '752.80'),
 ('INV0831', '2014-11-25', '3809260231088', '410.00', '887.64', '1297.64'),
 ('INV0832', '2014-11-25', '2902030264083', '410.00', '1142.68', '1552.68'),
-('INV0833', '2014-11-27', '2210130900088', '410.00', '479.80', '889.80'),
+('INV0833', '2014-11-27', '2210130900088', '410.00', '479.80', '889.80');
+INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `total_supplement`, `grand_total`) VALUES
 ('INV0834', '2014-11-28', '9304280349087', '0.00', '1592.12', '1592.12'),
 ('INV0835', '2014-12-03', '6308240548084', '0.00', '2228.65', '2228.65'),
 ('INV0836', '2014-12-06', '8906230122083', '0.00', '654.56', '654.56'),
@@ -2007,8 +2039,7 @@ INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `tot
 ('INV0857', '2015-01-02', '1709240402082', '0.00', '968.36', '968.36'),
 ('INV0858', '2015-01-03', '7804050808083', '0.00', '620.56', '620.56'),
 ('INV0859', '2015-01-04', '9902110250084', '0.00', '1350.06', '1350.06'),
-('INV0860', '2015-01-05', '3912200408082', '0.00', '2076.64', '2076.64');
-INSERT INTO `invoices` (`inv_num`, `inv_date`, `client_id`, `consultation`, `total_supplement`, `grand_total`) VALUES
+('INV0860', '2015-01-05', '3912200408082', '0.00', '2076.64', '2076.64'),
 ('INV0861', '2015-01-06', '8502060290083', '450.00', '1317.38', '1767.38'),
 ('INV0862', '2015-01-11', '6209040562083', '0.00', '858.00', '858.00'),
 ('INV0863', '2015-01-12', '4308010928085', '0.00', '2211.84', '2211.84'),
@@ -4631,8 +4662,56 @@ INSERT INTO `invoice_lines` (`line_id`, `inv_num`, `supplement_id`, `price_charg
 (2452, 'INV01516', 'Supplement-85', '284.22', 5, '1421.10'),
 (2453, 'INV01516', 'Supplement-99', '235.90', 5, '1179.50'),
 (2454, 'INV01516', 'Supplement-236', '126.54', 2, '253.08'),
-(2455, 'INV01516', 'Supplement-236', '126.54', 2, '253.08');
+(2455, 'INV01516', 'Supplement-236', '126.54', 2, '253.08'),
+(2456, 'INV01517', 'Supplement-127', '234.94', 2, '469.88'),
+(2457, 'INV01517', 'Supplement-157', '302.46', 1, '302.46'),
+(2458, 'INV01520', 'Supplement-1', '386.82', 5, '1934.10'),
+(2459, 'INV01521', 'Supplement-10', '283.28', 4, '1133.12'),
+(2460, 'INV01523', 'Supplement-112', '2.00', 4, '8.00'),
+(2461, 'INV01525', 'Supplement-112', '2.00', 4, '8.00'),
+(2462, 'INV01527', 'Supplement-10', '283.28', 17, '4815.76'),
+(2463, 'INV01528', 'Supplement-105', '348.94', 5, '1744.70'),
+(2464, 'INV01529', 'Supplement-19', '161.98', 5, '809.90'),
+(2465, 'INV01530', 'Supplement-236', '233.70', 1, '233.70'),
+(2466, 'INV01531', 'Supplement-112', '2.00', 1, '2.00'),
+(2467, 'INV01532', 'Supplement-236', '233.70', 3, '701.10'),
+(2468, 'INV01533', 'Supplement-157', '302.46', 1, '302.46'),
+(2469, 'INV01534', 'Supplement-112', '2.00', 1, '2.00'),
+(2470, 'INV01535', 'Supplement-127', '234.94', 1, '234.94'),
+(2471, 'INV01536', 'Supplement-1', '386.82', 3, '1160.46'),
+(2472, 'INV01536', 'Supplement-102', '251.86', 1, '251.86'),
+(2473, 'INV01536', 'Supplement-107', '343.24', 2, '686.48'),
+(2474, 'INV01538', 'Supplement-127', '234.94', 1, '234.94'),
+(2475, 'INV01538', 'Supplement-107', '343.24', 1, '343.24'),
+(2476, 'INV01538', 'Supplement-232', '361.30', 2, '722.60'),
+(2477, 'INV01539', 'Supplement-182', '312.46', 4, '1249.84'),
+(2478, 'INV01539', 'Supplement-183', '318.24', 2, '636.48'),
+(2479, 'INV01540', 'Supplement-127', '234.94', 3, '704.82'),
+(2480, 'INV01541', 'Supplement-127', '234.94', 3, '704.82'),
+(2481, 'INV01542', 'Supplement-105', '348.94', 2, '697.88'),
+(2482, 'INV01542', 'Supplement-107', '343.24', 2, '686.48'),
+(2483, 'INV01543', 'Supplement-236', '233.70', 12, '2804.40'),
+(2484, 'INV01544', 'Supplement-236', '233.70', 1, '233.70'),
+(2485, 'INV01544', 'Supplement-157', '302.46', 1, '302.46'),
+(2486, 'INV01544', 'Supplement-244', '360.34', 3, '1081.02');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_awaiting_payment`
+--
+
+DROP TABLE IF EXISTS `orders_awaiting_payment`;
+CREATE TABLE `orders_awaiting_payment` (
+  `order_id` int(10) UNSIGNED NOT NULL,
+  `inv_num` varchar(20) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Truncate table before insert `orders_awaiting_payment`
+--
+
+TRUNCATE TABLE `orders_awaiting_payment`;
 -- --------------------------------------------------------
 
 --
@@ -5077,6 +5156,13 @@ ALTER TABLE `invoice_lines`
   ADD KEY `supplement_id` (`supplement_id`);
 
 --
+-- Indexes for table `orders_awaiting_payment`
+--
+ALTER TABLE `orders_awaiting_payment`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `inv_num` (`inv_num`);
+
+--
 -- Indexes for table `supplements`
 --
 ALTER TABLE `supplements`
@@ -5127,7 +5213,13 @@ ALTER TABLE `client_references`
 -- AUTO_INCREMENT for table `invoice_lines`
 --
 ALTER TABLE `invoice_lines`
-  MODIFY `line_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2456;
+  MODIFY `line_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2487;
+
+--
+-- AUTO_INCREMENT for table `orders_awaiting_payment`
+--
+ALTER TABLE `orders_awaiting_payment`
+  MODIFY `order_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `supplement_descriptions`
@@ -5177,7 +5269,246 @@ ALTER TABLE `supplements`
 ALTER TABLE `suppliers`
   ADD CONSTRAINT `acc_type_const` FOREIGN KEY (`acc_type_id`) REFERENCES `account_types` (`acc_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `bank_const` FOREIGN KEY (`bank_id`) REFERENCES `banks` (`bank_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
+
+
+--
+-- Metadata
+--
+USE `phpmyadmin`;
+
+--
+-- Metadata for table account_types
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table auth
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table banks
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table clients
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table client_references
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table invoices
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table invoice_lines
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table orders_awaiting_payment
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table supplements
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table supplement_descriptions
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table suppliers
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for database xpress_health
+--
+
+--
+-- Truncate table before insert `pma__bookmark`
+--
+
+TRUNCATE TABLE `pma__bookmark`;
+--
+-- Truncate table before insert `pma__relation`
+--
+
+TRUNCATE TABLE `pma__relation`;
+--
+-- Truncate table before insert `pma__savedsearches`
+--
+
+TRUNCATE TABLE `pma__savedsearches`;
+--
+-- Truncate table before insert `pma__central_columns`
+--
+
+TRUNCATE TABLE `pma__central_columns`;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
