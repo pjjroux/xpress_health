@@ -103,7 +103,7 @@ class Invoice {
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',16);
 
-        $pdf->Image('../assets/img/logo.png',20,16,40);
+        $pdf->Image($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/assets/img/logo.png',10,10,70);
     
         //Cell(width , height , text , border , end line , [align] )
 
@@ -122,22 +122,24 @@ class Invoice {
         $pdf->Cell(59 ,5,'',0,1);//end of line
 
         $pdf->Cell(130 ,5,'',0,0);
-        $pdf->Cell(25 ,5,'Date ',0,0);
+        $pdf->Cell(25 ,5,'Date: ',0,0);
         $pdf->Cell(34 ,5,$this->inv_date,0,1);//end of line
 
         $pdf->Cell(130 ,5,'',0,0);
-        $pdf->Cell(25 ,5,'Invoice # ',0,0);
+        $pdf->Cell(25 ,5,'Invoice #: ',0,0);
         $pdf->Cell(34 ,5,$this->inv_num,0,1);//end of line
 
         $pdf->Cell(130 ,5,'',0,0);
-        $pdf->Cell(25 ,5,'Customer ID ',0,0);
+        $pdf->Cell(25 ,5,'Customer: ',0,0);
         $pdf->Cell(34 ,5,$this->client_id,0,1);//end of line
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189 ,10,'',0,1);//end of line
 
+        $pdf->Ln();
+
         //billing address
-        $pdf->Cell(100 ,5,'Bill to',0,1);//end of line
+        $pdf->Cell(100 ,5,'Bill to:',0,1);//end of line
 
         //add dummy cell at beginning of each line for indentation
         $pdf->Cell(10 ,5,'',0,0);
@@ -205,6 +207,11 @@ class Invoice {
         } else {
             $pdf->SetFont('Arial','B',12);
             $pdf->Cell(100 ,5,'Payment received and order completed',0,1);
+            $pdf->Ln();
+            $pdf->Ln();
+            $pdf->Ln();
+            $pdf->SetFont('Arial','I',11);
+            $pdf->Cell(100 ,5,'Thank you for shopping with us',0,1);
         }
 						
         // Output document as string and send email
@@ -295,8 +302,8 @@ class Invoice {
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',16);
     
-        $pdf->Image('../assets/img/logo.png',20,16,40);
-    
+        $pdf->Image($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/assets/img/logo.png',10,10,70);
+        
         $pdf->Cell(130 ,5,'',0,0);
     
         $pdf->Cell(59 ,5,'PICKING SLIP',0,1);//end of line
@@ -308,30 +315,44 @@ class Invoice {
         $pdf->Cell(59 ,5,'',0,1);//end of line
     
         $pdf->Cell(130 ,5,'',0,0);
-        $pdf->Cell(25 ,5,'Date ',0,0);
+        $pdf->Cell(25 ,5,'Date: ',0,0);
         $pdf->Cell(34 ,5,$this->inv_date,0,1);//end of line
     
         $pdf->Cell(130 ,5,'',0,0);
-        $pdf->Cell(25 ,5,'Invoice # ',0,0);
+        $pdf->Cell(25 ,5,'Invoice #: ',0,0);
         $pdf->Cell(34 ,5,$this->inv_num,0,1);//end of line
     
         $pdf->Cell(130 ,5,'',0,0);
-        $pdf->Cell(25 ,5,'Customer ID ',0,0);
+        $pdf->Cell(25 ,5,'Customer: ',0,0);
         $pdf->Cell(34 ,5,$this->client_id,0,1);//end of line
-    
+
+       
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189 ,10,'',0,1);//end of line
+
+        $pdf->Ln();
     
         //billing address
-        $pdf->Cell(100 ,5,'Deliver to',0,1);//end of line
+        $pdf->Cell(100 ,5,'Deliver to:',0,0);//end of line
+        $pdf->Cell(30 ,5,'',0,0);
+        $pdf->Cell(25 ,5,'Ship date:',0,0);//end of line
+        $pdf->Cell(30 ,5,date('Y-m-d'),0,1);//end of line
     
         //add dummy cell at beginning of each line for indentation
         $pdf->Cell(10 ,5,'',0,0);
-        $pdf->Cell(90 ,5,$this->client_name. ' '. $this->client_surname ,0,1);
-    
+        $pdf->Cell(90 ,5,$this->client_name. ' '. $this->client_surname ,0,0);
+
+        $pdf->Cell(30 ,5,'',0,0);
+        $pdf->Cell(25 ,5,'Courier:',0,0);//end of line
+        $pdf->Cell(30 ,5,'The Courier Guy',0,1);//end of line
+
         $pdf->Cell(10 ,5,'',0,0);
-        $pdf->Cell(90 ,5,$this->client_address,0,1);
-    
+        $pdf->Cell(90 ,5,$this->client_address,0,0);
+
+        $pdf->Cell(30 ,5,'',0,0);
+        $pdf->Cell(25 ,5,'Lead time:',0,0);//end of line
+        $pdf->Cell(30 ,5,'2-3 days',0,1);//end of line
+        
         $pdf->Cell(10 ,5,'',0,0);
         $pdf->Cell(90 ,5,$this->client_postalcode,0,1);
     
@@ -347,17 +368,23 @@ class Invoice {
         $pdf->Ln();
     
         //invoice contents
-        $pdf->Cell(90 ,5,'Supplement',1,0);
-        $pdf->Cell(25 ,5,'Quantity',1,1);
+        $pdf->SetFont('Arial','B',12);
+        $pdf->Cell(140 ,5,'Supplement',1,0);
+        $pdf->Cell(50 ,5,'Quantity',1,1);
 
     
         $pdf->SetFont('Arial','',12);
     
         //invoice lines
         foreach ($this->invoice_lines as $line) {
-            $pdf->Cell(90 ,5,$line['supplement_id'],1,0);
-            $pdf->Cell(25 ,5,$line['quantity'],1,1,'C');
+            $pdf->Cell(140 ,5,$line['supplement_id'],1,0);
+            $pdf->Cell(50 ,5,$line['quantity'],1,1,'C');
         }
+
+        $pdf->Ln();
+        $pdf->Ln();
+        $pdf->SetFont('Arial','B',12);
+        $pdf->Cell(100 ,5,'Payment received, order to ship to client',0,1);
             
         // Output document as string and send email
         $pdfdoc = $pdf->Output('S');
@@ -396,8 +423,8 @@ class Invoice {
             //Content
             $mail->isHTML(true);                      
             $mail->Subject = 'Xpress Health Picking Slip: '. $this->inv_num;
-            $mail->Body    = 'Please find attached picking slip for Custumer ID: <strong>'.$this->client_id.'</strong>';
-            $mail->AltBody = 'Please find attached picking slip for Custumer ID: '.$this->client_id;
+            $mail->Body    = 'Please find attached picking slip for Customer: <strong>'.$this->client_id.'</strong>';
+            $mail->AltBody = 'Please find attached picking slip for Customer: '.$this->client_id;
 
             $mail->send();
         } catch (Exception $e) {
@@ -417,6 +444,18 @@ class Invoice {
      */
     public function get_invoice_lines() {
         return $this->invoice_lines;
+    }
+
+    public function set_order_status() {
+        $this->database->query('SELECT * FROM orders_awaiting_payment WHERE inv_num = :inv_num');
+        $this->database->bind(':inv_num', $this->inv_num);
+        $row = $this->database->single();
+
+        if (!empty($row)) {
+             $this->order_status = 'Pending';
+        } else {
+             $this->order_status = 'Completed';
+        }
     }
 
 }

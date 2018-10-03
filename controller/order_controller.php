@@ -102,6 +102,8 @@ function confirmOrder($inv_num) {
 
     $database->endTransaction();
 
+    $invoice->set_order_status();
+
     // Send updated final invoice to client
     $invoice->create_and_email();
     $invoice->create_shipping_label();
@@ -134,6 +136,7 @@ function cancelOrder($inv_num) {
     $database->execute();
 
     $database->endTransaction();
+
   } catch (Throwable $t) {
     $data['error'] = $t->getMessage();
   } catch (Exception $e) {

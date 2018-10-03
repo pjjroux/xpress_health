@@ -234,16 +234,24 @@ function checkout() {
         text: 'Are you sure you want to place this order?',
         buttons: [
           Noty.button('YES', 'btn btn-success', function () {
+            n.close();
+            var processing = new Noty({
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    modal: true,
+                    text: '<div align="center"><img src="./assets/img/ajax-loader.gif"></div>',
+                    closeWith: [''],
+                }).show();
             $.ajax({
                 url: 'controller/cart_controller.php',
                 method: 'GET',
                 dataType: 'json',
-                async: false,
+                async: true,
                 data: { 
                     action: 'checkout',
                 },
                 success: function (json) {
-                    n.close();
+                    processing.close();
                     if (json.error != '') {
                         new Noty({
                             type: 'error',
@@ -257,7 +265,7 @@ function checkout() {
                             type: 'success',
                             layout: 'center',
                             theme: 'bootstrap-v4',
-                            timeout: 1500,
+                            timeout: 2000,
                             text: 'Order placed, you will receive a confirmation email shortly',
                             modal: true,
                             callbacks: {
@@ -269,6 +277,7 @@ function checkout() {
                    }
                 },
                 error: function (jqxhr, textStatus, error) {
+                    processing.close();
                     var err = textStatus + ", " + error;
                         new Noty({
                             type: 'error',
