@@ -53,7 +53,7 @@ $order_count = (!empty($orders)) ? count($orders) : 0 ;
             <a class="nav-link" href="admin.php"><i class="fa fa-shopping-cart"></i> Orders <span class="badge badge-pill badge-success" style="margin-left:5px;"><?php echo $order_count ?></span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-info-circle"></i> Reports</a>
+            <a class="nav-link" href="reports.php"><i class="fa fa-info-circle"></i> Reports</a>
           </li>
         </ul>
         <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 

@@ -11,7 +11,8 @@
 
 $(document).ready(function () {
   $('#orders').DataTable({
-    "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+    "pagingType": "simple", // "simple" option for 'Previous' and 'Next' buttons only
+    "ordering": false
   });
   $('.dataTables_length').addClass('bs-select');
 });
