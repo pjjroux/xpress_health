@@ -79,6 +79,7 @@ $order_count = (!empty($orders)) ? count($orders) : 0 ;
             <thead>
               <tr>
                 <th scope="col">Invoice #</th>
+                <th scope="col">Date</th>
                 <th scope="col">Customer ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Total</th>
@@ -89,6 +90,7 @@ $order_count = (!empty($orders)) ? count($orders) : 0 ;
               <?php foreach ($orders as $order) : ?>
               <tr>
                 <th scope="row"><?php echo $order['inv_num'] ?></th>
+                <td><?php echo $order['inv_date'] ?></td>
                 <td><?php echo $order['client_id'] ?></td>
                 <td><?php echo $order['client_name']. ' '. $order['client_surname'] ?></td>
                 <td align="right"><?php echo 'R' . number_format($order['grand_total'], 2, '.', ' ') ?></td>

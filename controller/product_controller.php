@@ -11,7 +11,18 @@
 */
 
 // Include Product class  
-require_once('classes/Product.php');
+require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/classes/Product.php');
+
+$action = (isset($_GET['action'])) ? $_GET['action'] : '' ;
+
+/**
+ * Decide on action using $_GET parameter
+ */
+switch ($action) {
+    case 'searchProducts': 
+        searchProducts($_GET['search_term']);
+        break;
+}
 
 
 /**
@@ -67,6 +78,31 @@ function getProductsTotal() {
        return $row['total_supplements'];
     }
 }
+
+
+/**
+ * Get products by search term and direct to products page
+ * 
+ * @param string $search_term Search criteria
+ */
+function searchProducts($search_term) {
+    $database = new Database();
+
+    $database->query("
+        SELECT supplements.supplement_id FROM supplements  
+        INNER JOIN supplement_descriptions on supplement_descriptions.description_id = supplements.description_id
+        WHERE supplements.supplement_id LIKE CONCAT('%', :search_term, '%') 
+        OR supplement_descriptions.long_description LIKE CONCAT('%', :search_term, '%')
+        OR supplement_descriptions.supplement_description LIKE CONCAT('%', :search_term, '%')
+    ");
+
+    $database->bind(':search_term', $search_term);
+    $data = $database->resultset();
+
+    echo json_encode($data);
+
+}
+
 
 
 ?>

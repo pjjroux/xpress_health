@@ -99,6 +99,10 @@ class Report {
             SELECT
                 inv.inv_num,
                 inv.inv_date,
+                inv.client_id,
+                cl.client_name,
+                cl.client_surname,
+                inv.grand_total,
                 invl.supplement_id,
                 supd.supplement_description,
                 invl.quantity,
@@ -107,6 +111,7 @@ class Report {
                 invoice_lines invl
                     LEFT JOIN invoices inv ON invl.inv_num = inv.inv_num
                     LEFT JOIN supplements sup ON invl.supplement_id = sup.supplement_id
+                    LEFT JOIN clients cl ON inv.client_id = cl.client_id
                     LEFT JOIN supplement_descriptions supd ON sup.description_id = supd.description_id
             WHERE
                 inv.inv_date >= :date_from AND inv.inv_date <= :date_to

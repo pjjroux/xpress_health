@@ -293,6 +293,7 @@ switch ($report_type) {
                     <thead>
                         <tr>
                             <th scope="col">Invoice #</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Customer ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Total</th>
@@ -301,7 +302,11 @@ switch ($report_type) {
                     <tbody>
                         <?php foreach ($report_data as $data) : ?>
                         <tr>
-                            
+                            <th scope="row"><?php echo $data['inv_num'] ?></th>
+                            <td><?php echo $data['inv_date'] ?></td>
+                            <td><?php echo $data['client_id'] ?></td>
+                            <td><?php echo $data['client_name']. ' '. $data['client_surname'] ?></td>
+                            <td align="right"><?php echo 'R ' . number_format($data['grand_total'], 2, '.', ' ') ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

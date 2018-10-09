@@ -78,8 +78,8 @@ $best_sellers = getBestSellingProducts();
         </ul>
       </div>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
-        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" id="search_box" name="search_box" type="search" placeholder="Search..." aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0" id="btn_search" type="button">Search</button>
       </form>
     </nav>
     
@@ -152,6 +152,7 @@ $best_sellers = getBestSellingProducts();
     <script src="assets/libraries/noty/lib/noty.js" type="text/javascript"></script>
     <script src="assets/js/login.js"></script>
     <script src="assets/js/cart.js"></script>
+    <script src="assets/js/search.js"></script>
 
   </body>
 </html>
