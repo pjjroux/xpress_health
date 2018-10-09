@@ -9,6 +9,16 @@
 |
 */
 
+$(document).ready(function() {
+    $(window).keydown(function(event){
+      if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+});
+
+
 $('#btn_search').on('click', function() {
     var search_term = $('#search_box').val();
     
@@ -32,9 +42,9 @@ $('#btn_search').on('click', function() {
         success: function (json) {
             processing.close();
 
-            
-
-            console.log($.param(search,JSON.stringify(json)));
+            var search_data = JSON.stringify(json);
+            var encodedString = btoa(search_data);
+            window.location.assign('products.php?search_data=' + encodedString);
         },
         error: function (jqxhr, textStatus, error) {
             processing.close();
@@ -48,7 +58,4 @@ $('#btn_search').on('click', function() {
                 }).show();
         }
     });       
-
-
-
 });

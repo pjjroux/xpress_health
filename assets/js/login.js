@@ -48,6 +48,7 @@ function validateForm() {
                     type: 'error',
                     layout: 'center',
                     theme: 'bootstrap-v4',
+                    modal: true,
                     text: err
                 }).show();
         }
@@ -58,6 +59,7 @@ function validateForm() {
             type: 'error',
             layout: 'center',
             theme: 'bootstrap-v4',
+            modal: true,
             text: login_error
         }).show();
         return false;

@@ -1,15 +1,17 @@
 <?php
+require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/client_controller.php');
 require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/order_controller.php');
 
 // If admin user is not logged in redirect to index
 if (!isset($_SESSION['client_name'])) { 
   header('Location: index.php');
 }
-
 // Get outstanding orders
 $orders = getOrders();
 $order_count = (!empty($orders)) ? count($orders) : 0 ;
 
+// Get all clients
+$clients = getClients();
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +19,7 @@ $order_count = (!empty($orders)) ? count($orders) : 0 ;
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Xpress Health - Admin Dashboard">
+    <meta name="description" content="Xpress Health - Clients">
     <meta name="author" content="Jaco Roux (5376-553-2)">
     <link rel="icon" href="assets/img/favicon.ico">
 
@@ -32,7 +34,7 @@ $order_count = (!empty($orders)) ? count($orders) : 0 ;
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/admin.css">
 
-    <title>Xpress Health - Admin Dashboard</title>
+    <title>Xpress Health - Clients</title>
   </head>
   <body>
     
@@ -71,47 +73,46 @@ $order_count = (!empty($orders)) ? count($orders) : 0 ;
     </nav>
     <section id="main">
       <div class="container-fluid" id="table-area">
-        <?php if (!empty($orders)) { ?>
+        <?php if (!empty($clients)) { ?>
           <div class="row">
             <div class="col-12">
-              <h4 class="table-header">Orders awaiting payment</h4>
+              <h4 class="table-header">Clients</h4>
             </div>
           </div>
 
           <table id="orders" class="table table-sm table-bordered table-hover" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th scope="col">Invoice #</th>
-                <th scope="col">Date</th>
-                <th scope="col">Customer ID</th>
+                <th scope="col">Client ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">Total</th>
-                <th scope="col">Confirm/Cancel</th>
+                <th scope="col">Surname</th>
+                <th scope="col" width="15%">Tel (Home)</th>
+                <th scope="col" width="15%">Tel (Work)</th>
+                <th scope="col" width="15%">Cell</th>
+                <th scope="col">Email</th>
+                <th scope="col">Registered</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($orders as $order) : ?>
+              <?php foreach ($clients as $client) : ?>
               <tr>
-                <th scope="row"><?php echo $order['inv_num'] ?></th>
-                <td><?php echo $order['inv_date'] ?></td>
-                <td><?php echo $order['client_id'] ?></td>
-                <td><?php echo $order['client_name']. ' '. $order['client_surname'] ?></td>
-                <td align="right"><?php echo 'R' . number_format($order['grand_total'], 2, '.', ' ') ?></td>
-                <td align="right">
-                  <button class="btn btn-success" onclick="confirmOrder('<?php echo $order['inv_num'] ?>')"><i class="fa fa-check"></i></button>
-                  <button class="btn btn-danger" onclick="cancelOrder('<?php echo $order['inv_num'] ?>')"><i class="fa fa-times"></i></button>
-                </td>
+                <th scope="row"><?php echo $client['client_id'] ?></th>
+                <td><?php echo $client['client_name'] ?></td>
+                <td><?php echo $client['client_surname'] ?></td>
+                <td width="15%"><?php echo $client['client_tel_home'] ?></td>
+                <td width="15%"><?php echo $client['client_tel_work'] ?></td>
+                <td width="15%"><?php echo $client['client_tel_cell'] ?></td>
+                <td><?php echo $client['client_email'] ?></td>
+                <td align="center"><?php echo (!empty($client['pass'])) ? "<i class='text-success fa fa-lg fa-check'></i>" : "<i class='text-danger fa fa-lg fa-times'></i>" ?></td>
               </tr>
               <?php endforeach; ?>
             </tbody>
           </table>
         <?php } else { ?>
-          <h4 class="no_orders">No pending orders</h4>
+          <h4 class="no_orders">No client data found</h4>
         <?php }  ?>
       </div>
     </section>
-
-    
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

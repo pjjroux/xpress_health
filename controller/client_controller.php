@@ -9,7 +9,9 @@
 | Date:           2018-08-29
 |
 */
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Include Client class  
 require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/classes/Client.php');
@@ -17,7 +19,8 @@ require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/classes/Client.php');
 /**
  * Decide on action using $_GET parameter
  */
-switch ($_GET['action']) {
+$action = (isset($_GET['action'])) ? $_GET['action'] : null ;
+switch ($action) {
     case 'getClientData':
         $client_id = (isset($_GET['client_id'])) ? $_GET['client_id'] : null ;
         getClientData($client_id);
@@ -36,9 +39,6 @@ switch ($_GET['action']) {
         break;
     case 'isAlreadyRegisteredUpdate':
         isAlreadyRegisteredUpdate($_GET['client_id'], $_GET['client_email']);
-        break;
-    default:
-        echo 'Invalid action - ' . __LINE__ . ' - ' . __FILE__;
         break;
 }
 
@@ -193,6 +193,35 @@ function isAlreadyRegisteredUpdate($client_id, $client_email) {
     }
 
     echo json_encode($data);    
+}
+
+
+/**
+ * Get all clients in database
+ */
+function getClients() {
+    $database = new Database();
+
+    $database->query('
+        SELECT 
+            clients.client_id,
+            clients.client_name,
+            clients.client_surname,
+            clients.client_address,
+            clients.client_postalcode,
+            clients.client_tel_home,
+            clients.client_tel_work,
+            clients.client_tel_cell,
+            clients.client_email,
+            auth.pass
+        FROM clients 
+            LEFT JOIN auth on auth.client_id = clients.client_id
+        WHERE clients.admin = 0
+    ');
+
+    $data = $database->resultset();
+
+    return $data;
 }
 
 

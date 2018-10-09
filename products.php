@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 
 require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/product_controller.php');
 
@@ -19,7 +21,24 @@ $products = getProducts($start_from, $limit);
 
 $products_total = getProductsTotal();
 
-$total_pages = ceil($products_total / $limit); 
+
+// Search data from search.js
+$search_data = (isset($_GET['search_data'])) ? json_decode(base64_decode($_GET['search_data'])) : null ;
+$search_data_url = (isset($_GET['search_data'])) ? $_GET['search_data'] : null ;
+
+if (!is_null($search_data)) {
+  $products = getProductsByIDs($search_data,$start_from, $limit);
+
+  $products_total = count($search_data);
+}
+
+$total_pages = ceil($products_total / $limit);
+
+if ($page == $total_pages) {
+  $total_header = ($start_from + 1). ' - ' . $products_total . ' of ' .$products_total;
+} else {
+  $total_header = ($start_from + 1). ' - ' . ($start_from + 10) . ' of ' .$products_total;
+}
 
 ?>
 <!DOCTYPE html>
@@ -83,6 +102,10 @@ $total_pages = ceil($products_total / $limit);
           <?php } ?>   
         </ul>
       </div>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" id="search_box" name="search_box" type="search" placeholder="Search..." aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0" id="btn_search" type="button">Search</button>
+      </form>
     </nav>
 
     <div class="container-fluid">
@@ -93,7 +116,7 @@ $total_pages = ceil($products_total / $limit);
 
             <?php if ($page > 1) { ?>
               <li class="page-item">
-                <a class="page-link" href="products.php?page=<?php echo $page - 1 ?>" tabindex="-1">Previous</a>
+                <a class="page-link" href="products.php?page=<?php echo $page - 1 ?>&search_data=<?php echo $search_data_url ?>" tabindex="-1">Previous</a>
               </li>
             <?php } else { ?>
               <li class="page-item disabled">
@@ -103,15 +126,15 @@ $total_pages = ceil($products_total / $limit);
             
             <?php for ($i=1; $i<=$total_pages; $i++) : ?> 
                 <?php if ($i == $page) { ?>
-                  <li class="page-item active"><a class="page-link" href="products.php?page=<?php echo $i ?>"><?php echo $i ?></a></li> 
+                  <li class="page-item active"><a class="page-link" href="products.php?page=<?php echo $i ?>&search_data=<?php echo $search_data_url ?>"><?php echo $i ?></a></li> 
                 <?php } else { ?>
-                  <li class="page-item"><a class="page-link" href="products.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                  <li class="page-item"><a class="page-link" href="products.php?page=<?php echo $i ?>&search_data=<?php echo $search_data_url ?>"><?php echo $i ?></a></li>
                 <?php } ?>
             <?php endfor; ?>
 
             <?php if ($page < $total_pages) { ?>
               <li class="page-item">
-                <a class="page-link" href="products.php?page=<?php echo $page + 1 ?>">Next</a>
+                <a class="page-link" href="products.php?page=<?php echo $page + 1 ?>&search_data=<?php echo $search_data_url ?>">Next</a>
               </li>
             <?php } else { ?>
               <li class="page-item disabled">
@@ -123,6 +146,8 @@ $total_pages = ceil($products_total / $limit);
           <i class="fa fa-list" aria-hidden="true"></i>
           Product listing
           <div class="clearfix"></div>
+
+          <div align="right">Products: <?php echo $total_header ?></div>
         </div>
 
         <div class="card-body">
@@ -133,7 +158,7 @@ $total_pages = ceil($products_total / $limit);
                 <!-- PRODUCT -->
                 <div class="row">
                   <div class="col-12 col-sm-12 col-md-2 text-center">
-                    <img class="img-responsive" src="<?php echo $product['img'] ?>" alt="prewiew" width="100" height="100">
+                    <img class="img-responsive" src="<?php echo $product['img'] ?>" alt="prewiew" width="75" height="75">
                   </div>
                   <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
                     <h4 class="product-name"><strong><?php echo $product['supplement_id'] ?></strong></h4>
@@ -201,5 +226,6 @@ $total_pages = ceil($products_total / $limit);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="assets/libraries/noty/lib/noty.js" type="text/javascript"></script>
     <script src="assets/js/product.js"></script>
+    <script src="assets/js/search.js"></script>
   </body>
 </html>

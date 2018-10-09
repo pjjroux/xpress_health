@@ -102,7 +102,6 @@ switch ($report_type) {
         </div>
     </div>
 
-
     <nav class="navbar navbar-expand-lg fixed-top navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -115,6 +114,9 @@ switch ($report_type) {
           </li>
           <li class="nav-item">
             <a class="nav-link" href="reports.php"><i class="fa fa-info-circle"></i> Reports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="clients.php"><i class="fa fa-users"></i> Clients</a>
           </li>
         </ul>
         <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 

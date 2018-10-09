@@ -9,6 +9,7 @@
 |
 */
 $(document).ready(function() {
+    console.log(action);
     // If page loads with the registered parameter show noty and redirect to login page within 5 seconds
     if (getUrlParameter('updated') == 1) {
         new Noty({
@@ -21,66 +22,74 @@ $(document).ready(function() {
         }).show();
     }
 
-    // Get reference values for reference select box
-    $.getJSON("controller/client_controller.php", {action: "getReferences"})
-        .done(function(json) {
-            $.each(json, function(key, value) {
-                $('#inputRef').append($('<option>').text(value['ref_description']).attr('value', value['ref_id']));
+    if (action == 'edit') {
+        // Get reference values for reference select box
+        $.getJSON("controller/client_controller.php", {action: "getReferences"})
+            .done(function(json) {
+                $.each(json, function(key, value) {
+                    $('#inputRef').append($('<option>').text(value['ref_description']).attr('value', value['ref_id']));
+                });
+            })
+            .fail(function(jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                new Noty({
+                    type: 'error',
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    text: err
+                }).show();
             });
-        })
-        .fail(function(jqxhr, textStatus, error) {
-            var err = textStatus + ", " + error;
-            new Noty({
-                type: 'error',
-                layout: 'center',
-                theme: 'bootstrap-v4',
-                text: err
-            }).show();
+
+        // Input masks for form validation
+        $("#inputID").inputmask("9999999999999",{
+            greedy: false,
+            showMaskOnFocus: false,
+            showMaskOnHover: false
+        });
+        $('#inputTelHome, #inputTelWork, #inputCell').inputmask('(999)-(999)-(9999)',{
+            greedy: false,
+            showMaskOnFocus: false,
+            showMaskOnHover: false
+        });
+        $("#inputPostal").inputmask("9{0,4}",{
+            greedy: false,
+            showMaskOnFocus: false,
+            showMaskOnHover: false
         });
 
-    // Input masks for form validation
-    $("#inputID").inputmask("9999999999999",{
-        greedy: false,
-        showMaskOnFocus: false,
-        showMaskOnHover: false
-    });
-    $('#inputTelHome, #inputTelWork, #inputCell').inputmask('(999)-(999)-(9999)',{
-        greedy: false,
-        showMaskOnFocus: false,
-        showMaskOnHover: false
-    });
-    $("#inputPostal").inputmask("9{0,4}",{
-        greedy: false,
-        showMaskOnFocus: false,
-        showMaskOnHover: false
-    });
+        // Get user data
+        $.getJSON("controller/client_controller.php", {action: "getClientData"})
+            .done(function(json) {
+                if (typeof json.client_name != "undefined") {
+                    $("#inputID").val(json.client_id);
+                    $("#inputEmail").val(json.client_email);
+                    $("#inputName").val(json.client_name);
+                    $("#inputSurname").val(json.client_surname);
+                    $("#inputAddress").val(json.client_address);
+                    $("#inputPostal").val(json.client_postalcode);
+                    $("#inputTelHome").val(json.client_tel_home);
+                    $("#inputTelWork").val(json.client_tel_work);
+                    $("#inputCell").val(json.client_tel_cell);
+                    $("#inputRef").val(json.ref_id);
+                }
+            })
+            .fail(function(jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                new Noty({
+                    type: 'error',
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    text: err
+                }).show();
+            });
+    }
 
-    // Get user data
-    $.getJSON("controller/client_controller.php", {action: "getClientData"})
-        .done(function(json) {
-            if (typeof json.client_name != "undefined") {
-                $("#inputID").val(json.client_id);
-                $("#inputEmail").val(json.client_email);
-                $("#inputName").val(json.client_name);
-                $("#inputSurname").val(json.client_surname);
-                $("#inputAddress").val(json.client_address);
-                $("#inputPostal").val(json.client_postalcode);
-                $("#inputTelHome").val(json.client_tel_home);
-                $("#inputTelWork").val(json.client_tel_work);
-                $("#inputCell").val(json.client_tel_cell);
-                $("#inputRef").val(json.ref_id);
-            }
-        })
-        .fail(function(jqxhr, textStatus, error) {
-            var err = textStatus + ", " + error;
-            new Noty({
-                type: 'error',
-                layout: 'center',
-                theme: 'bootstrap-v4',
-                text: err
-            }).show();
+    if (action == 'orders') {
+        $('#orders').DataTable({
+            "pagingType": "simple", // "simple" option for 'Previous' and 'Next' buttons only
         });
-    
+        $('.dataTables_length').addClass('bs-select');
+    } 
 });
 
 /**
@@ -159,3 +168,18 @@ function getUrlParameter(name) {
     var results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
+
+function logout() {
+    $.ajax({
+        url: 'controller/login_controller.php?action=logout',
+        success: function() {
+            window.location.href = 'index.php';
+        }
+      });
+}
+
+
+// Email invoice to client
+function email_invoice(inv_num) {
+    alert(inv_num);
+}

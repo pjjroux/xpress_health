@@ -48,6 +48,8 @@ function getBestSellingProducts() {
  * Get all the products
  */
 function getProducts($start_from, $limit_val) {
+    $array = [];
+    
     $database = new Database();
     
     $database->query('SELECT supplement_id FROM supplements ORDER BY supplement_id ASC LIMIT :start_from, :limit_val');
@@ -103,6 +105,31 @@ function searchProducts($search_term) {
 
 }
 
+/**
+ * Get products by supplement id
+ * 
+ * @param object $search_data Search data from object
+ * @return array $array containing product data
+ */
+function getProductsByIDs($search_data, $start_from, $limit) {
+    $array = [];
 
+    if (!empty($search_data)) {        
+        $count_limit = 0;
+        for ($i = $start_from; $i <= count($search_data); $i++) {
+            if (isset($search_data[$i])) {
+                if ($count_limit < 10) {
+                    $count_limit++;
+                    $product = new Product($search_data[$i]->supplement_id);
+                    $array[] = $product->get_product_card();
+                }
+                
+            }
+
+        }
+    }
+
+    return $array;
+}
 
 ?>

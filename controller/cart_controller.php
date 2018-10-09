@@ -9,7 +9,9 @@
 | Date:           2018-09-20
 |
 */
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Include Product class  
 require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/classes/Product.php');

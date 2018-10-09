@@ -9,7 +9,9 @@
 | Date:           2018-10-02
 |
 */
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 
 // Include Product class  
 require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/classes/Product.php');
@@ -144,6 +146,26 @@ function cancelOrder($inv_num) {
   }
 
   echo json_encode($data);
+}
+
+
+/**
+ * Get orders for client by client_id
+ * 
+ * @param string $client_id Client id number
+ * @return array $array Invoice data 
+ */
+function getOrdersByID($client_id) {
+  $database = new Database();
+  
+  $database->query('SELECT * FROM invoices WHERE client_id = :client_id');
+  $database->bind(':client_id', $client_id);
+
+  $data = $database->resultset();
+
+  if (!empty($data)) {
+    return $data;
+  }
 }
 
 ?>

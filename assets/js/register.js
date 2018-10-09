@@ -15,6 +15,7 @@ $(document).ready(function() {
             type: 'success',
             layout: 'center',
             theme: 'bootstrap-v4',
+            modal: true,
             text: 'Thank you for registering, you will be redirected to the login page shortly'
         }).show();
 
@@ -37,6 +38,7 @@ $(document).ready(function() {
             new Noty({
                 type: 'error',
                 layout: 'center',
+                modal: true,
                 theme: 'bootstrap-v4',
                 text: err
             }).show();
@@ -88,6 +90,7 @@ $("#inputID").on("input", function() {
                     type: 'error',
                     layout: 'center',
                     theme: 'bootstrap-v4',
+                    modal: true,
                     text: err
                 }).show();
             });
@@ -107,6 +110,7 @@ function validateForm() {
             type: 'error',
             layout: 'center',
             theme: 'bootstrap-v4',
+            modal: true,
             text: 'Passwords must match'
         }).show();
         $('#inputPassword').focus();
@@ -143,6 +147,7 @@ function validateForm() {
                 new Noty({
                     type: 'error',
                     layout: 'center',
+                    modal: true,
                     theme: 'bootstrap-v4',
                     text: err
                 }).show();
@@ -155,7 +160,8 @@ function validateForm() {
             type: 'error',
             layout: 'center',
             theme: 'bootstrap-v4',
-            text: 'Client already registered'
+            text: 'Client already registered',
+            modal: true,
         }).show();
         $('#inputID').focus();
         return false;
@@ -166,6 +172,7 @@ function validateForm() {
             type: 'error',
             layout: 'center',
             theme: 'bootstrap-v4',
+            modal: true,
             text: 'Email address already in use'
         }).show();
         $('#inputEmail').focus();

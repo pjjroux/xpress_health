@@ -9,7 +9,9 @@
 | Date:           2018-09-10
 |
 */
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Include Client class  
 require_once('../classes/Client.php');
