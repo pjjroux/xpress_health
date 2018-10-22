@@ -13,7 +13,7 @@
  * Add item to shopping cart
  * @param string supplement_id 
  */
-function buy(supplement_id) {
+function buy(supplement_id,qty=1) {
     $.ajax({
         url: 'controller/cart_controller.php',
         method: 'GET',
@@ -22,6 +22,7 @@ function buy(supplement_id) {
         data: { 
             action: 'addToCart',
             supplement_id: supplement_id, 
+            supplement_qty: qty
         },
         success: function (json) {
             if (json.error != '') {

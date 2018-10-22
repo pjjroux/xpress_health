@@ -1,5 +1,9 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/cart_controller.php');
+
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html lang="en">

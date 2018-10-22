@@ -458,6 +458,22 @@ class Invoice {
         }
     }
 
+    public function get_client_email() {
+        return $this->client_email;
+    }
+
+    public function get_client_name() {
+        return $this->client_name;
+    }
+
+    public function get_client_surname() {
+        return $this->client_surname;
+    }
+
+    public function get_inv_num() {
+        return $this->inv_num;
+    }
+
 }
 
 

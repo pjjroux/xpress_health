@@ -61,7 +61,7 @@ function addToCart($supplement_id, $supplement_qty = 1) {
 
         $item = [
             "supplement_id" => $product->get_supplement_id(),
-            "cost" => $product->get_cost_client(),
+            "cost" => $supplement_qty * $product->get_cost_client(),
             "cost_per_item" => $product->get_cost_client(),
             "description" => $product->get_long_description(),
             "img" => $product->get_product_img(),

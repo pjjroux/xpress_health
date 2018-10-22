@@ -59,6 +59,7 @@
         <div class="btn-group" role="group" aria-label="Select a report">
             <a href="account.php?action=edit" class="btn btn-success">Edit Account Detail</a>
             <a href="account.php?action=orders" class="btn btn-success">Order History</a>
+            <a href="account.php?action=change_password" class="btn btn-success">Change Password</a>
         </div>
     </div>
 
@@ -208,6 +209,41 @@
         </div>
       </section>
     <?php endif; ?> 
+
+    <?php if ($action == 'change_password') : ?>
+      <h4 class="table-header">Change Password</h4>
+      <section id="main">
+        <div class="container-fluid" id="table-area">
+          <form class="form-account" id="password_form" method="post" action="controller/client_controller.php?action=updatePassword" onsubmit="return validateFormPassword()" >
+            <h1 class="h3 mb-3 font-weight-normal">Change Password</h1>
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <label for="inputPassword" class="sr-only">Current Password</label>
+                <input type="password" id="inputCurrentPassword" name="inputCurrentPassword" class="form-control" placeholder="Current Password" required>    
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <label for="inputPassword" class="sr-only">New Password</label>
+                <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="New Password" required>    
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <label for="inputRePassword" class="sr-only">Confirm New Password</label>
+                <input type="password" id="inputRePassword" name="inputRePassword" class="form-control" placeholder="Confirm New Password" required>
+              </div>
+            </div>
+            
+
+            <div align="right"><button class="btn btn-success" type="submit"><i class="fa fa-pencil-square-o"></i> Update</button></div>
+          </form>
+        </div>
+      </section>
+    <?php endif; ?>
     
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

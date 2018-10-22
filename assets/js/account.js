@@ -9,7 +9,6 @@
 |
 */
 $(document).ready(function() {
-    console.log(action);
     // If page loads with the registered parameter show noty and redirect to login page within 5 seconds
     if (getUrlParameter('updated') == 1) {
         new Noty({
@@ -181,5 +180,69 @@ function logout() {
 
 // Email invoice to client
 function email_invoice(inv_num) {
-    alert(inv_num);
+    var n = new Noty({
+        layout: 'center',
+        theme: 'bootstrap-v4',
+        modal: true,
+        text: 'Are you sure you want to request invoice by email for this order?',
+        buttons: [
+          Noty.button('YES', 'btn btn-success', function () {
+            n.close();
+            var processing = new Noty({
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    modal: true,
+                    text: '<div align="center"><img src="./assets/img/ajax-loader.gif"></div>',
+                    closeWith: [''],
+                }).show();
+            $.ajax({
+                url: 'controller/order_controller.php',
+                method: 'GET',
+                dataType: 'json',
+                async: true,
+                data: { 
+                    action: 'requestInvoiceMail',
+                    inv_num: inv_num
+                },
+                success: function (json) {
+                    processing.close();
+                    if (json.error != '') {
+                        new Noty({
+                            type: 'error',
+                            layout: 'center',
+                            theme: 'bootstrap-v4',
+                            text: json.error,
+                            modal: true,
+                        }).show();
+                    } else {
+                        new Noty({
+                            type: 'success',
+                            layout: 'center',
+                            theme: 'bootstrap-v4',
+                            timeout: 2000,
+                            text: 'Request sent you will receive an invoice by email shortly',
+                            modal: true,
+                        }).show();
+                   }
+                },
+                error: function (jqxhr, textStatus, error) {
+                    processing.close();
+                    var err = textStatus + ", " + error;
+                        new Noty({
+                            type: 'error',
+                            layout: 'center',
+                            theme: 'bootstrap-v4',
+                            modal: true,
+                            text: err
+                        }).show();
+                }
+            }); 
+          }, {id: 'button1', 'data-status': 'ok'}),
+      
+          Noty.button('NO', 'btn btn-danger', function () {
+              n.close();
+          })
+        ]
+      });
+      n.show();
 }

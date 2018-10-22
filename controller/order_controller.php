@@ -43,6 +43,9 @@ switch ($action) {
   case 'cancelOrder':
     cancelOrder($_GET['inv_num']);
     break;
+  case 'requestInvoiceMail':
+    requestInvoiceMail($_GET['inv_num']);
+    break;
 }
 
 /**
@@ -128,9 +131,21 @@ function cancelOrder($inv_num) {
   $data['error'] = '';
 
   try {
+    send_cancel_notification($inv_num);
+
     $database = new Database();
     
     $database->beginTransaction();
+
+    $database->query('DELETE FROM invoice_lines WHERE inv_num = :inv_num');
+    $database->bind(':inv_num', $inv_num);
+
+    $database->execute();
+
+    $database->query('DELETE FROM invoices WHERE inv_num = :inv_num');
+    $database->bind(':inv_num', $inv_num);
+
+    $database->execute();
 
     $database->query('DELETE FROM orders_awaiting_payment WHERE inv_num = :inv_num');
     $database->bind(':inv_num', $inv_num);
@@ -138,7 +153,6 @@ function cancelOrder($inv_num) {
     $database->execute();
 
     $database->endTransaction();
-
   } catch (Throwable $t) {
     $data['error'] = $t->getMessage();
   } catch (Exception $e) {
@@ -167,5 +181,64 @@ function getOrdersByID($client_id) {
     return $data;
   }
 }
+
+/**
+ * Get orders for client by client_id
+ * 
+ * @param string $client_id Client id number
+ * @return array $array Invoice data 
+ */
+function requestInvoiceMail($inv_num) {
+  $data['error'] = '';
+
+  try {
+    $invoice = new Invoice($inv_num);
+    // Send updated final invoice to client
+    $invoice->create_and_email();
+
+  } catch (Throwable $t) {
+    $data['error'] = $t->getMessage();
+  } catch (Exception $e) {
+    $data['error'] = $e->getMessage();     
+  }
+
+  echo json_encode($data);
+}
+
+
+/**
+ * Cancel notification
+ */
+function send_cancel_notification($inv_num) {
+  try {
+    $invoice = new Invoice($inv_num);
+
+    $mail = new PHPMailer(true); 
+
+    //Server settings
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    $mail->Username = "xpresshealth000@gmail.com";
+    $mail->Password = "Xpress123";
+
+    //Recipients
+    $mail->setFrom('xpresshealth000@gmail.com', 'Xpress Health');
+    $mail->addAddress($invoice->get_client_email(), $invoice->get_client_name() . ' '. $invoice->get_client_surname());     
+
+    //Content
+    $mail->isHTML(true);                      
+    $mail->Subject = 'Xpress Health Invoice: '. $invoice->get_inv_num() . ' cancelled';
+    $mail->Body    = 'Please note that your order has been cancelled.';
+    $mail->AltBody = 'Please note that your order has been cancelled.';
+
+    $mail->send();
+  } catch (Exception $e) {
+      $invoice->error = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+  }
+}
+
 
 ?>
