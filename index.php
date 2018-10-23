@@ -78,16 +78,16 @@ $best_sellers = getBestSellingProducts();
             </li> 
           <?php } ?>   
         </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="search_box" name="search_box" type="search" placeholder="Search..." aria-label="Search">
+          <button class="btn btn-success my-2 my-sm-0" id="btn_search" type="button">Search</button>
+        </form>
       </div>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" id="search_box" name="search_box" type="search" placeholder="Search..." aria-label="Search">
-        <button class="btn btn-success my-2 my-sm-0" id="btn_search" type="button">Search</button>
-      </form>
     </nav>
     
     <section>
       <div id="logo">
-        <img src="assets/img/logo.png" alt="Xpress Health Logo">
+        <img id="logo_img" src="assets/img/logo.png" alt="Xpress Health Logo">
       </div>
     </section>
 
@@ -103,7 +103,7 @@ $best_sellers = getBestSellingProducts();
           
           <div class="row">
             <?php foreach ($best_sellers as $value) : ?>
-              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 main_card">
                 <div class="product card" align="center"> 
                   <div class="product-image">
                     <img class="card-img-top" src="<?php echo $value['img'] ?>" alt="Product image">

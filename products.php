@@ -101,17 +101,19 @@ if ($page == $total_pages) {
             </li> 
           <?php } ?>   
         </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="search_box" name="search_box" type="search" placeholder="Search..." aria-label="Search">
+          <button class="btn btn-success my-2 my-sm-0" id="btn_search" type="button">Search</button>
+        </form>
       </div>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" id="search_box" name="search_box" type="search" placeholder="Search..." aria-label="Search">
-        <button class="btn btn-success my-2 my-sm-0" id="btn_search" type="button">Search</button>
-      </form>
     </nav>
 
     <div class="container-fluid">
       <div class="card shopping-cart">
         <div class="card-header bg-light text-dark">
-        <nav class="pagination-bar">
+        <div class="row">
+          <div class="col-12">
+          <nav class="pagination-bar">
           <ul class="pagination justify-content-end pagination-sm">
 
             <?php if ($page > 1) { ?>
@@ -143,11 +145,14 @@ if ($page == $total_pages) {
             <?php } ?>
           </ul>
         </nav>
+          </div>
+        </div>
+        
           <i class="fa fa-list" aria-hidden="true"></i>
           Product listing
           <div class="clearfix"></div>
 
-          <div align="right">Products: <?php echo $total_header ?></div>
+          <div class="product_counter" align="right">Products: <?php echo $total_header ?></div>
         </div>
 
         <div class="card-body">
@@ -162,15 +167,15 @@ if ($page == $total_pages) {
                   </div>
                   <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
                     <h4 class="product-name"><strong><?php echo $product['supplement_id'] ?></strong></h4>
-                    <h4>
+                    <h4 class="long_description">
                         <small><?php echo htmlspecialchars($product['long_description']) ?></small>
                     </h4>
                   </div>
-                  <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                    <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                  <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row price_row">
+                    <div class="col-6 col-sm-6 col-md-6 text-md-right" style="padding-top: 5px">
                       <h6><strong><?php echo $product['cost'] ?> <span class="text-muted">x</span></strong></h6>
                     </div>
-                    <div class="col-4 col-sm-4 col-md-4">
+                    <div class="col-6 col-sm-6 col-md-4">
                       <div class="quantity">
                         <input type="button" value="+" class="plus" onclick="add_qty('<?php echo $product['supplement_id'] ?>')">
                         <input type="number" step="1" max="99" min="1" id="<?php echo $product['supplement_id'].'_qty' ?>" value="1" title="Qty" class="qty"
@@ -182,19 +187,17 @@ if ($page == $total_pages) {
                 </div>
 
                 <div class="row">
-                  <div class="col-6"></div>
                   <div class="col-6 col-sm-6 col-md-6 text-md-right">
-                      <div class="<?php echo $product['stock_style'] ?>">
-                        <p><?php echo $product['stock_status'] ?></p>
-                      </div>
-
-                      <div class="text-right">
-                        <?php if ($product['stock_status'] != 'Out of stock') { ?>
-                          <a href="#" onclick="buy('<?php echo $product['supplement_id'] ?>');return false;" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                        <?php } else { ?>
-                          <a href="#" disabled class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                        <?php } ?>
-                      </div>
+                    <div class="<?php echo $product['stock_style'] ?>">
+                      <p><?php echo $product['stock_status'] ?></p>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-6 col-md-6 text-right">
+                    <?php if ($product['stock_status'] != 'Out of stock') { ?>
+                      <a href="#" onclick="buy('<?php echo $product['supplement_id'] ?>');return false;" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                    <?php } else { ?>
+                      <a href="#" disabled class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                    <?php } ?>
                   </div>
                 </div>
                   

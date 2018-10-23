@@ -123,6 +123,31 @@ footer {
     height: 400px;
     background-color: grey;
 }
+
+@media (max-width: 575.98px) {
+    #logo_img {
+        width: 75%;
+        height: 75%;
+        padding-top: 10%;
+    }
+
+
+    .shop-header {
+        text-decoration: underline;
+        font-size: 24px;
+        color: #D5DDC8; 
+        text-align: center;
+    }
+
+    .product {
+        padding: 10%;
+    }
+
+    .main_card {
+        padding: 2%;
+    }
+}
+
 /* #C9D408 gold
 #668330 dark green
 white #FBFBFB

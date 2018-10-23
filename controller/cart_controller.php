@@ -202,6 +202,15 @@ function checkout() {
         $database->execute();
 
         foreach ($_SESSION['cart'] as $cart_item) {
+            $database->query('SELECT stock_levels FROM supplements WHERE supplement_id = :supplement_id');
+            $database->bind(':supplement_id', $cart_item['supplement_id']);
+            $row = $database->single();
+
+            // Check if stock level is sufficient for order qty
+            if ($row['stock_levels'] < $cart_item['qty']) {
+                throw new Exception('Not enough stock available to process order for: <strong>' . $cart_item['supplement_id'] . '</strong><br><br> Available units: '. $row['stock_levels']);
+            }
+
             $database->query(
                 'INSERT INTO invoice_lines (
                     inv_num, supplement_id, price_charged, quantity, total
