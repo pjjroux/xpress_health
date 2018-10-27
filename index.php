@@ -51,7 +51,7 @@ $best_sellers = getBestSellingProducts();
             <a class="nav-link" href="products.php"><i class="fa fa-list"></i> Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html"><i class="fa fa-info-circle"></i> Contact Us</a>
+            <a class="nav-link" href="contact.php"><i class="fa fa-info-circle"></i> Contact Us</a>
           </li>
         </ul>
         <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 

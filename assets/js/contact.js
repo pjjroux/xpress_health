@@ -20,7 +20,7 @@ $(document).ready(function() {
             text: 'Thank you for contacting us, we will get back to you shortly',
             callbacks: {
                 onClose: function() {
-                    window.location.href = 'contact.html';
+                    window.location.href = 'contact.php';
                 },
                 
             }

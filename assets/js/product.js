@@ -8,6 +8,9 @@
 | Date:           2018-09-25
 |
 */
+$(document).ready(function() {
+    $(".pagination").rPage();
+});
 
 /**
  * Add item to shopping cart

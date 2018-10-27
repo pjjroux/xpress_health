@@ -1,3 +1,16 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+if (isset($_SESSION['cart'])) {
+  $checkout_count = 0;
+  foreach ($_SESSION['cart'] as $cart_item) {
+    $checkout_count +=  $cart_item['qty'];
+  }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +28,7 @@
     <link href="assets/libraries/noty/lib/noty.css" rel="stylesheet">
     <link rel="stylesheet"  href="assets/libraries/noty/lib/themes/bootstrap-v4.css" />
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
 
     <title>Xpress Health - Contact Us</title>
   </head>
@@ -29,26 +43,60 @@
           <li class="nav-item">
             <a class="nav-link" href="index.php"><i class="fa fa-home"></i> Home</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.php"><i class="fa fa-list"></i> Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.php"><i class="fa fa-info-circle"></i> Contact Us</a>
+          </li>
         </ul>
+        <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 
+          <?php if (!isset($_SESSION['client_name'])) { ?>  
+            <li class="nav-item">
+              <a class="nav-link" href="login.html"><i class="fa fa-sign-in"></i> Login</a>
+            </li>   
+            <li class="nav-item">
+              <a class="nav-link" href="register.html"><i class="fa fa-user-plus"></i> Register</a>
+            </li>
+          <?php } else { ?> 
+            <li class="nav-item">
+              <a class="nav-link" href="account.php"><i class="fa fa-user"></i> <?php echo $_SESSION['client_name'] ?></a>
+            </li>
+            <li class="nav-item">
+              <?php if (isset($checkout_count) && $checkout_count > 0) { ?>
+                <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i> Checkout <span class="badge badge-pill badge-success" style="margin-left:5px;"><?php echo $checkout_count ?></span></a>
+              <?php } else { ?>
+                <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i> Checkout</a>
+              <?php } ?>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="logout();return false;"><i class="fa fa-sign-out"></i> Logout</a>
+            </li> 
+          <?php } ?>   
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="search_box" name="search_box" type="search" placeholder="Search..." aria-label="Search">
+          <button class="btn btn-success my-2 my-sm-0" id="btn_search" type="button">Search</button>
+        </form>
       </div>
     </nav>
     
     <section>
       <div id="logo">
-        <img src="assets/img/logo.png" alt="Xpress Health Logo">
+        <img id="logo_img" src="assets/img/logo.png" alt="Xpress Health Logo">
       </div>
     </section>
 
     <section id="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
               <h2 class="shop-header">About Us</h2>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-6 about">
+          <div class="col-12 col-md-6 col-lg-6 about">
             <p>Traditional healthcare can be expensive and Xpress Health Wellness Center provides alternative healthcare options and supplements at an affordable price. 
               The business strives to improve the general health and lifestyle of persons with an active and demanding lifestyle. 
               We have been in business for over 10 years and our supplements enriches lives everyday.
@@ -81,21 +129,21 @@
                 </form>
             </div>
           </div>
+          
+          <div class="col-12 col-md-6 col-lg-6">
+            <img src="assets/img/store.jpg" alt="Store" class="store-img img-fluid img-thumbnail">
 
-          <div class="col-6">
-            <img src="assets/img/store.jpg" alt="Store" class="img-fluid img-thumbnail">
-
-            <div class="contact-icons text-center">
+            <div class="contact-icons text-left">
               <div class="row">
-                <div class="col-4">
+                <div class="col-12">
                   <a href="tel:0186331531"><i class="fa fa-lg fa-phone"></i> 012 000 1111</a>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12">
                   <a href="mailto:sales@xpresshealth.co.za"><i class="fa fa-lg fa-envelope"></i> sales@xpresshealth.co.za</a>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12">
                   <a href="https://twitter.com/Twitter" target="_blank"><i class="fa fa-lg fa-twitter"></i> @XpressHealth</a>
                 </div>
               </div>
@@ -136,10 +184,12 @@
 
 
     <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="assets/libraries/noty/lib/noty.js" type="text/javascript"></script>
+    <script src="assets/js/login.js"></script>
     <script src="assets/js/contact.js"></script>
+    <script src="assets/js/search.js"></script>
   </body>
 </html>

@@ -40,6 +40,9 @@ switch ($action) {
     case 'isAlreadyRegisteredUpdate':
         isAlreadyRegisteredUpdate($_GET['client_id'], $_GET['client_email']);
         break;
+    case 'updatePassword':
+        updatePassword();
+        break;
 }
 
 
@@ -225,7 +228,12 @@ function getClients() {
 }
 
 
-
+/** 
+ * Update client password
+ */
+function updatePassword() {
+    
+}
 
 ?>
 

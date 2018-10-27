@@ -74,7 +74,7 @@ if ($page == $total_pages) {
             <a class="nav-link" href="index.php"><i class="fa fa-home"></i> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html"><i class="fa fa-info-circle"></i> Contact Us</a>
+            <a class="nav-link" href="contact.php"><i class="fa fa-info-circle"></i> Contact Us</a>
           </li>
         </ul>
         <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 
@@ -107,6 +107,12 @@ if ($page == $total_pages) {
         </form>
       </div>
     </nav>
+
+    <section>
+      <div id="logo">
+        <img id="logo_img" src="assets/img/logo.png" alt="Xpress Health Logo">
+      </div>
+    </section>
 
     <div class="container-fluid">
       <div class="card shopping-cart">
@@ -228,6 +234,7 @@ if ($page == $total_pages) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="assets/libraries/noty/lib/noty.js" type="text/javascript"></script>
+    <script src="assets/libraries/responsive-paginate.js" type="text/javascript"></script>
     <script src="assets/js/product.js"></script>
     <script src="assets/js/search.js"></script>
   </body>

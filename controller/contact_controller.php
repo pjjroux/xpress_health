@@ -42,7 +42,7 @@ try {
 } catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
 } finally {
-    header("Location: ../contact.html?sent=1");
+    header("Location: ../contact.php?sent=1");
 }
 
 ?>

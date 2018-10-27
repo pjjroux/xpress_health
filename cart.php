@@ -1,6 +1,17 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/cart_controller.php');
 
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+if (isset($_SESSION['cart'])) {
+  $checkout_count = 0;
+  foreach ($_SESSION['cart'] as $cart_item) {
+    $checkout_count +=  $cart_item['qty'];
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,9 +46,40 @@ require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/cart_controll
             <a class="nav-link" href="index.php"><i class="fa fa-home"></i> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html"><i class="fa fa-info-circle"></i> Contact Us</a>
+            <a class="nav-link" href="products.php"><i class="fa fa-list"></i> Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.php"><i class="fa fa-info-circle"></i> Contact Us</a>
           </li>
         </ul>
+        <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 
+          <?php if (!isset($_SESSION['client_name'])) { ?>  
+            <li class="nav-item">
+              <a class="nav-link" href="login.html"><i class="fa fa-sign-in"></i> Login</a>
+            </li>   
+            <li class="nav-item">
+              <a class="nav-link" href="register.html"><i class="fa fa-user-plus"></i> Register</a>
+            </li>
+          <?php } else { ?> 
+            <li class="nav-item">
+              <a class="nav-link" href="account.php"><i class="fa fa-user"></i> <?php echo $_SESSION['client_name'] ?></a>
+            </li>
+            <li class="nav-item">
+              <?php if (isset($checkout_count) && $checkout_count > 0) { ?>
+                <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i> Checkout <span class="badge badge-pill badge-success" style="margin-left:5px;"><?php echo $checkout_count ?></span></a>
+              <?php } else { ?>
+                <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i> Checkout</a>
+              <?php } ?>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="logout();return false;"><i class="fa fa-sign-out"></i> Logout</a>
+            </li> 
+          <?php } ?>   
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="search_box" name="search_box" type="search" placeholder="Search..." aria-label="Search">
+          <button class="btn btn-success my-2 my-sm-0" id="btn_search" type="button">Search</button>
+        </form>
       </div>
     </nav>
 
@@ -118,6 +160,8 @@ require_once($_SERVER["DOCUMENT_ROOT"] .'/xpress_health/controller/cart_controll
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="assets/libraries/noty/lib/noty.js" type="text/javascript"></script>
+    <script src="assets/js/login.js"></script>
     <script src="assets/js/cart.js"></script>
+    <script src="assets/js/search.js"></script>
   </body>
 </html>
