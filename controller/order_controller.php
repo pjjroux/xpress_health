@@ -172,7 +172,7 @@ function cancelOrder($inv_num) {
 function getOrdersByID($client_id) {
   $database = new Database();
   
-  $database->query('SELECT * FROM invoices WHERE client_id = :client_id');
+  $database->query('SELECT * FROM invoices WHERE client_id = :client_id ORDER BY inv_num DESC');
   $database->bind(':client_id', $client_id);
 
   $data = $database->resultset();

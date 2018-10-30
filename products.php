@@ -40,6 +40,7 @@ if ($page == $total_pages) {
   $total_header = ($start_from + 1). ' - ' . ($start_from + 10) . ' of ' .$products_total;
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -176,6 +177,9 @@ if ($page == $total_pages) {
                     <h4 class="long_description">
                         <small><?php echo htmlspecialchars($product['long_description']) ?></small>
                     </h4>
+                    <hr>
+                    <p><?php echo 'Available: '.$product['stock_level'] ?></p>
+                    <hr>
                   </div>
                   <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row price_row">
                     <div class="col-6 col-sm-6 col-md-6 text-md-right" style="padding-top: 5px">

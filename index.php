@@ -117,6 +117,9 @@ $best_sellers = getBestSellingProducts();
                   <h6><?php echo $value['description'] ?></h6>
                   <p class="card-text"><?php echo $value['long_description'] ?></p>
 
+                  <hr>
+                  <p><?php echo 'Available: '.$value['stock_level'] ?></p>
+
                   <div class="<?php echo $value['stock_style'] ?>">
                     <p><?php echo $value['stock_status'] ?></p>
                   </div>
@@ -124,7 +127,7 @@ $best_sellers = getBestSellingProducts();
                   <div class="price">
                     <p><?php echo $value['cost'] ?></p>
                   </div>
-
+                  <hr>
                   <div class="text-right">
                     <?php if ($value['stock_status'] != 'Out of stock') { ?>
                       <a href="#" onclick="buy('<?php echo $value['supplement_id'] ?>');return false;" class="btn btn-success" title="Buy"><i class="fa fa-shopping-cart"></i> Add to cart</a>

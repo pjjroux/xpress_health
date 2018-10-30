@@ -32,6 +32,25 @@ class Product {
      * Retrieve product information from database and set properties
      */
     private function set_product_data($supplement_id) {
+        // Get quantity for pending orders
+        $this->database->query(
+            'SELECT * FROM orders_awaiting_payment
+            INNER JOIN invoices ON orders_awaiting_payment.inv_num = invoices.inv_num
+            INNER JOIN invoice_lines on invoices.inv_num = invoice_lines.inv_num
+            WHERE invoice_lines.supplement_id = :supplement_id'
+        );
+
+        $this->database->bind(':supplement_id', $supplement_id);
+        $rows = $this->database->resultset();
+
+        $pending_order_qty = 0;
+        if (!empty($rows)) {
+            foreach ($rows as $row) {
+                $pending_order_qty +=  $row['quantity'];
+            }
+        }
+
+        // Get product info
         $this->database->query('SELECT * FROM supplements INNER JOIN supplement_descriptions on supplements.description_id = supplement_descriptions.description_id WHERE supplement_id = :supplement_id');
         $this->database->bind(':supplement_id', $supplement_id);
         $row = $this->database->single();
@@ -46,7 +65,7 @@ class Product {
             $this->cost_client = $row['cost_client'];
             $this->supplier_id = $row['supplier_id'];
             $this->min_levels = $row['min_levels'];
-            $this->stock_levels = $row['stock_levels'];
+            $this->stock_levels = $row['stock_levels'] - $pending_order_qty;
             $this->nappi_code = $row['nappi_code'];
             $this->product_img = $row['img_path'];
         } else {
@@ -62,7 +81,7 @@ class Product {
                 $this->perc_inc = $row['perc_inc'];
                 $this->cost_client = $row['cost_client'];
                 $this->min_levels = $row['min_levels'];
-                $this->stock_levels = $row['stock_levels'];
+                $this->stock_levels = $row['stock_levels'] - $pending_order_qty;
                 $this->nappi_code = $row['nappi_code'];
                 $this->product_img = 'assets/img/products/no_img.png';
             }
@@ -140,7 +159,8 @@ class Product {
             "stock_style" => $stock_style,
             "cost" => 'R' . number_format($this->get_cost_client(), 2, '.', ' '),
             "description" => $this->get_description(),
-            "img" => $this->get_product_img()
+            "img" => $this->get_product_img(),
+            "stock_level" => $stock_level
         ];
 
         return $product_card;
