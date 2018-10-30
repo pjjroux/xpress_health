@@ -13,6 +13,17 @@ $(document).ready(function() {
     if (getUrlParameter('logged_in') == 1) {
         window.location.href = 'index.php';
     }   
+
+    if (getUrlParameter('updated_password') == 1) {
+        new Noty({
+            type: 'success',
+            layout: 'center',
+            theme: 'bootstrap-v4',
+            timeout: 3000,
+            modal: true,
+            text: 'Password updated successfully, please login with your new password',
+        }).show();
+    }
 });
 
 /**

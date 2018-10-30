@@ -114,7 +114,6 @@ function validateForm() {
             client_email: inputEmail
         },
         success: function (json) {
-            console.log(json);
             if (json.client_id) {
                 client_id_exists = true;
             }
@@ -129,7 +128,8 @@ function validateForm() {
                     type: 'error',
                     layout: 'center',
                     theme: 'bootstrap-v4',
-                    text: err
+                    text: err,
+                    modal: true,
                 }).show();
         }
     });
@@ -140,7 +140,8 @@ function validateForm() {
             type: 'error',
             layout: 'center',
             theme: 'bootstrap-v4',
-            text: 'A user with this ID is already registered'
+            text: 'A user with this ID is already registered',
+            modal: true,
         }).show();
         $('#inputID').focus();
         return false;
@@ -151,13 +152,70 @@ function validateForm() {
             type: 'error',
             layout: 'center',
             theme: 'bootstrap-v4',
-            text: 'Email address already in use by another user'
+            text: 'Email address already in use by another user',
+            modal: true,
         }).show();
         $('#inputEmail').focus();
         return false;
     }
     
     return true;
+}
+
+// Change password validation
+var client_old_password_valid = '';
+function validateFormPassword() {
+    if ($('#inputPassword').val() !== $('#inputRePassword').val()) {
+        new Noty({
+            type: 'error',
+            layout: 'center',
+            theme: 'bootstrap-v4',
+            text: 'Passwords must match',
+            modal: true,
+        }).show();
+        $('#inputPassword').focus();
+        return false;
+    }
+
+    $.ajax({
+        url: 'controller/client_controller.php',
+        method: 'GET',
+        dataType: 'json',
+        async: false,
+        data: { 
+            action: 'oldPasswordValid',
+            old_password: $('#inputCurrentPassword').val(), 
+        },
+        success: function (json) {
+            if (json.valid) {
+                client_old_password_valid = true;
+            }
+        },
+        error: function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+                new Noty({
+                    type: 'error',
+                    layout: 'center',
+                    theme: 'bootstrap-v4',
+                    text: err,
+                    modal: true,
+                }).show();
+        }
+    });
+
+    if (!client_old_password_valid) {
+        new Noty({
+            type: 'error',
+            layout: 'center',
+            theme: 'bootstrap-v4',
+            text: 'Current password incorrect',
+            modal: true,
+        }).show();
+        $('#inputCurrentPassword').focus();
+        return false;
+    } else {
+        return true;
+    }
 }
 
 // Get value from url

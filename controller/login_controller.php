@@ -53,8 +53,6 @@ function login() {
     } else {
         header("Location: ../admin.php");
     }
-    
-    
 }
 
 /**

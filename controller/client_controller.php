@@ -40,6 +40,9 @@ switch ($action) {
     case 'isAlreadyRegisteredUpdate':
         isAlreadyRegisteredUpdate($_GET['client_id'], $_GET['client_email']);
         break;
+    case 'oldPasswordValid':
+        oldPasswordValid($_GET['old_password']);
+        break;
     case 'updatePassword':
         updatePassword();
         break;
@@ -232,7 +235,37 @@ function getClients() {
  * Update client password
  */
 function updatePassword() {
+    $client = new Client($_SESSION['client_id']);
+
+    $client->update_client_password(password_hash($_POST['inputPassword'], PASSWORD_DEFAULT));
+
+    session_start();
+    session_destroy();
+
+    header("Location: ../login.html?updated_password=1");
+}
+
+
+/**
+ * Validate old password before update
+ */
+function oldPasswordValid($old_password) {
+    $database = new Database();
     
+    $database->query('SELECT * FROM auth INNER JOIN clients on auth.client_id = clients.client_id WHERE client_email = :client_email'); 
+    $database->bind(':client_email', $_SESSION['client_email']);
+    $row = $database->single();
+
+    if (!empty($row)) {
+        // Validate password
+        if (password_verify($old_password, $row['pass'])) {
+            $data['valid'] = true;
+        } else {
+            $data['valid'] = false;
+        }
+    }
+
+    echo json_encode($data);
 }
 
 ?>

@@ -185,6 +185,26 @@ class Client {
         }
     }
 
+
+    /**
+     * Updates client password
+     * 
+     * @param string $new_password Hashed password string
+     * @return void
+     */
+    public function update_client_password($new_password) {
+        $this->database->beginTransaction(); 
+
+        $this->database->query('UPDATE auth SET pass = :pass WHERE client_id = :client_id;');
+
+        $this->database->bind(':pass', $new_password);
+        $this->database->bind(':client_id', $_SESSION['client_id']); 
+        
+        $this->database->execute();  
+
+        $this->database->endTransaction();  
+    }
+
     public function get_client_id() {
         return $this->client_id;
     }

@@ -239,7 +239,7 @@
             </div>
             
 
-            <div align="right"><button class="btn btn-success" type="submit"><i class="fa fa-pencil-square-o"></i> Update</button></div>
+            <div align="right"><button class="btn btn-success" type="submit"><i class="fa fa-pencil-square-o"></i> Update Password</button></div>
           </form>
         </div>
       </section>
