@@ -58,6 +58,9 @@ $order_count = (!empty($orders)) ? count($orders) : 0 ;
           <li class="nav-item">
             <a class="nav-link" href="clients.php"><i class="fa fa-users"></i> Clients</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="controller/backup.php"><i class="fa fa-cloud-download"></i> Database backup</a>
+          </li>
         </ul>
         <ul class="navbar-nav mr-right mt-2 mt-lg-0"> 
           <li class="nav-item">
