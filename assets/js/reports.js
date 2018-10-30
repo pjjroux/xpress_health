@@ -63,11 +63,7 @@ if (report_type == 'top_10_sold') {
 
 // Top suppliers
 if (report_type == 'top_suppliers') {
-    console.log(report_data);
     report_data = JSON.parse(report_data);
-
-    console.log(report_data);
-
     var chart_data = [];
     for (var i=0; i < report_data.length; i++) {
         chart_data.push({

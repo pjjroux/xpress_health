@@ -3,6 +3,10 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
+if (isset($_SESSION['client_email']) && $_SESSION['client_email'] == 'xpresshealth000@gmail.com') {
+  header("Location: ../admin.php");
+}
+
 require_once('controller/product_controller.php');
 
 if (isset($_SESSION['cart'])) {

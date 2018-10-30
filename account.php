@@ -49,19 +49,36 @@
   <body>
  
 
-   <section>
+    <section>
       <div id="logo">
-        <img src="assets/img/logo.png" alt="Xpress Health Logo">
+        <img id="logo_img" src="assets/img/logo.png" alt="Xpress Health Logo">
       </div>
     </section>
 
     <div align="center" style="margin-bottom:2%;">
         <div class="btn-group" role="group" aria-label="Select a report">
-            <a href="account.php?action=edit" class="btn btn-success">Edit Account Detail</a>
-            <a href="account.php?action=orders" class="btn btn-success">Order History</a>
-            <a href="account.php?action=change_password" class="btn btn-success">Change Password</a>
+            
         </div>
     </div>
+
+    <div class="container">
+      <div align="center">
+        <div class="dropdown d-md-none">
+            <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Options</button>
+            <div class="dropdown-menu">
+              <a href="account.php?action=edit" class="dropdown-item">Edit Account Detail</a>
+              <a href="account.php?action=orders" class="dropdown-item">Order History</a>
+              <a href="account.php?action=change_password" class="dropdown-item">Change Password</a>
+            </div>
+        </div>
+      </div>
+       
+      <div class="btn-group d-none d-md-flex justify-content-center"" role="group" aria-label="Options">
+        <a href="account.php?action=edit" class="btn btn-success">Edit Account Detail</a>
+        <a href="account.php?action=orders" class="btn btn-success">Order History</a>
+        <a href="account.php?action=change_password" class="btn btn-success">Change Password</a>
+      </div>
+   </div>
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">

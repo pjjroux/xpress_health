@@ -46,13 +46,6 @@ switch ($report_type) {
 }
 
 
-
-// echo '<pre>';
-// print_r($report_data);
-// echo '</pre>';
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,19 +81,33 @@ switch ($report_type) {
   
     <section>
       <div id="logo">
-        <img src="assets/img/logo.png" alt="Xpress Health Logo">
+        <img id="logo_img" src="assets/img/logo.png" alt="Xpress Health Logo">
       </div>
     </section>
 
-    <div align="center">
-        <div class="btn-group" role="group" aria-label="Select a report">
+    <div class="container">
+        <div align="center">
+            <div class="dropdown d-md-none">
+                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Select a report</button>
+
+                <div class="dropdown-menu">
+                    <a href="reports.php?report=select_dates" class="dropdown-item">Invoices</a>
+                    <a href="reports.php?report=low_stock" class="dropdown-item">Low Stock Levels</a>
+                    <a href="reports.php?report=top_10_sold" class="dropdown-item">Top 10 Supplements</a>
+                    <a href="reports.php?report=top_suppliers" class="dropdown-item">Top Suppliers</a>
+                    <a href="reports.php?report=top_10_profit" class="dropdown-item">Top 10 Most Profitable Supplements</a>
+                </div>
+            </div>
+        </div>
+       
+        <div class="btn-group d-none d-md-flex justify-content-center"" role="group" aria-label="Select a report">
             <a href="reports.php?report=select_dates" class="btn btn-success">Invoices</a>
             <a href="reports.php?report=low_stock" class="btn btn-success">Low Stock Levels</a>
             <a href="reports.php?report=top_10_sold" class="btn btn-success">Top 10 Supplements</a>
             <a href="reports.php?report=top_suppliers" class="btn btn-success">Top Suppliers</a>
             <a href="reports.php?report=top_10_profit" class="btn btn-success">Top 10 Most Profitable Supplements</a>
         </div>
-    </div>
+   </div>
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">

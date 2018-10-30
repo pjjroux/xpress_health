@@ -13,6 +13,7 @@ $(document).ready(function () {
   $('#orders').DataTable({
     "pagingType": "simple", // "simple" option for 'Previous' and 'Next' buttons only
     "ordering": false,
+    "responsive": true,
   });
   $('.dataTables_length').addClass('bs-select');
 });

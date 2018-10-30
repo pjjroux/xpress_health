@@ -38,7 +38,7 @@ $order_count = (!empty($orders)) ? count($orders) : 0 ;
     
     <section>
       <div id="logo">
-        <img src="assets/img/logo.png" alt="Xpress Health Logo">
+        <img id="logo_img" src="assets/img/logo.png" alt="Xpress Health Logo">
       </div>
     </section>
 

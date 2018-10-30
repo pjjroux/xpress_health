@@ -86,6 +86,7 @@ $(document).ready(function() {
     if (action == 'orders') {
         $('#orders').DataTable({
             "pagingType": "simple", // "simple" option for 'Previous' and 'Next' buttons only
+            "responsive": true,
         });
         $('.dataTables_length').addClass('bs-select');
     } 
