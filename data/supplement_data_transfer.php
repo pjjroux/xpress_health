@@ -56,7 +56,7 @@ try {
   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $csvFile = 'files/supplement.csv';
+  $csvFile = 'csv/supplement.csv';
 
   $supplementData = readCSV($csvFile);
   //dd($supplementData,1);
