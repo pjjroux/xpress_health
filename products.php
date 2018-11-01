@@ -64,6 +64,7 @@ if ($page == $total_pages) {
     <title>Xpress Health - Products</title>
   </head>
   <body>
+    <div id="preloader"></div>
     <nav class="navbar navbar-expand-lg fixed-top navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -73,6 +74,9 @@ if ($page == $total_pages) {
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
             <a class="nav-link" href="index.php"><i class="fa fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.php"><i class="fa fa-list"></i> Products</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.php"><i class="fa fa-info-circle"></i> Contact Us</a>
@@ -235,6 +239,7 @@ if ($page == $total_pages) {
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="assets/js/load.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="assets/libraries/noty/lib/noty.js" type="text/javascript"></script>

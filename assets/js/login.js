@@ -84,6 +84,7 @@ function validateForm() {
 function logout() {
     $.ajax({
         url: 'controller/login_controller.php?action=logout',
+        async: false,
         success: function() {
           window.location.reload();
         }
