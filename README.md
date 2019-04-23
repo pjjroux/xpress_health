@@ -33,7 +33,7 @@ All Data privileges
 * Profile detail view and update.
 * Admin dashboard with MIS reports available when logging in with admin user.
 
-![alt text](1 "Welcome")
+![alt text](https://github.com/pjjroux/xpress_health/assets/screenshots/home.png "Homepage")
 ![alt text](2 "1")
 ![alt text](3 "2")
 ![alt text](4 "3")
