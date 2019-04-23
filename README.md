@@ -7,13 +7,18 @@ UNISA Final Year Project - NDip IT
 PHP based ecommerce application built as my final year project. The project started with a simple spreadsheet that was converted to a MySQL database 
 with a web-based interface built using PHP, JavaScript and HTML/CSS. I used my own implementation of a MVC design pattern.
 
+Libraries used for pdf documents and email functionality as well as notifications:
+FPDF
+PHPMailer
+Noty
+
 ### Installing
 
 * Clone or download the project files to your local machine. I used xampp as my localhost server but any PHP localhost implemetation will work.
 * Import the xpress_health.sql script to create all tables and create a user with the following credentials:
-> user: xpress_admin
-> password: leyvosYRnFHPujCH
-> All Data privileges 
+user: xpress_admin
+password: leyvosYRnFHPujCH
+All Data privileges 
 
 ## Authors
 
@@ -26,7 +31,7 @@ with a web-based interface built using PHP, JavaScript and HTML/CSS. I used my o
 * Product Listing with Search functionality.
 * Shopping Cart with Proforma and Invoice emailing.
 * Profile detail view and update.
-* Admin dashboard with MIS reports available when logging in with admin user (username: xpresshealth000@gmail.com, password: aasd)
+* Admin dashboard with MIS reports available when logging in with admin user.
 
 ![alt text](1 "Welcome")
 ![alt text](2 "1")
