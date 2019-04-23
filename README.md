@@ -33,7 +33,12 @@ All Data privileges
 * Profile detail view and update.
 * Admin dashboard with MIS reports available when logging in with admin user.
 
-![alt text](https://github.com/pjjroux/xpress_health/blob/master/assets/screenshots/home.png "Homepage")
-![alt text](2 "1")
-![alt text](3 "2")
-![alt text](4 "3")
+## Screenshots
+
+![Homepage](https://github.com/pjjroux/xpress_health/blob/master/assets/screenshots/home.png "Homepage")
+![Register](https://github.com/pjjroux/xpress_health/blob/master/assets/screenshots/register.png "Register")
+![Products](https://github.com/pjjroux/xpress_health/blob/master/assets/screenshots/products.png "Products")
+![Contact](https://github.com/pjjroux/xpress_health/blob/master/assets/screenshots/contact.png "Contact")
+![Cart](https://github.com/pjjroux/xpress_health/blob/master/assets/screenshots/cart.png "Cart")
+![Profit](https://github.com/pjjroux/xpress_health/blob/master/assets/screenshots/cart.png "Profit MIS Report")
+![Top 10](https://github.com/pjjroux/xpress_health/blob/master/assets/screenshots/top10.png "Top 10 MIS Report")
