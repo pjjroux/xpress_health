@@ -527,7 +527,7 @@ INSERT INTO `clients` (`client_id`, `client_name`, `client_surname`, `client_add
 ('8908220122088', 'Andre ', 'Schoeman', 'PO Bos 535\r\nHONEYDEW\r\n2040', '', '(066)-(489)-(8662)', '(023)-(794)-(9855)', '(057)-(850)-(4856)', 'Andre @work.co.za', 2, 0),
 ('9003280235085', 'Alex ', 'Mkhonto', '15 Beaufort Place 39 Beaufort Avenue Goodwood Park', '7960', '(097)-(965)-(1602)', '(061)-(129)-(0277)', '(029)-(270)-(8897)', '', 2, 0),
 ('9010200680087', 'Mothupi ', 'Xulubana', 'P O Box 3912 Pretoria', '0001', '(018)-(867)-(8067)', '(065)-(848)-(7223)', '(039)-(256)-(2775)', 'Mothupi @telkomsa.net', 2, 0),
-('9011135082087', 'Jaco', 'Roux', '23B Transvaal Street, Lichtenburg', '2740', '(018)-(633)-(6163)', '(018)-(633)-(1394)', '(079)-(969)-(2440)', 'pjjroux@gmail.com', 1, 0),
+('9012121234158', 'Jack', 'Jill', '23B Transvaal Street, Koosfontein', '2740', '(018)-(633)-(6163)', '(018)-(633)-(1394)', '(079)-(969)-(2440)', 'pj222x@gmail.com', 1, 0),
 ('9012110306084', 'Thapelo ', 'Mokoena', 'C18239 Umsunduzi Road Kwamashu', '9359', '(055)-(900)-(9493)', '(053)-(715)-(3414)', '(043)-(775)-(4966)', 'Thapelo @gmail.com', 2, 0),
 ('9103060340082', 'Mpho ', 'Hleza', '9953 Motloung Avenue Dobsonville Ext 3', '1863', '(046)-(303)-(4847)', '(026)-(340)-(8970)', '(083)-(339)-(7282)', '', NULL, 0),
 ('9109140754088', 'Mashamokwena ', 'Van Vuuren', '995 30Th Avenue Villieria', '0186', '(072)-(432)-(4094)', '(099)-(338)-(6528)', '(097)-(273)-(6866)', 'Mashamokwena @mweb.co.za', NULL, 0),
